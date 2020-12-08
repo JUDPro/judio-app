@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <AppHeader class="text"></AppHeader>
+    <AppHeader></AppHeader>
   </div>
 </template>
 
 <script>
-import AppHeader from './components/Header/AppHeader';
+import AppHeader from './components/Header/AppHeader'
+
 export default {
   name: 'app',
   components: {
-    AppHeader
+    AppHeader,
   }
 }
 </script>
@@ -23,9 +24,11 @@ export default {
 	src: url('../public/font/Roboto/Roboto-Regular.ttf');
 }
 
-#app{
+#app {
   font-family: 'Roboto Regular';
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-
 </style>
 

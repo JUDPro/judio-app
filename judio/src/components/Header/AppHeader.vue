@@ -4,7 +4,8 @@
             <Avatar></Avatar>
             <div class="user-name">User name</div>
             <!--Exit></Exit-->
-            <SignIn></SignIn>
+            <SignIn @click.native="showDialog = true"></SignIn>
+            <AuthForm :showDialog=showDialog />
         </div>
     </header>
 </template>
@@ -13,14 +14,19 @@
 import Avatar from './ButtonHeader/Avatar'
 import Exit from './ButtonHeader/Exit'
 import SignIn from './ButtonHeader/Sign-in'
+import AuthForm from '../AuthForm'
 
 export default {
     name: 'Header',
     components: {
         Avatar,
         Exit,
-        SignIn
-    }
+        SignIn,
+        AuthForm,
+    },
+    data: () => ({
+        showDialog: false
+    }),
 }
 </script>
 
