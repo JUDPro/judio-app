@@ -10,6 +10,7 @@ export default new Vuex.Store({
       email: 'Anon',
       userId: '',
     },
+    Logged: false,
   },
   mutations: {
     setOpenSignIn(state, i) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setUser(state, i) {
       state.user = i
+    },
+    setLogged(state, i) {
+      state.Logged = i
     }
   },
   actions: {
@@ -25,6 +29,9 @@ export default new Vuex.Store({
     },
     setUser(user, i) {
       user.commit('setUser', i)
+    },
+    setLogged(Logged, i) {
+      Logged.commit('setLogged', i)
     }
   },
   modules: {}

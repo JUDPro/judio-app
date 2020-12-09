@@ -35,11 +35,12 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
             .then((res) => {
                 let userInfo = {
-                    email: this.user.email,
-                    userId: this.user.id,
+                    email: res.user.email,
+                    userId: res.user.uid,
                 }
                 this.$store.dispatch('setUser', userInfo)
                 this.$store.dispatch('setOpenSignIn', false)
+                this.$store.dispatch('setLogged', true)
             })
             .catch((error) => {
                 console.log('error')

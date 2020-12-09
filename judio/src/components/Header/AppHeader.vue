@@ -3,8 +3,10 @@
         <div class="line-header">
             <Avatar></Avatar>
             <div class="user-name">{{$store.state.user.email}}</div>
-            <!--Exit></Exit-->
-            <SignIn @click.native="$store.dispatch('setOpenSignIn', true)"></SignIn>
+            <div>
+                <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenSignIn', true)"></SignIn>
+                <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
+            </div>
             <!--AuthForm :showDialog=showDialog /-->
         </div>
     </header>
@@ -14,6 +16,7 @@
 import Avatar from './ButtonHeader/Avatar'
 import Exit from './ButtonHeader/Exit'
 import SignIn from './ButtonHeader/Sign-in'
+import { firebase } from '../../plugins/firebase'
 
 export default {
     name: 'Header',
@@ -25,6 +28,22 @@ export default {
     data: () => ({
         showDialog: false
     }),
+    methods: {
+        outAccount() {
+            firebase.auth().signOut()
+            .then(() => {
+                let userInfo = {
+                    email: 'Anon',
+                    userId: ''
+                }
+                this.$store.dispatch('setUser', userInfo)
+                this.$store.dispatch('setLogged', false)
+            })
+            .catch((error) => {
+                console.log('error')
+            })
+        }
+    }
 }
 </script>
 
