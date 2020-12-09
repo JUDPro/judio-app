@@ -1,11 +1,9 @@
 <template>
-<div class="blur">
+<div class="close">
+    <div class="blur" type="button" @click="$store.dispatch('setOpenSignIn', false)"></div>
     <div class="auth">
         <div class="textAuth">
             Authorization
-        </div>
-        <div @click="$store.dispatch('setOpenSignIn', false)" class="close">
-            <img src="../../public/icons/svg/plus.svg" alt="">
         </div>
         <div class="userInput">
             <input type="email" v-model="user.email" autofocus>
@@ -52,6 +50,11 @@ export default {
 </script>
 
 <style>
+.close {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
 .blur {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.075);
@@ -90,15 +93,6 @@ export default {
     width: 500px;
     height: 70px;
     border-bottom: 2px solid #505050;
-}
-
-.close {
-    position: absolute;
-    width: 30px;
-    top: 30px;
-    right: 50px;
-    transform: rotate(45deg);
-    cursor: pointer;
 }
 
 .userInput {
