@@ -8,7 +8,7 @@ export default {}
 
 <style>
 .avatar {
-    width: 40px;
+    width: 42px;
     border-radius: 50%;
     margin-left: 30px;
 }

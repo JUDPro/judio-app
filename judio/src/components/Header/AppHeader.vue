@@ -2,10 +2,10 @@
     <header class="header">
         <div class="line-header">
             <Avatar></Avatar>
-            <div class="user-name">User name</div>
+            <div class="user-name">{{$store.state.user.email}}</div>
             <!--Exit></Exit-->
-            <SignIn @click.native="showDialog = true"></SignIn>
-            <AuthForm :showDialog=showDialog />
+            <SignIn @click.native="$store.dispatch('setOpenSignIn', true)"></SignIn>
+            <!--AuthForm :showDialog=showDialog /-->
         </div>
     </header>
 </template>
@@ -14,15 +14,13 @@
 import Avatar from './ButtonHeader/Avatar'
 import Exit from './ButtonHeader/Exit'
 import SignIn from './ButtonHeader/Sign-in'
-import AuthForm from '../AuthForm'
 
 export default {
     name: 'Header',
     components: {
         Avatar,
         Exit,
-        SignIn,
-        AuthForm,
+        SignIn
     },
     data: () => ({
         showDialog: false
@@ -31,7 +29,6 @@ export default {
 </script>
 
 <style>
-
 .header {
     display: flex;
     justify-content: center;
@@ -42,13 +39,14 @@ export default {
 .line-header {
     display: flex;
     align-items: center;
-    width: 85%;
+    width: 80%;
     height: 100%;
-    border-bottom: 2px solid #505050;
+    border-bottom: 3px solid #505050;
 }
 
 .user-name {
     flex-grow: 1;
     margin-left: 20px;
+    font-size: 20pt;
 }
 </style>

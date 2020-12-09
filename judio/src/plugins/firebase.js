@@ -10,4 +10,6 @@ let firebaseConfig = {
     appId: "1:253779954642:web:8fd270f871bd7a9998d60b"
 };
 
-export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+export { firebase }; 
