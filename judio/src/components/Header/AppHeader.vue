@@ -1,13 +1,23 @@
 <template>
     <header class="header">
         <div class="line-header">
-            <Avatar></Avatar>
-            <div class="user-name">{{$store.state.user.email}}</div>
+            <div class="reg-position">
+                <Avatar 
+                    v-if="$store.state.Logged == false"  
+                    @click.native="$store.dispatch('setOpenSignIn', true)"
+                    >
+                </Avatar>
+                <div 
+                    class="user-name" 
+                    v-if="$store.state.Logged == false"
+                    @click="$store.dispatch('setOpenSignIn', true)"
+                    >{{$store.state.user.email}}
+                </div>
+            </div>
             <div>
                 <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenSignIn', true)"></SignIn>
                 <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
             </div>
-            <!--AuthForm :showDialog=showDialog /-->
         </div>
     </header>
 </template>
@@ -58,14 +68,20 @@ export default {
 .line-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 80%;
     height: 100%;
     border-bottom: 3px solid #505050;
 }
 
 .user-name {
-    flex-grow: 1;
     margin-left: 20px;
     font-size: 20pt;
+    cursor: pointer;
+}
+
+.reg-position {
+    display: flex;
+    align-items: center;
 }
 </style>

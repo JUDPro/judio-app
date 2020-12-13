@@ -11,5 +11,6 @@ export default {}
     width: 42px;
     border-radius: 50%;
     margin-left: 30px;
+    cursor: pointer;
 }
 </style>
