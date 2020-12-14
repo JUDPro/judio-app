@@ -1,6 +1,6 @@
 <template>
 <div class="close">
-    <div class="blur" type="button" @click="$store.dispatch('setOpenSignIn', false)"></div>
+    <div class="blur" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
     <div class="auth">
         <div class="textAuth">
             Authorization
@@ -10,7 +10,7 @@
             <input type="password" v-model="user.password">
         </div>
         <div class="btnUser">
-            <div @click="$store.dispatch('setOpenSignIn', false)" class="btnForm">Close</div>
+            <div @click="$store.dispatch('setOpenDialogWindow', false)" class="btnForm">Close</div>
             <div class="btnForm" @click="SignIn">Login</div>
         </div>
     </div> 

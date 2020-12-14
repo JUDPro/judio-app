@@ -1,6 +1,6 @@
 <template>
     <div class="close">
-        <div class="blur" type="button" @click="$store.dispatch('setOpenSignIn', false)"></div>
+        <div class="blur" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
 
     </div>
 </template>

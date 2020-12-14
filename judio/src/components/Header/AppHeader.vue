@@ -3,19 +3,17 @@
         <div class="line-header">
             <div class="reg-position">
                 <Avatar 
-                    v-if="$store.state.Logged == false"  
-                    @click.native="$store.dispatch('setOpenSignIn', true)"
+                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >
                 </Avatar>
-                <div 
+                <div
                     class="user-name" 
-                    v-if="$store.state.Logged == false"
-                    @click="$store.dispatch('setOpenSignIn', true)"
+                    @click="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >{{$store.state.user.email}}
                 </div>
             </div>
             <div>
-                <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenSignIn', true)"></SignIn>
+                <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
                 <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
             </div>
         </div>
@@ -36,7 +34,7 @@ export default {
         SignIn
     },
     data: () => ({
-        showDialog: false
+        
     }),
     methods: {
         outAccount() {

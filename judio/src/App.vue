@@ -2,7 +2,8 @@
   <div id="app">
     <AppHeader></AppHeader>
     <transition name="openDialogAnimation">
-      <AuthForm v-if='$store.state.isOpenSignIn'/>
+      <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'"/>
+      <Regist v-if="$store.state.isOpenDialogWindow == 'regist'"></Regist>
     </transition>
   </div>
 </template>
@@ -10,12 +11,14 @@
 <script>
 import AppHeader from './components/Header/AppHeader'
 import AuthForm from './components/AuthForm'
+import Regist from './components/RegistForm'
 
 export default {
   name: 'app',
   components: {
     AppHeader,
     AuthForm,
+    Regist,
   }
 }
 </script>

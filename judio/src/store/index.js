@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isOpenSignIn: false,
+    isOpenDialogWindow: false,
     user: {
       email: 'Anon',
       userId: '',
@@ -13,8 +13,8 @@ export default new Vuex.Store({
     Logged: false,
   },
   mutations: {
-    setOpenSignIn(state, i) {
-      state.isOpenSignIn = i
+    setOpenDialogWindow(state, i) {
+      state.isOpenDialogWindow = i
     },
     setUser(state, i) {
       state.user = i
@@ -24,8 +24,16 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setOpenSignIn(isOpenSignIn, i) {
-      isOpenSignIn.commit('setOpenSignIn', i)
+    setOpenDialogWindow(isOpenDialogWindow, i) {
+      if (i == 'login') {
+        isOpenDialogWindow.commit('setOpenDialogWindow', i)
+      }
+      if (i == 'regist') {
+        isOpenDialogWindow.commit('setOpenDialogWindow', i)
+      }
+      if (i == false) {
+        isOpenDialogWindow.commit('setOpenDialogWindow', i)
+      }
     },
     setUser(user, i) {
       user.commit('setUser', i)
