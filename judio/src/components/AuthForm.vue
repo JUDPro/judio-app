@@ -6,8 +6,8 @@
             Authorization
         </div>
         <div class="userInput">
-            <input type="email" v-model="user.email" autofocus>
-            <input type="password" v-model="user.password">
+            <input type="email" v-model="user.email" placeholder="email" autofocus>
+            <input type="password" v-model="user.password" placeholder="password">
         </div>
         <div class="btnUser">
             <div @click="$store.dispatch('setOpenDialogWindow', false)" class="btnForm">Close</div>
