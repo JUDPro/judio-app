@@ -6,20 +6,50 @@
                 Registration
             </div>
             <div class="userInput">
-                <input type="email" placeholder="email" autofocus>
-                <input type="password" placeholder="password">
-                <input type="password" placeholder="repeat password">
+                <input type="email" v-model="user.email" placeholder="email" autofocus>
+                <input type="password" v-model="user.password" placeholder="password">
+                <input type="password" v-model="user.repeatPassword" placeholder="repeat password">
             </div>
             <div class="btnUser">
                 <div @click="$store.dispatch('setOpenDialogWindow', false)" class="btnForm">Close</div>
-                <div class="btnForm">Registration</div>
+                <div class="btnForm" @click="CreateNewAccount">Registration</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {}
+import { firebase } from '../plugins/firebase'
+
+export default {
+    name: 'regist',
+
+    data: () => ({
+        user: {
+            email: '',
+            password: '',
+            repeatPassword: '',
+        }
+    }),
+
+    methods: {
+        CreateNewAccount() {
+            firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+            .then((res) => {
+                let userInfo = {
+                    email: res.user.email,
+                    userId: res.user.uid,
+                }
+                this.$store.dispatch('setUser', userInfo)
+                this.$store.dispatch('setOpenDialogWindow', false)
+                this.$store.dispatch('setLogged', true)
+            })
+            .catch((error) => {
+                console.log('error')
+            })
+        }
+    }
+}
 </script>
 
 <style>

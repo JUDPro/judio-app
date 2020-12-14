@@ -39,7 +39,7 @@ export default {
                     userId: res.user.uid,
                 }
                 this.$store.dispatch('setUser', userInfo)
-                this.$store.dispatch('setOpenSignIn', false)
+                this.$store.dispatch('setOpenDialogWindow', false)
                 this.$store.dispatch('setLogged', true)
             })
             .catch((error) => {
