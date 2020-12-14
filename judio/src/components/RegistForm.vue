@@ -34,19 +34,25 @@ export default {
 
     methods: {
         CreateNewAccount() {
-            firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
-            .then((res) => {
-                let userInfo = {
-                    email: res.user.email,
-                    userId: res.user.uid,
-                }
-                this.$store.dispatch('setUser', userInfo)
-                this.$store.dispatch('setOpenDialogWindow', false)
-                this.$store.dispatch('setLogged', true)
-            })
-            .catch((error) => {
-                console.log('error')
-            })
+            if( this.user.password == this.user.repeatPassword ){
+                firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
+                .then((res) => {
+                    let userInfo = {
+                        email: res.user.email,
+                        userId: res.user.uid,
+                    }
+                    this.$store.dispatch('setUser', userInfo)
+                    this.$store.dispatch('setOpenDialogWindow', false)
+                    this.$store.dispatch('setLogged', true)
+                })
+                .catch((error) => {
+                    console.log('error')
+                })
+            } 
+            
+            else {
+                console.log('error! пароли не совпадают, бака T//_//T')
+            }
         }
     }
 }
