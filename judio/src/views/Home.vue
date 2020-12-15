@@ -4,7 +4,6 @@
             <video 
                 src="https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/16039715690370.webm?alt=media&token=7223f140-e884-4797-ae4d-955bec7e6fc2" 
                 controls="controls"
-                autoplay="autoplay"
                 loop="loop" 
                 poster=""> 
             </video>

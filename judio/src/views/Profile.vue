@@ -1,6 +1,6 @@
 <template>
     <div class="content-profile">
-        <div class="newVideo">
+        <div v-if="$store.state.Logged == true" class="newVideo">
             Add video
         </div>
     </div>

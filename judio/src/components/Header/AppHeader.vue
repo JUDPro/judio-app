@@ -9,6 +9,7 @@
                 </Avatar>
                 <Avatar 
                     v-if="$store.state.Logged == true"
+                    @click.native="$router.push('Profile')"
                     >
                 </Avatar>
                 <div
@@ -20,6 +21,7 @@
                 <div
                     class="user-name" 
                     v-if="$store.state.Logged == true"
+                    @click="$router.push('Profile')"
                     >{{$store.state.user.email}}
                 </div>
             </div>
@@ -27,11 +29,6 @@
                     <div class="home-btn">
                         <router-link to="/Home">
                             Home
-                        </router-link>
-                    </div>
-                    <div class="profile-btn">
-                        <router-link to="/Profile">
-                            Profile
                         </router-link>
                     </div>
             </div>
