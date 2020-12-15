@@ -5,6 +5,7 @@
       <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'"/>
       <Regist v-if="$store.state.isOpenDialogWindow == 'regist'"></Regist>
     </transition>
+    <router-view/>
   </div>
 </template>
 

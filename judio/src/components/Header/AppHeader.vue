@@ -3,14 +3,32 @@
         <div class="line-header">
             <div class="reg-position">
                 <Avatar 
+                    v-if="$store.state.Logged == false"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
+                    >
+                </Avatar>
+                <Avatar 
+                    v-if="$store.state.Logged == true"
                     >
                 </Avatar>
                 <div
                     class="user-name" 
+                    v-if="$store.state.Logged == false"
                     @click="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >{{$store.state.user.email}}
                 </div>
+                <div
+                    class="user-name" 
+                    v-if="$store.state.Logged == true"
+                    >{{$store.state.user.email}}
+                </div>
+            </div>
+            <div class="navigation">
+                    <div class="home-btn">
+                        <router-link to="/Home">
+                            Home
+                        </router-link>
+                    </div>
             </div>
             <div>
                 <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
@@ -81,5 +99,24 @@ export default {
 .reg-position {
     display: flex;
     align-items: center;
+}
+
+.navigation {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20pt;
+
+}
+
+.navigation > div{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.navigation > div:hover {
+    background-color: rgb(238, 238, 238);
 }
 </style>
