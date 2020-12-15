@@ -4,6 +4,7 @@ import 'firebase/auth'
 let firebaseConfig = {
     apiKey: "AIzaSyD4DU70XauUU1vjjiuDWPmwv5nk3bqgKDo",
     authDomain: "judio-10aa1.firebaseapp.com",
+    databaseURL: 'https://judio-10aa1-default-rtdb.firebaseio.com',
     projectId: "judio-10aa1",
     storageBucket: "judio-10aa1.appspot.com",
     messagingSenderId: "253779954642",
@@ -11,5 +12,7 @@ let firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+//let storage = firebase.storage();
 
 export { firebase }; 

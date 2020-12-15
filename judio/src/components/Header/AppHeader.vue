@@ -29,6 +29,11 @@
                             Home
                         </router-link>
                     </div>
+                    <div class="profile-btn">
+                        <router-link to="/Profile">
+                            Profile
+                        </router-link>
+                    </div>
             </div>
             <div>
                 <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
@@ -114,6 +119,11 @@ export default {
 .navigation > div{
     padding: 10px;
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .navigation > div:hover {

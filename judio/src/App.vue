@@ -37,6 +37,8 @@ export default {
   position: relative;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .openDialogAnimation-enter-active {
