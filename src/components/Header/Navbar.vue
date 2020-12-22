@@ -1,7 +1,8 @@
 <template>
     <header class="navbar">
-        <div class="line-navbar">
+        <div class="content-navbar">
             <div class="reg-position">
+
                 <Avatar 
                     v-if="$store.state.Logged == false"
                     width="50px"
@@ -10,21 +11,26 @@
                 </Avatar>
                 <Avatar 
                     v-if="$store.state.Logged == true"
+                    width="50px"
                     @click.native="$router.push('Profile')"
                     >
                 </Avatar>
+
                 <SignUp
                     class="user-name" 
                     v-if="$store.state.Logged == false"
+                    fontSize="24px"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >
                 </SignUp>
-                <div
+
+                <SignUp
                     class="user-name" 
                     v-if="$store.state.Logged == true"
                     @click.native="$router.push('Profile')"
                     >{{$store.state.user.email}}
-                </div>
+                </SignUp>
+
             </div>
             <div class="navigation">
                     <div class="home-btn">
@@ -86,19 +92,13 @@ export default {
     height: 120px;
 }
 
-.line-navbar {
+.content-navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 80%;
     height: 100%;
     border-bottom: 3px solid #505050;
-}
-
-.user-name {
-    margin-left: 20px;
-    font-size: 20pt;
-    cursor: pointer;
 }
 
 .reg-position {

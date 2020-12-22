@@ -51,7 +51,7 @@ export default {
   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 .openDialogAnimation-enter, .openDialogAnimation-leave-to
-/* .slide-fade-leave-active до версии 2.1.8 */ {
+{
   transform: translate3d(10px);
   opacity: 0;
 }

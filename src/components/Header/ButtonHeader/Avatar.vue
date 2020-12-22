@@ -21,7 +21,6 @@ export default {
 <style>
 .avatar {
     margin-left: 30px;
-    width: 40px;
     border-radius: 50%;
     cursor: pointer;
 }

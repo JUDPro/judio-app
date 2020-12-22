@@ -1,5 +1,5 @@
 <template>
-    <div class="sign-up">
+    <div class="sign-up" :style="style()">
         {{$store.state.user.email}}
     </div>
 </template>
@@ -7,13 +7,21 @@
 <script>
 export default {
     name: 'sign-up',
+    props: {
+        fontSize: String,
+    },
+    methods: {
+        style() {
+            return 'font-size: ' + this.fontSize;
+        }
+    }
 }
 </script>
 
 <style>
 .sign-up {
-    width: 40px;
-    margin-right: 30px;
+    margin-left: 20px;
     padding: 8px;
+    cursor: pointer;
 }
 </style>

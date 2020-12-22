@@ -1,7 +1,20 @@
 <template>
     <div class="AppHeader">
-        <div class="content">
-            
+        <div class="content-header">
+            <div class="user-info">
+                <Avatar 
+                    width="150px"
+                >
+                </Avatar>
+
+                <SignUp
+                    fontSize="36px"
+                >
+                </SignUp>
+            </div>
+            <div class="user-menu">
+
+            </div>
         </div>
     </div>
 </template>
@@ -28,16 +41,17 @@ export default {
     width: 100%;
 }
 
-.content {
+.content-header {
     width: 80%;
     height: 100%;
     border-bottom: 3px solid #505050;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.content > div {
-    width: 300px;
-    height: 60px;
+.user-info {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 </style>
