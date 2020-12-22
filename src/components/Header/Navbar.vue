@@ -4,6 +4,7 @@
             <div class="reg-position">
                 <Avatar 
                     v-if="$store.state.Logged == false"
+                    width="50px"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >
                 </Avatar>
@@ -12,16 +13,16 @@
                     @click.native="$router.push('Profile')"
                     >
                 </Avatar>
-                <div
+                <SignUp
                     class="user-name" 
                     v-if="$store.state.Logged == false"
-                    @click="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >{{$store.state.user.email}}
-                </div>
+                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
+                    >
+                </SignUp>
                 <div
                     class="user-name" 
                     v-if="$store.state.Logged == true"
-                    @click="$router.push('Profile')"
+                    @click.native="$router.push('Profile')"
                     >{{$store.state.user.email}}
                 </div>
             </div>
@@ -44,6 +45,7 @@
 import Avatar from './ButtonHeader/Avatar'
 import Exit from './ButtonHeader/Exit'
 import SignIn from './ButtonHeader/Sign-in'
+import SignUp from './ButtonHeader/Sign-up'
 import { firebase } from '../../plugins/firebase'
 
 export default {
@@ -51,7 +53,8 @@ export default {
     components: {
         Avatar,
         Exit,
-        SignIn
+        SignIn,
+        SignUp
     },
     data: () => ({
         
