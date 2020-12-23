@@ -1,8 +1,5 @@
 <template>
     <div class="content-profile">
-        <div v-if="$store.state.Logged == true" class="newVideo">
-            Add video
-        </div>
     </div>
 </template>
 
@@ -19,12 +16,5 @@ export default {}
     align-items: center;
     justify-content: center;
 }
-.newVideo {
-    width: 120px;
-    height: 30px;
-    font-size: 20pt;
-    text-align: center;
-    border: 1px solid black;
-    cursor: pointer;
-}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="sign-up" :style="style()">
-        {{$store.state.user.email}}
+        <slot></slot>
     </div>
 </template>
 

@@ -21,7 +21,7 @@
                     v-if="$store.state.Logged == false"
                     fontSize="24px"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >
+                    >{{$store.state.user.email}}
                 </SignUp>
 
                 <SignUp

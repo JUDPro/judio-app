@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: {
       email: 'Anon',
       userId: '',
+      userVideo: [],
     },
     Logged: false,
   },
