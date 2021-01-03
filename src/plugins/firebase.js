@@ -1,4 +1,5 @@
 import firebase from 'firebase/app'
+import 'firebase/database'
 import 'firebase/auth'
 
 let firebaseConfig = {
@@ -10,6 +11,10 @@ let firebaseConfig = {
     messagingSenderId: "253779954642",
     appId: "1:253779954642:web:8fd270f871bd7a9998d60b"
 };
+
+function getReference() {
+    let database = firebase.database();
+}
 
 firebase.initializeApp(firebaseConfig);
 

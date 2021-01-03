@@ -1,12 +1,12 @@
 <template>
-<div class="close">
+<div class="close" @keyup.enter="SignIn">
     <div class="blur" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
     <div class="auth">
         <div class="textAuth">
             Authorization
         </div>
         <div class="userInput">
-            <input type="email" v-model="user.email" placeholder="email" autofocus>
+            <input type="email" v-model="user.email" placeholder="email" v-focus>
             <input type="password" v-model="user.password" placeholder="password">
         </div>
         <div class="btnUser">
@@ -45,6 +45,14 @@ export default {
             .catch((error) => {
                 console.log('error')
             })
+        }
+    },
+
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus();
+            }
         }
     }
 }

@@ -13,6 +13,7 @@
                 </SignUp>
             </div>
             <div class="user-menu">
+                <input type="text" v-model="urlVideo">
                 <div 
                     v-if="$store.state.Logged == true" 
                     @click="addVideo()"
@@ -35,9 +36,28 @@ export default {
         Avatar,
         SignUp
     },
+
+    data: () => ({
+        urlVideo: '',
+        postId: 0,
+        dataVideo: [{
+            id: 0,
+            posts: '',
+        }]
+    }),
+
     methods: {
         addVideo() {
-
+            let post = {
+                id: this.postId,
+                posts: this.urlVideo
+            }
+            firebase.database().ref('posts/').push(post)
+            .then( () => {
+                this.dataVideo.unshift(post)
+                this.urlVideo = ''
+                this.postId = 0
+            })
         },
     },
 }
@@ -69,7 +89,15 @@ export default {
     width: 50%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-evenly;
+}
+
+.user-menu > div:hover{
+    background-color: #f0f0f0;
+}
+
+.user-menu > * {
+    position: relative;
 }
 
 .newVideo {

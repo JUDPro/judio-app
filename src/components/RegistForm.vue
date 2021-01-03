@@ -6,7 +6,7 @@
                 Registration
             </div>
             <div class="userInput">
-                <input type="email" v-model="user.email" placeholder="email" autofocus>
+                <input type="email" v-model="user.email" placeholder="email" v-focus>
                 <input type="password" v-model="user.password" placeholder="password">
                 <input type="password" v-model="user.repeatPassword" placeholder="repeat password">
             </div>
@@ -52,6 +52,14 @@ export default {
             
             else {
                 console.log('error! пароли не совпадают, бака T//_//T')
+            }
+        }
+    },
+
+    directives: {
+        focus: {
+            inserted: function (el) {
+                el.focus();
             }
         }
     }

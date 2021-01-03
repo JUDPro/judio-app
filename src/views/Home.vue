@@ -1,19 +1,41 @@
 <template>
     <div class="content-home">
-        <div class="video">
-            <video 
-                src="https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/16039715690370.webm?alt=media&token=7223f140-e884-4797-ae4d-955bec7e6fc2" 
+        <div class="video" v-for="video in videos" :key="video.idVideo">
+            <video
+                src=videos.urlVideo
                 controls="controls"
                 loop="loop" 
                 poster=""> 
             </video>
         </div>
+        <div class="arrayTest" v-for="value in object" :key="value.id">
+            {{ value }}
+        </div>
     </div>
 </template>
 
 <script>
+import {firebase} from 'firebase/database'
+
 export default {
-    name: 'Home'
+    name: 'Home',
+
+    data: () => ({
+        videos: { 
+            idVideo: '' 
+        },
+    }),
+
+    methods: {
+        testAr() {
+
+        },
+        writeData(userId, urlVideo) {
+            firebase.database().ref('posts/' + userId).set({
+                urlVideo:  urlVideo,
+            })
+        },
+    }
 }
 </script>
 
