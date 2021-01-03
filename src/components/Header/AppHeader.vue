@@ -39,25 +39,14 @@ export default {
 
     data: () => ({
         urlVideo: '',
-        postId: 0,
-        dataVideo: [{
-            id: 0,
-            posts: '',
-        }]
     }),
 
     methods: {
         addVideo() {
             let post = {
-                id: this.postId,
-                posts: this.urlVideo
+                urlVideo: this.urlVideo,
             }
-            firebase.database().ref('posts/').push(post)
-            .then( () => {
-                this.dataVideo.unshift(post)
-                this.urlVideo = ''
-                this.postId = 0
-            })
+            firebase.database().ref('users/testUser/userVideo/').push(post)
         },
     },
 }

@@ -12,12 +12,5 @@ let firebaseConfig = {
     appId: "1:253779954642:web:8fd270f871bd7a9998d60b"
 };
 
-function getReference() {
-    let database = firebase.database();
-}
-
 firebase.initializeApp(firebaseConfig);
-
-//let storage = firebase.storage();
-
 export { firebase }; 

@@ -7,9 +7,12 @@ export default new Vuex.Store({
   state: {
     isOpenDialogWindow: false,
     user: {
+      uid: '',
       email: 'Anon',
-      userId: '',
-      userVideo: [],
+      userAvatar: '',
+      userVideo: {
+        videoUrl: ''
+      },
     },
     Logged: false,
   },

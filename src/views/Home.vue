@@ -1,41 +1,42 @@
 <template>
     <div class="content-home">
-        <div class="video" v-for="video in videos" :key="video.idVideo">
+        <div class="video" v-for="video in videos" :key="video.id">
             <video
-                src=videos.urlVideo
+                src="videos.id"
                 controls="controls"
                 loop="loop" 
-                poster=""> 
+                poster=""
+                >{{video.id}}
             </video>
-        </div>
-        <div class="arrayTest" v-for="value in object" :key="value.id">
-            {{ value }}
         </div>
     </div>
 </template>
 
 <script>
-import {firebase} from 'firebase/database'
+import {firebase} from '../plugins/firebase'
 
 export default {
     name: 'Home',
 
     data: () => ({
+        idVideo: '',
         videos: { 
-            idVideo: '' 
+            id: ''
         },
     }),
 
     methods: {
-        testAr() {
-
-        },
-        writeData(userId, urlVideo) {
-            firebase.database().ref('posts/' + userId).set({
-                urlVideo:  urlVideo,
+        writeData(Id, videoUrl) {
+            firebase.database().ref('users/testUser/userVideo/').get({
+                videoUrl:  videoUrl,
             })
         },
-    }
+    },
+    
+    mounted: function () {
+        this.writeData(this.idVideo, this.videos.id)
+    },
+    
 }
 </script>
 
