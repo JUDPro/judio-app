@@ -5,7 +5,7 @@
       <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'"/>
       <Regist v-if="$store.state.isOpenDialogWindow == 'regist'"></Regist>
     </transition>
-    <AppHeader></AppHeader>
+    <!--AppHeader></AppHeader-->
     <router-view/>
   </div>
 </template>
@@ -38,10 +38,6 @@ export default {
 #app {
   font-family: 'Roboto Regular';
   position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
 }
 
 .openDialogAnimation-enter-active {
@@ -57,4 +53,4 @@ export default {
 }
 
 </style>
-
+  

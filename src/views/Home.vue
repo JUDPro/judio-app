@@ -1,13 +1,13 @@
 <template>
     <div class="content-home">
-        <div class="video" v-for="video in videos" :key="video.id">
-            <video
-                src="videos.id"
-                controls="controls"
-                loop="loop" 
-                poster=""
-                >{{video.id}}
-            </video>
+        <div class="video" v-for="video in userData.videos" :key="video.id">
+            <video 
+            :src="idVideo"
+            controls="controls"
+            loop="loop"
+            poster=""
+            >{{video.id}}
+        </video>
         </div>
     </div>
 </template>
@@ -19,22 +19,26 @@ export default {
     name: 'Home',
 
     data: () => ({
-        idVideo: '',
-        videos: { 
-            id: ''
+        idVideo: 'gs://judio-10aa1.appspot.com/15788215775460.webm',
+        userData: { 
+            id: 0,
+            uid: '',
+            userEmail: '',
+            userAvatar: '',
+            videos: {
+                url: 'gs://judio-10aa1.appspot.com/16086600287720.webm'
+            }
         },
     }),
 
     methods: {
-        writeData(Id, videoUrl) {
-            firebase.database().ref('users/testUser/userVideo/').get({
-                videoUrl:  videoUrl,
-            })
-        },
+        writeData() {
+            return firebase.database().ref('users/testUser/userVideo/').get()
+        }
     },
     
     mounted: function () {
-        this.writeData(this.idVideo, this.videos.id)
+        this.writeData();
     },
     
 }

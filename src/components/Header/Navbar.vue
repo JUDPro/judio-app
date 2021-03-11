@@ -2,21 +2,19 @@
     <header class="navbar">
         <div class="content-navbar">
             <div class="reg-position">
-
-                <Avatar 
+                <div class="menu"></div>
+                <Avatar
                     v-if="$store.state.Logged == false"
-                    width="50px"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >
                 </Avatar>
                 <Avatar 
                     v-if="$store.state.Logged == true"
-                    width="50px"
                     @click.native="$router.push('Profile')"
                     >
                 </Avatar>
 
-                <SignUp
+                <!--SignUp
                     class="user-name" 
                     v-if="$store.state.Logged == false"
                     fontSize="24px"
@@ -29,16 +27,16 @@
                     v-if="$store.state.Logged == true"
                     @click.native="$router.push('Profile')"
                     >{{$store.state.user.email}}
-                </SignUp>
+                </SignUp-->
 
             </div>
-            <div class="navigation">
+            <!--div class="navigation">
                     <div class="home-btn">
                         <router-link to="/Home">
                             Home
                         </router-link>
                     </div>
-            </div>
+            </div-->
             <div>
                 <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
                 <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
@@ -86,10 +84,12 @@ export default {
 
 <style>
 .navbar {
+    position: fixed;
+    left: 0;
     display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 120px;
+    width: 90px;
+    height: 100%;
+    border-right: 1px solid black;
 }
 
 .content-navbar {
@@ -98,12 +98,19 @@ export default {
     justify-content: space-between;
     width: 80%;
     height: 100%;
-    border-bottom: 3px solid #505050;
 }
 
 .reg-position {
     display: flex;
+    flex-direction: column;
     align-items: center;
+}
+
+.menu {
+    background-image: url('../../../public/icons/svg/menu.svg');
+    background-size: 40px 40px;
+    height: 40px;
+    width: 40px;
 }
 
 .navigation {

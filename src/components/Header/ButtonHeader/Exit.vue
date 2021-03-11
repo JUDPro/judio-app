@@ -1,6 +1,6 @@
 <template>
     <div class="exit">
-        <img src="../../../../public/icons/svg/exit.svg" alt="">
+        <img src="" alt="">
         </div>
 </template>
 

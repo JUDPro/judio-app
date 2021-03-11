@@ -1,6 +1,6 @@
 <template>
     <div class="sign-in">
-        <img src="../../../../public/icons/svg/login.svg" alt="">
+        <img src="" alt="">
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="avatar" :style="style()">
-        <img src="../../../../public/icons/svg/user-3.svg" alt="">
+        <div class="some-class"></div>
     </div>
 </template>
 
@@ -9,19 +9,27 @@ export default {
     name: 'Avatar',
     props: {
         width: String,
+        height: String,
     },
     methods: {
         style () {
-            return 'width: ' + this.width; 
+            return 'width: ' + this.width, 'height: ' + this.height; 
         }
     }
 }
 </script>
-
 <style>
 .avatar {
-    margin-left: 30px;
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
+}
+
+.some-class{
+    width: 100%;
+    height: 100%;
+    background-color: #505050;
+    mask-size: 100%;
+    mask-image: url("../../../../public/icons/svg/account.svg");
 }
 </style>
