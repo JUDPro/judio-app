@@ -1,47 +1,50 @@
 <template>
     <header class="navbar">
-        <div class="content-navbar">
-            <div class="reg-position">
-                <div class="menu"></div>
-                <Avatar
-                    v-if="$store.state.Logged == false"
-                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >
-                </Avatar>
-                <Avatar 
-                    v-if="$store.state.Logged == true"
-                    @click.native="$router.push('Profile')"
-                    >
-                </Avatar>
-
-                <!--SignUp
-                    class="user-name" 
-                    v-if="$store.state.Logged == false"
-                    fontSize="24px"
-                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >{{$store.state.user.email}}
-                </SignUp>
-
-                <SignUp
-                    class="user-name" 
-                    v-if="$store.state.Logged == true"
-                    @click.native="$router.push('Profile')"
-                    >{{$store.state.user.email}}
-                </SignUp-->
-
-            </div>
-            <!--div class="navigation">
-                    <div class="home-btn">
-                        <router-link to="/Home">
-                            Home
-                        </router-link>
-                    </div>
-            </div-->
-            <div>
-                <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
-                <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
-            </div>
+        <div class="menu">
+            <div class="menu-icon"></div>
         </div>
+
+        <div class="icons">
+
+            <Avatar
+                v-if="$store.state.Logged == false"
+                @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
+                >
+            </Avatar>
+            <Avatar 
+                v-if="$store.state.Logged == true"
+                @click.native="$router.push('Profile')"
+                >
+            </Avatar>
+
+            <div class="home">
+                <router-link to="/Home">
+                    <div class="home-icon"></div>
+                </router-link>
+            </div>
+
+            <SignUp
+                class="user-name" 
+                v-if="$store.state.Logged == false"
+                fontSize="24px"
+                @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
+                >{{$store.state.user.email}}
+            </SignUp>
+        
+            <SignUp
+                class="user-name" 
+                v-if="$store.state.Logged == true"
+                @click.native="$router.push('Profile')"
+                >{{$store.state.user.email}}
+            </SignUp>
+
+        </div>
+
+        <div>
+            <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
+            <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
+        </div>
+
     </header>
 </template>
 
@@ -87,53 +90,52 @@ export default {
     position: fixed;
     left: 0;
     display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 90px;
     height: 100%;
-    border-right: 1px solid black;
+    border-right: 1px solid #505050;
 }
 
-.content-navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
+.menu {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    padding: 15px 20px 15px 20px;
+    border-bottom: 1px solid #505050;
+}
+
+.menu-icon {
+    width: 100%;
     height: 100%;
+    background-color: #505050;
+    mask-size: 100%;
+    mask-image: url('../../../public/icons/svg/menu.svg');
 }
 
-.reg-position {
+.icons {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.menu {
-    background-image: url('../../../public/icons/svg/menu.svg');
-    background-size: 40px 40px;
-    height: 40px;
-    width: 40px;
+.home {
+    height: 35px;
+    width: 35px;
+    margin: 20px;
 }
 
-.navigation {
-    height: 100%;
+.home-icon {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20pt;
-
-}
-
-.navigation > div{
-    padding: 10px;
-    cursor: pointer;
+    height: 100%;
+    background-color: #505050;
+    mask-size: 100%;
+    mask-image: url('../../../public/icons/svg/home.svg');
 }
 
 a {
     text-decoration: none;
     color: black;
-}
-
-.navigation > div:hover {
-    background-color: rgb(238, 238, 238);
 }
 </style>
