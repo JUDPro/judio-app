@@ -87,6 +87,7 @@ export default {
 
 <style>
 .navbar {
+    background-color: white;
     position: fixed;
     left: 0;
     display: flex;
@@ -95,6 +96,7 @@ export default {
     width: 90px;
     height: 100%;
     border-right: 1px solid #505050;
+    z-index: 200;
 }
 
 .menu {
