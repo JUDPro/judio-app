@@ -1,6 +1,8 @@
 <template>
-    <div class="exit">
-        <div class="exit-icon"></div>    
+    <div class="line-top">
+        <div class="exit">
+            <div class="exit-icon"></div>    
+        </div>
     </div>
 </template>
 
@@ -9,15 +11,16 @@ export default {}
 </script>
 
 <style>
+.line-top {
+    width: 95%;
+    border-top: 1px solid #505050;
+}
 .exit {
     width: 40px;
     height: 40px;
     padding: 15px 20px 15px 20px;
-    border-top: 1px solid #505050;
     cursor: pointer;
-
 }
-
 .exit-icon {
     height: 100%;
     width: 100%;

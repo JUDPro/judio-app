@@ -51,6 +51,5 @@ export default {
   transform: translate3d(10px);
   opacity: 0;
 }
-
 </style>
   

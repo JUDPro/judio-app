@@ -15,6 +15,7 @@ export default new Vuex.Store({
       },
     },
     Logged: false,
+    navbarIsActive: false,
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -25,7 +26,10 @@ export default new Vuex.Store({
     },
     setLogged(state, i) {
       state.Logged = i
-    }
+    },
+    setNavbarIsActive(state, i) {
+      state.navbarIsActive = i
+    },
   },
   actions: {
     setOpenDialogWindow(isOpenDialogWindow, i) {
@@ -44,6 +48,9 @@ export default new Vuex.Store({
     },
     setLogged(Logged, i) {
       Logged.commit('setLogged', i)
+    },
+    setNavbarIsActive(setNavbarIsActive, i) {
+      setNavbarIsActive.commit('setNavbarIsActive', i)
     }
   },
   modules: {}

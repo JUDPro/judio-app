@@ -1,21 +1,24 @@
 <template>
-    <div class="sign-in">
-        <div class="sign-in-icon"></div>
+    <div class="line-top">
+        <div class="sign-in">
+            <div class="sign-in-icon"></div>
+        </div>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'sign-in',
-}
+export default {}
 </script>
 
 <style>
+.line-top {
+    width: 95%;
+    border-top: 1px solid #505050;
+}
 .sign-in {
     width: 40px;
     height: 40px;
     padding: 15px 20px 15px 20px;
-    border-top: 1px solid #505050;
     cursor: pointer;
 }
 .sign-in-icon {

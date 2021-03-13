@@ -1,6 +1,9 @@
 <template>
-    <header class="navbar">
-        <Menu></Menu>
+    <header class="navbar" :class="{active: $store.state.navbarIsActive}">
+        <Menu
+            @click.native="$store.dispatch('setNavbarIsActive', !$store.state.navbarIsActive)"
+        >
+        </Menu>
         <div class="icons">
             <Avatar
                 v-if="$store.state.Logged == false"
@@ -27,10 +30,8 @@
                 >{{$store.state.user.email}}
             </SignUp>
         </div>
-        <div>
-            <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
-            <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
-        </div>
+        <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
+        <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
     </header>
 </template>
 
@@ -68,7 +69,10 @@ export default {
             .catch((error) => {
                 console.log('error')
             })
-        }
+        },
+        actionNavbar() {
+            return 'width: 370';
+        },
     }
 }
 </script>
@@ -85,6 +89,11 @@ export default {
     height: 100%;
     border-right: 1px solid #505050;
     z-index: 200;
+    transition: all .2s ease-in-out;
+}
+.active {
+    width: 370px;
+    transition: all .2s ease-in-out;
 }
 .icons {
     flex-grow: 1;
