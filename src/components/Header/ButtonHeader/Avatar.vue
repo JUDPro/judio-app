@@ -20,8 +20,8 @@ export default {
 </script>
 <style>
 .avatar {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     margin: 20px;
 }

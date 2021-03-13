@@ -12,8 +12,8 @@ export default {}
 
 <style>
 .home {
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
     margin: 20px;
 }
 .home-icon {

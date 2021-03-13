@@ -1,10 +1,10 @@
 <template>
-    <header class="navbar" :class="{active: $store.state.navbarIsActive}">
+    <header class="navbar" :class="{activeNavbar: $store.state.navbarIsActive}">
         <Menu
             @click.native="$store.dispatch('setNavbarIsActive', !$store.state.navbarIsActive)"
         >
         </Menu>
-        <div class="icons">
+        <div class="icons" :class="{activeIcons: $store.state.navbarIsActive}">
             <Avatar
                 v-if="$store.state.Logged == false"
                 @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
@@ -91,15 +91,19 @@ export default {
     z-index: 200;
     transition: all .2s ease-in-out;
 }
-.active {
+.activeNavbar {
     width: 370px;
     transition: all .2s ease-in-out;
 }
 .icons {
+    width: 95%;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+}
+.activeIcons {
+    align-items: flex-start;
 }
 a {
     text-decoration: none;

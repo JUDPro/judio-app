@@ -21,8 +21,8 @@ export default {
 
 <style>
 .sign-up {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin: 20px;
     cursor: pointer;
 }
