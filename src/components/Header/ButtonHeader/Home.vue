@@ -1,8 +1,6 @@
 <template>
     <div class="home">
-        <router-link to="/Home">
-            <div class="home-icon"></div>
-        </router-link>
+        <div class="home-icon"></div>
     </div>
 </template>
 
@@ -15,6 +13,7 @@ export default {}
     height: 40px;
     width: 40px;
     margin: 20px;
+    cursor: pointer;
 }
 .home-icon {
     width: 100%;

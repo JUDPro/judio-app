@@ -15,7 +15,9 @@
                 @click.native="$router.push('Profile')"
                 >
             </Avatar>
-            <Home></Home>
+            <router-link to="/Home">
+                <Home></Home>
+            </router-link>
             <SignUp
                 class="user-name" 
                 v-if="$store.state.Logged == false"
@@ -29,6 +31,7 @@
                 @click.native="$router.push('Profile')"
                 >{{$store.state.user.email}}
             </SignUp>
+            <ButtonComponent></ButtonComponent>
         </div>
         <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
         <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
@@ -42,6 +45,7 @@ import SignIn from './ButtonHeader/Sign-in'
 import SignUp from './ButtonHeader/Sign-up'
 import Menu from './ButtonHeader/Menu'
 import Home from './ButtonHeader/Home'
+import ButtonComponent from './ButtonHeader/Button-component'
 import { firebase } from '../../plugins/firebase'
 
 export default {
@@ -53,6 +57,7 @@ export default {
         SignUp,
         Menu,
         Home,
+        ButtonComponent
     },
     data: () => ({}),
     methods: {
