@@ -31,7 +31,6 @@
                 @click.native="$router.push('Profile')"
                 >{{$store.state.user.email}}
             </SignUp>
-            <ButtonComponent></ButtonComponent>
         </div>
         <SignIn v-if="$store.state.Logged == false" @click.native="$store.dispatch('setOpenDialogWindow', 'login')"></SignIn>
         <Exit v-if="$store.state.Logged == true" @click.native="outAccount"></Exit>
@@ -45,7 +44,6 @@ import SignIn from './ButtonHeader/Sign-in'
 import SignUp from './ButtonHeader/Sign-up'
 import Menu from './ButtonHeader/Menu'
 import Home from './ButtonHeader/Home'
-import ButtonComponent from './ButtonHeader/Button-component'
 import { firebase } from '../../plugins/firebase'
 
 export default {
@@ -57,7 +55,6 @@ export default {
         SignUp,
         Menu,
         Home,
-        ButtonComponent
     },
     data: () => ({}),
     methods: {
@@ -94,11 +91,11 @@ export default {
     height: 100%;
     border-right: 1px solid #505050;
     z-index: 200;
-    transition: all .2s ease-in-out;
+    transition: all .15s ease-in-out;
 }
 .activeNavbar {
     width: 370px;
-    transition: all .2s ease-in-out;
+    transition: all .15s ease-in-out;
 }
 .icons {
     width: 95%;
