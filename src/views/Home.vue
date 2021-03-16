@@ -47,19 +47,20 @@ export default {
 <style>
 .content-home {
     position: relative;
-    width: 80%;
+    width: auto;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-flow: wrap;
+    margin: 0 0 0 90px;
 }
 
 .video {
     background-color: grey;
     width: 380px;
     height: 220px;
-    margin: 40px 0 0 0;
+    margin: 0px 0 0 0;
 }
 
 video {

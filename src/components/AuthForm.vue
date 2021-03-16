@@ -1,6 +1,6 @@
 <template>
 <div class="close" @keyup.enter="SignIn">
-    <div class="blur" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
+    <div class="blackout-form" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
     <div class="auth">
         <div class="textAuth">
             Authorization
@@ -65,9 +65,8 @@ export default {
     position: absolute;
     z-index: 1000;
 }
-.blur {
+.blackout-form {
 	position: fixed;
-    backdrop-filter: blur(2px);
     background-color: rgba(0, 0, 0, 0.075);
     width: 100%;
     height: 100%;
