@@ -126,7 +126,7 @@ export default {
 }
 .info-for-anon {
     animation: infoAction .2s;
-    background-color: #F0F0F0;
+    background-color: white;
     font-size: 24px;
     width: 100%;
     height: 220px;
@@ -139,11 +139,17 @@ export default {
         opacity: 0;
         transform: translate(-400px);
     }
+    50% {
+        opacity: 0;
+        transform: translate(-200px);
+    }
     100% {
         opacity: 1;
     }
 }
 .text-block {
+    background-color: #f0f0f0;
+    padding: 20px;
     width: 240px;
     height: 150px;
     color: #505050;
