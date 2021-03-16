@@ -41,13 +41,12 @@ export default {
 }
 
 .openDialogAnimation-enter-active {
-  transition: all .3s ease;
+  transition: all .3s ease-in-out;
 }
 .openDialogAnimation-leave-active {
   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.openDialogAnimation-enter, .openDialogAnimation-leave-to
-{
+.openDialogAnimation-enter, .openDialogAnimation-leave-to {
   transform: translate3d(10px);
   opacity: 0;
 }

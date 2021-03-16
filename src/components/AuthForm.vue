@@ -66,13 +66,12 @@ export default {
     z-index: 1000;
 }
 .blur {
-    position: fixed;
+	position: fixed;
+    backdrop-filter: blur(2px);
     background-color: rgba(0, 0, 0, 0.075);
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(3px);
 }
-
 .auth {
     position: fixed;
     background-color: #fff;
@@ -88,7 +87,6 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 .textAuth {
     position: absolute;
     font-size: 24px;
@@ -104,14 +102,12 @@ export default {
     height: 70px;
     border-bottom: 2px solid #505050;
 }
-
 .userInput {
     height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-
 .btnUser {
     position: absolute;
     bottom: 10px;
@@ -119,13 +115,11 @@ export default {
     cursor: pointer;
     display: flex;
 }
-
 .btnForm {
     padding: 10px;
     font-size: 24px;
     margin: 10px;
 }
-
 input,
 input:active,
 input:hover,

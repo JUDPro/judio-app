@@ -6,6 +6,11 @@
                 <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
             </svg>   
         </div>
+        <transition name="textActive">
+            <div class="text-exit" v-if="$store.state.navbarIsActive">
+                Exit
+            </div>
+        </transition>  
     </div>
 </template>
 
@@ -17,6 +22,8 @@ export default {}
 .line-top {
     width: 95%;
     border-top: 1px solid #505050;
+    display: flex;
+    align-items: center;
 }
 .exit {
     width: 40px;
@@ -27,5 +34,22 @@ export default {}
 .exit > svg {
     fill: #505050;
     transform: rotate(180deg);
+}
+.text-exit {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    font-size: 24px;
+    color: #505050;
+    padding: 20px 20px 20px 20px;
+    cursor: pointer;
+    opacity: 1;
+}
+.textActive-enter-active {
+    transition: .5s;
+}
+.textActive-enter {
+    opacity: 0;
 }
 </style>
