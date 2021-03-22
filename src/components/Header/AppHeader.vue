@@ -2,15 +2,6 @@
     <div class="AppHeader">
         <div class="content-header">
             <div class="user-info">
-                <Avatar 
-                    width="150px"
-                >
-                </Avatar>
-
-                <SignUp
-                    fontSize="36px"
-                >{{$store.state.user.email}}
-                </SignUp>
             </div>
             <div class="user-menu">
                 <input type="text" v-model="urlVideo">
@@ -26,16 +17,10 @@
 </template>
 
 <script>
-import Avatar from './ButtonHeader/Avatar'
-import SignUp from './ButtonHeader/Sign-up'
 import { firebase } from '../../plugins/firebase'
 
 export default {
     name: 'AppHeader',
-    components: {
-        Avatar,
-        SignUp
-    },
 
     data: () => ({
         urlVideo: '',

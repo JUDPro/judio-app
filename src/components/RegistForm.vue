@@ -1,6 +1,6 @@
 <template>
     <div class="close">
-        <div class="blur" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
+        <div class="blackout-form" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
         <div class="regist">
             <div class="textRegist">
                 Registration
@@ -73,7 +73,12 @@ export default {
     position: absolute;
     z-index: 1000;
 }
-
+.blackout-form {
+	position: fixed;
+    background-color: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    height: 100%;
+}
 .regist {
     position: fixed;
     background-color: #fff;
@@ -89,14 +94,12 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-
 .textRegist {
     position: absolute;
     font-size: 24px;
     top: 30px;
     left: 50px;
 }
-
 .textRegist::after {
     content: "";
     position: absolute;
@@ -106,14 +109,12 @@ export default {
     height: 70px;
     border-bottom: 2px solid #505050;
 }
-
 .userInput {
     height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-
 .btnUser {
     position: absolute;
     bottom: 10px;
@@ -121,13 +122,11 @@ export default {
     cursor: pointer;
     display: flex;
 }
-
 .btnForm {
     padding: 10px;
     font-size: 24px;
     margin: 10px;
 }
-
 input,
 input:active,
 input:hover,
