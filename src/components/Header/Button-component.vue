@@ -13,10 +13,9 @@
 
 <script>
 export default {
-    name: "test",
-    props: {
-        img: String,
-        text: String
+    name: "button-component",
+    render: function(){
+
     },
 }
 </script>

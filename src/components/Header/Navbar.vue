@@ -68,7 +68,6 @@
 				<span slot="icon" class="material-icons-outlined">logout</span>
 				<span slot="text">Exit</span>
 			</ButtonComponent>
-
         </nav>
     </div>
 </template>
