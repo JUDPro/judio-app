@@ -26,6 +26,10 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
 }
 .icon {
     width: 40px;
@@ -36,10 +40,6 @@ export default {
     fill: #505050;
 }
 .text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -khtml-user-select: none;
     font-size: 24px;
     color: #505050;
     padding: 20px 20px 20px 20px;
