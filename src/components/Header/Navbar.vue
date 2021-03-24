@@ -16,6 +16,14 @@
             </ButtonComponent>
             <div class="icons" :class="{activeIcons: $store.state.navbarIsActive}">
                 <ButtonComponent
+                    v-for="info in dataOfButton"
+                    :key="info.index"
+                    :class="info.class"
+                >
+                    <span slot="icon" class="material-icons-outlined">{{info.icon}}</span>
+                    <span slot="text">{{info.text}}</span>
+                </ButtonComponent>
+                <!--ButtonComponent
 					class="avatar-btn"
                     v-if="$store.state.Logged == false"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
@@ -38,7 +46,7 @@
 					</ButtonComponent>
                 </router-link>
                 <ButtonComponent
-                    class="user-btn" 
+                    class="user-add-btn" 
                     v-if="$store.state.Logged == false"
                     @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
                     >
@@ -49,25 +57,24 @@
                     <div class="text-block">
                         To get more features, you need to create a new one or log into your account.
                     </div>
-                </div>  
-
+                </div-->  
             </div>
             <ButtonComponent
-				class="sign-in-btn"
-				v-if="$store.state.Logged == false"
-				@click.native="$store.dispatch('setOpenDialogWindow', 'login')"
-			>
-				<span slot="icon" class="material-icons-outlined">login</span>
-				<span slot="text">Sign&#8209;in</span>
-			</ButtonComponent>
+                class="sign-in-btn"
+                v-if="$store.state.Logged == false"
+                @click.native="$store.dispatch('setOpenDialogWindow', 'login')"
+            >
+                <span slot="icon" class="material-icons-outlined">login</span>
+                <span slot="text">Sign&#8209;in</span>
+            </ButtonComponent>
             <ButtonComponent
-				class="exit-btn"
-				v-if="$store.state.Logged == true"
-				@click.native="outAccount"
-			>
-				<span slot="icon" class="material-icons-outlined">logout</span>
-				<span slot="text">Exit</span>
-			</ButtonComponent>
+                class="exit-btn"
+                v-if="$store.state.Logged == true"
+                @click.native="outAccount"
+            >
+                <span slot="icon" class="material-icons-outlined">logout</span>
+                <span slot="text">Exit</span>
+            </ButtonComponent>
         </nav>
     </div>
 </template>
@@ -81,7 +88,25 @@ export default {
     components: {
         ButtonComponent,
     },
-    data: () => ({}),
+    data: () => ({
+        dataOfButton: [
+            {
+                class: 'avatar-btn',
+                icon: 'account_circle',
+                text: 'Anon',
+            },
+            {
+                class: 'home-btn',
+                icon: 'home',
+                text: 'Home',
+            },
+            {
+                class: 'user-add-btn',
+                icon: 'person_add_alt',
+                text: 'Registration',
+            },
+        ],
+    }),
     methods: {
         outAccount() {
             firebase.auth().signOut()

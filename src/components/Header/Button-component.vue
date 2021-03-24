@@ -14,9 +14,6 @@
 <script>
 export default {
     name: "button-component",
-    render: function(){
-
-    },
 }
 </script>
 
