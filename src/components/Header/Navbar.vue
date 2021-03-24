@@ -52,12 +52,12 @@
                     >
 					    <span slot="icon" class="material-icons-outlined">person_add_alt</span>
 						<span slot="text">Registration</span>
-                </ButtonComponent>
+                </ButtonComponent-->
                 <div class="info-for-anon" v-show="$store.state.navbarIsActive" v-if="$store.state.Logged == false">
                     <div class="text-block">
                         To get more features, you need to create a new one or log into your account.
                     </div>
-                </div-->  
+                </div>
             </div>
             <ButtonComponent
                 class="sign-in-btn"
@@ -93,7 +93,7 @@ export default {
             {
                 class: 'avatar-btn',
                 icon: 'account_circle',
-                text: 'Anon',
+                text: '',
             },
             {
                 class: 'home-btn',

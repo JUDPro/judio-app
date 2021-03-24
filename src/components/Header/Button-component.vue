@@ -22,10 +22,17 @@ export default {
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 100%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
+}
+.button-component:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.button-component:active {
+    background-color: rgba(0, 0, 0, 0.075);
 }
 .icon {
     width: 40px;
