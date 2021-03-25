@@ -14,11 +14,12 @@
                     <span slot="icon" class="material-icons-outlined">menu</span>
                     <span slot="text">Menu</span>
             </ButtonComponent>
-            <div class="icons" :class="{activeIcons: $store.state.navbarIsActive}">
+            <div class="nav-buttons" :class="{activeIcons: $store.state.navbarIsActive}">
                 <ButtonComponent
                     v-for="info in dataOfButton"
                     :key="info.index"
                     :class="info.class"
+                    @click.native="buttonsPattern(info)"
                 >
                     <span slot="icon" class="material-icons-outlined">{{info.icon}}</span>
                     <span slot="text">{{info.text}}</span>
@@ -88,25 +89,7 @@ export default {
     components: {
         ButtonComponent,
     },
-    data: () => ({
-        dataOfButton: [
-            {
-                class: 'avatar-btn',
-                icon: 'account_circle',
-                text: '',
-            },
-            {
-                class: 'home-btn',
-                icon: 'home',
-                text: 'Home',
-            },
-            {
-                class: 'user-add-btn',
-                icon: 'person_add_alt',
-                text: 'Registration',
-            },
-        ],
-    }),
+    data: () => ({}),
     methods: {
         outAccount() {
             firebase.auth().signOut()
@@ -125,7 +108,38 @@ export default {
         actionNavbar() {
             return 'width: 370';
         },
-    }
+        buttonsPattern(info) {
+            console.log(info.method);
+            this.test();
+        },
+        test() {
+            this.$store.dispatch('setOpenDialogWindow', 'regist')
+        }
+    },
+    computed: {
+        dataOfButton: {
+            get() {
+                return [
+                    {
+                        class: 'avatar-btn',
+                        icon: 'account_circle',
+                        text: this.$store.state.user.email,
+                        method: 'test'
+                    },
+                    {
+                        class: 'home-btn',
+                        icon: 'home',
+                        text: 'Home',
+                    },
+                    {
+                        class: 'user-add-btn',
+                        icon: 'person_add_alt',
+                        text: 'Registration',
+                    },
+                ]
+            }
+        },
+    },
 }
 </script>
 
@@ -156,7 +170,7 @@ export default {
     width: 370px;
     transition: all .15s ease-in-out;
 }
-.icons {
+.nav-buttons {
     width: 95%;
     flex-grow: 1;
     display: flex;
