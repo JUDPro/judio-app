@@ -48,7 +48,6 @@ export default {
             })
         }
     },
-
     directives: {
         focus: {
             inserted: function (el) {

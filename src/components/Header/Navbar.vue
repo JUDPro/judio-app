@@ -19,41 +19,11 @@
                     v-for="info in dataOfButton"
                     :key="info.index"
                     :class="info.class"
-                    @click.native="buttonsPattern(info)"
+                    @click.native="info.method"
                 >
                     <span slot="icon" class="material-icons-outlined">{{info.icon}}</span>
                     <span slot="text">{{info.text}}</span>
                 </ButtonComponent>
-                <!--ButtonComponent
-					class="avatar-btn"
-                    v-if="$store.state.Logged == false"
-                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >
-                        <span slot="icon" class="material-icons-outlined">account_circle</span>
-						<span slot="text">Anon</span>
-                </ButtonComponent>
-				<ButtonComponent
-					class="avatar-btn"
-                    v-if="$store.state.Logged == true"
-                    @click.native="$router.push('Profile')"
-                    >
-					    <span slot="icon" class="material-icons-outlined">account_circle</span>
-						<span slot="text">{{$store.state.user.email}}</span>
-                </ButtonComponent>
-                <router-link to="/Home">
-                    <ButtonComponent class="home-btn">
-						<span slot="icon" class="material-icons-outlined">home</span>
-						<span slot="text">Home</span>
-					</ButtonComponent>
-                </router-link>
-                <ButtonComponent
-                    class="user-add-btn" 
-                    v-if="$store.state.Logged == false"
-                    @click.native="$store.dispatch('setOpenDialogWindow', 'regist')"
-                    >
-					    <span slot="icon" class="material-icons-outlined">person_add_alt</span>
-						<span slot="text">Registration</span>
-                </ButtonComponent-->
                 <div class="info-for-anon" v-show="$store.state.navbarIsActive" v-if="$store.state.Logged == false">
                     <div class="text-block">
                         To get more features, you need to create a new one or log into your account.
@@ -107,13 +77,6 @@ export default {
         },
         actionNavbar() {
             return 'width: 370';
-        },
-        buttonsPattern(info) {
-            console.log(info.method);
-            this.test();
-        },
-        test() {
-            this.$store.dispatch('setOpenDialogWindow', 'regist')
         }
     },
     computed: {
@@ -124,17 +87,29 @@ export default {
                         class: 'avatar-btn',
                         icon: 'account_circle',
                         text: this.$store.state.user.email,
-                        method: 'test'
+                        method: () => {
+                            if(!this.$store.state.Logged)
+                                this.$store.dispatch('setOpenDialogWindow', 'regist');
+                            else this.$router.push('Profile');
+                        }
                     },
                     {
                         class: 'home-btn',
                         icon: 'home',
                         text: 'Home',
+                        method: () => {
+                            this.$router.push('Home');
+                        }
                     },
                     {
                         class: 'user-add-btn',
-                        icon: 'person_add_alt',
-                        text: 'Registration',
+                        icon: this.$store.state.Logged ? 'chat':'person_add_alt',
+                        text: this.$store.state.Logged ? 'Messenger':'Registration',
+                        method: () => {
+                            if(!this.$store.state.Logged)
+                                this.$store.dispatch('setOpenDialogWindow', 'regist');
+                            else console.log('button!')
+                        }
                     },
                 ]
             }
