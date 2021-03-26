@@ -14,6 +14,7 @@
                     <span slot="icon" class="material-icons-outlined">menu</span>
                     <span slot="text">Menu</span>
             </ButtonComponent>
+
             <div class="nav-buttons" :class="{activeIcons: $store.state.navbarIsActive}">
                 <ButtonComponent
                     v-for="info in dataOfButton"
@@ -30,6 +31,7 @@
                     </div>
                 </div>
             </div>
+
             <ButtonComponent
                 class="sign-in-btn"
                 v-if="$store.state.Logged == false"
@@ -82,36 +84,83 @@ export default {
     computed: {
         dataOfButton: {
             get() {
-                return [
-                    {
-                        class: 'avatar-btn',
-                        icon: 'account_circle',
-                        text: this.$store.state.user.email,
-                        method: () => {
-                            if(!this.$store.state.Logged)
+                if(this.$store.state.Logged){
+                    return [
+                        {
+                            class: 'avatar-btn',
+                            icon: 'account_circle',
+                            text: this.$store.state.user.email,
+                            method: () => {
+                                this.$router.push('Profile');
+                            }
+                        },
+                        {
+                            class: 'home-btn',
+                            icon: 'home',
+                            text: 'Home',
+                            method: () => {
+                                this.$router.push('Home');
+                            }
+                        },
+                        {
+                            class: 'user-add-btn',
+                            icon: 'chat',
+                            text: 'Messenger',
+                            method: () => {
+                                console.log('chat!');
+                            }
+                        },                        {
+                            class: 'settings-btn',
+                            icon: 'settings',
+                            text: 'Settings',
+                            method: () => {
+                                console.log('Settings!');
+                            }
+                        },                        {
+                            class: 'statistics-btn',
+                            icon: 'assessment',
+                            text: 'Statistics',
+                            method: () => {
+                                console.log('Statistics!');
+                            }
+                        },                        {
+                            class: 'new-video-btn',
+                            icon: 'add_circle',
+                            text: 'Add video',
+                            method: () => {
+                                console.log('Add video!');
+                            }
+                        },
+                    ]
+                }
+                if(!this.$store.state.Logged) {
+                    return [
+                        {
+                            class: 'avatar-btn',
+                            icon: 'account_circle',
+                            text: this.$store.state.user.email,
+                            method: () => {
                                 this.$store.dispatch('setOpenDialogWindow', 'regist');
-                            else this.$router.push('Profile');
-                        }
-                    },
-                    {
-                        class: 'home-btn',
-                        icon: 'home',
-                        text: 'Home',
-                        method: () => {
-                            this.$router.push('Home');
-                        }
-                    },
-                    {
-                        class: 'user-add-btn',
-                        icon: this.$store.state.Logged ? 'chat':'person_add_alt',
-                        text: this.$store.state.Logged ? 'Messenger':'Registration',
-                        method: () => {
-                            if(!this.$store.state.Logged)
+                            }
+                        },
+                        {
+                            class: 'home-btn',
+                            icon: 'home',
+                            text: 'Home',
+                            method: () => {
+                                this.$router.push('Home');
+                            }
+                        },
+                        {
+                            class: 'user-add-btn',
+                            icon: 'person_add_alt',
+                            text: 'Registration',
+                            method: () => {
                                 this.$store.dispatch('setOpenDialogWindow', 'regist');
-                            else console.log('button!')
-                        }
-                    },
-                ]
+                            }
+                        },
+                    ]
+                }
             }
         },
     },
