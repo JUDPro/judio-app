@@ -1,17 +1,24 @@
 <template>
     <div class="content-profile">
+        <ProfileHeader></ProfileHeader>
     </div>
 </template>
 
 <script>
-export default {}
+import ProfileHeader from '../components/ProfileHeader'
+export default {
+    name: 'Profile',
+    components: {
+        ProfileHeader,
+    }
+}
 </script>
 
 <style>
 .content-profile {
     position: relative;
-    width: 80%;
-    height: 200px;
+    width: auto;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

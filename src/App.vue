@@ -5,16 +5,14 @@
       <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'"/>
       <Regist v-if="$store.state.isOpenDialogWindow == 'regist'"></Regist>
     </transition>
-    <!--AppHeader></AppHeader-->
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Header/Navbar'
+import Navbar from './components/Navbar'
 import AuthForm from './components/AuthForm'
 import Regist from './components/RegistForm'
-import AppHeader from './components/Header/AppHeader'
 
 export default {
   name: 'app',
@@ -22,7 +20,6 @@ export default {
     Navbar,
     AuthForm,
     Regist,
-    AppHeader
   }
 }
 </script>

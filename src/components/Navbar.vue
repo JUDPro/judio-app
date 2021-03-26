@@ -54,7 +54,7 @@
 
 <script>
 import ButtonComponent from './Button-component'
-import { firebase } from '../../plugins/firebase'
+import { firebase } from '../plugins/firebase'
 
 export default {
     name: 'Navbar',
