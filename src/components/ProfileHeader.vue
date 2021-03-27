@@ -4,14 +4,16 @@
             <img src="https://sun9-76.userapi.com/impf/NxH11vMrZ8oiFCGfPhfu31HNxrHwEgbc2BK86A/WeNZs2ReS7U.jpg?size=1080x926&quality=96&sign=257877d30d170bcc5fdb46dc186f150c&type=album" alt="">
         </div>
         <div class="user-info">
-            <div class="user-nickname">{{$store.state.user.email}}</div>
+            <span class="user-nickname">{{$store.state.user.email}}</span>
             <div class="user-subscribers">
-                <span>232301 subscribers</span>
+                <span><font color="#DA2222">232301</font> subscribers</span>
             </div>
         </div>
         <div class="user-action">
-            <div class="user-setting"></div>
-            <div class="subscribe-btn">New video</div>
+            <div class="user-settings">
+                <span class="material-icons-outlined">settings</span>
+            </div>
+            <div class="user-btn">Add video</div>
         </div>
     </header>
 </template>
@@ -39,11 +41,18 @@ export default {
 
 <style>
 .profile-header {
-    width: 1600px;
+    position: relative;
+    width: 80%;
     height: 230px;
     border-bottom: solid 2px #000;
+    display: flex;
+    align-items: center;
 }
 .user-avatar {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
     width: 150px;
     height: 150px;
     margin: 40px;
@@ -53,21 +62,51 @@ export default {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    left: 0;
-}
-.user-info {
 }
 .user-nickname {
-    width: auto;
     font-size: 36px;
 }
 .user-subscribers {
-    width: 220px;
     font-size: 20px;
     display: flex;
     justify-content: center;
-}
+    border: solid 1px #000;
+    border-radius: 4px;
+}    
 .user-action{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    position: absolute;
     right: 0;
+    display: flex;
+    align-items: center;
+}
+.user-btn {
+    background-color: #008BAA;
+    font-size: 36px;
+    color: #fff;
+    border: solid 1px #000;
+    border-radius: 7px;
+    padding: 5px 15px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+.user-settings {
+    color: #505050;
+    border: solid 2px #000;
+    border-radius: 7px;
+    margin: 25px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.user-settings:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.user-settings:active {
+    background-color: rgba(0, 0, 0, 0.075);
 }
 </style>

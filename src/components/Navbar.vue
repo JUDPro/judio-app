@@ -89,7 +89,7 @@ export default {
                         {
                             class: 'avatar-btn',
                             icon: 'account_circle',
-                            text: this.$store.state.user.email,
+                            text: 'Your profile',
                             method: () => {
                                 this.$router.push('Profile');
                             }
@@ -201,7 +201,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
 }
-.material-icons-outlined, .material-icons{
+.material-icons-outlined, .material-icons {
     color: #505050;
     font-size: 40px;
 }
