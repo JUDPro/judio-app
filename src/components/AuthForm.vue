@@ -2,16 +2,17 @@
     <div class="close" @keyup.enter="SignIn">
         <div class="blackout-form" type="button" @click="$store.dispatch('setOpenDialogWindow', false)"></div>
         <div class="auth">
-            <div class="textAuth">
+            <div class="text-auth">
                 Authorization
             </div>
-            <div class="userInput">
+            <div class="user-input">
                 <input type="email" v-model="user.email" placeholder="email" v-focus>
                 <input type="password" v-model="user.password" placeholder="password">
             </div>
-            <div class="btnUser">
-                <div @click="$store.dispatch('setOpenDialogWindow', false)" class="btnForm">Close</div>
-                <div class="btnForm" @click="SignIn">Login</div>
+            <div class="go-to-regist" @click="$store.dispatch('setOpenDialogWindow', 'regist')">Registration?</div>
+            <div class="btn-user">
+                <div @click="$store.dispatch('setOpenDialogWindow', false)" class="btn-form">Close</div>
+                <div class="btn-form" @click="SignIn">Login</div>
             </div>
         </div> 
     </div>
@@ -86,13 +87,13 @@ export default {
     flex-direction: column;
     align-items: center;
 }
-.textAuth {
+.text-auth {
     position: absolute;
     font-size: 24px;
     top: 30px;
     left: 50px;
 }
-.textAuth::after {
+.text-auth::after {
     content: "";
     position: absolute;
     left: -20px;
@@ -101,23 +102,38 @@ export default {
     height: 70px;
     border-bottom: 2px solid #505050;
 }
-.userInput {
+.user-input {
     height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.btnUser {
+.go-to-regist {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 30px 55px;
+    font-size: 20px;
+    cursor: pointer;
+    border-bottom: solid 1px #000;
+}
+.btn-user {
     position: absolute;
     bottom: 10px;
     right: 15px;
     cursor: pointer;
     display: flex;
 }
-.btnForm {
+.btn-form {
     padding: 10px;
     font-size: 24px;
     margin: 10px;
+}
+.btn-form:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.btn-form:active {
+    background-color: rgba(0, 0, 0, 0.075);
 }
 input,
 input:active,
