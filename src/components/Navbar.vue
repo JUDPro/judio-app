@@ -140,7 +140,7 @@ export default {
                             icon: 'account_circle',
                             text: this.$store.state.user.email,
                             method: () => {
-                                this.$store.dispatch('setOpenDialogWindow', 'login');
+                                this.$store.dispatch('setOpenDialogWindow', true);
                             }
                         },
                         {
@@ -156,7 +156,7 @@ export default {
                             icon: 'person_add_alt',
                             text: 'Registration',
                             method: () => {
-                                this.$store.dispatch('setOpenDialogWindow', 'regist');
+                                this.$store.dispatch('setOpenDialogWindow', true);
                             }
                         },
                     ]

@@ -33,15 +33,7 @@ export default new Vuex.Store({
   },
   actions: {
     setOpenDialogWindow(isOpenDialogWindow, i) {
-      if (i == 'login') {
-        isOpenDialogWindow.commit('setOpenDialogWindow', i)
-      }
-      if (i == 'regist') {
-        isOpenDialogWindow.commit('setOpenDialogWindow', i)
-      }
-      if (i == false) {
-        isOpenDialogWindow.commit('setOpenDialogWindow', i)
-      }
+      isOpenDialogWindow.commit('setOpenDialogWindow', i)
     },
     setUser(user, i) {
       user.commit('setUser', i)
