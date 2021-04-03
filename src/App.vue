@@ -38,7 +38,6 @@ export default {
   width: 100%;
   height: 100%;
 }
-
 .openDialogAnimation-enter-active {
   transition: all .3s ease-in-out;
 }
