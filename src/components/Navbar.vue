@@ -103,11 +103,11 @@ export default {
                             }
                         },
                         {
-                            class: 'user-add-btn',
+                            class: 'messenger-btn',
                             icon: 'chat',
                             text: 'Messenger',
                             method: () => {
-                                console.log('chat!');
+                                this.$router.push('Messenger');
                             }
                         },                        {
                             class: 'settings-btn',

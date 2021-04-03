@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from '../views/Home.vue';
 import Profile from '../views/Profile.vue';
+import Messenger from '../views/Messenger.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,11 @@ const routes = [
     name: "Profile",
     component: Profile
   },
+  {
+    path: "/Messenger",
+    name: "Messenger",
+    component: Messenger
+  }
 ];
 
 const router = new VueRouter({
