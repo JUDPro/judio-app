@@ -35,6 +35,8 @@ export default {
 #app {
   font-family: 'Roboto Regular';
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .openDialogAnimation-enter-active {
