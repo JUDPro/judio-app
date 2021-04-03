@@ -114,21 +114,21 @@ export default {
                             icon: 'settings',
                             text: 'Settings',
                             method: () => {
-                                console.log('Settings!');
+                                this.$router.push('Settings');
                             }
                         },                        {
                             class: 'statistics-btn',
                             icon: 'assessment',
                             text: 'Statistics',
                             method: () => {
-                                console.log('Statistics!');
+                                this.$router.push('Statistics');
                             }
                         },                        {
                             class: 'new-video-btn',
                             icon: 'add_circle',
                             text: 'Add video',
                             method: () => {
-                                console.log('Add video!');
+                                this.$router.push('AddVideo');
                             }
                         },
                     ]

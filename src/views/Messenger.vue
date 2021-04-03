@@ -1,5 +1,6 @@
 <template>
-    <div class="">
+    <div>
+        Messenger
     </div>
 </template>
 

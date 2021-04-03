@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>Add Video</div>
 </template>
 
 <script>
