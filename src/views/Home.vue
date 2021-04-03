@@ -53,7 +53,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     flex-flow: wrap;
-    margin: 0 0 0 90px;
+    margin-left: 90px;
 }
 
 .video {

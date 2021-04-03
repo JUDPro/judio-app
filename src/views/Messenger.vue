@@ -1,6 +1,14 @@
 <template>
-    <div>
-        Messenger
+    <div class="messenger">
+        <div class="users-chat">
+            <div class="search-chat">
+                <input type="text">
+            </div>
+            <div class="user-chat">
+                
+            </div>
+        </div>
+        <div class="correspondence">ыфвфывфвывф</div>
     </div>
 </template>
 
@@ -8,5 +16,16 @@
 export default {}
 </script>
 
-<style scoped>
+<style>
+.messenger {
+    position: relative;
+    display: flex;
+    margin-left: 90px;
+}
+.users-chat {
+    width: 360px;
+}
+.correspondence {
+    width: 100%;
+}
 </style>

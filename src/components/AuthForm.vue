@@ -135,6 +135,9 @@ export default {
 .btn-form:active {
     background-color: rgba(0, 0, 0, 0.075);
 }
+</style>
+
+<style scoped>
 input,
 input:active,
 input:hover,

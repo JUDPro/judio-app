@@ -127,6 +127,9 @@ export default {
     font-size: 24px;
     margin: 10px;
 }
+</style>
+
+<style scoped>
 input,
 input:active,
 input:hover,
