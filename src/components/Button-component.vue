@@ -39,9 +39,6 @@ export default {
     height: 40px;
     padding: 15px 20px 15px 20px;
 }
-.icon > svg {
-    fill: #505050;
-}
 .text {
     font-size: 24px;
     color: #505050;

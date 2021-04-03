@@ -201,7 +201,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
 }
-.material-icons-outlined, .material-icons {
+.material-icons-outlined {
     color: #505050;
     font-size: 40px;
 }
