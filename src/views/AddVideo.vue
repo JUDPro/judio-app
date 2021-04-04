@@ -1,8 +1,11 @@
 <template>
     <div class="add-video">
         <div class="container">
-            <div class="uploading-video">
-                <div class="upl-video-btn">Select a file</div>
+            <div id="uploading-video" class="select-off" @mouseover="dropFunction">
+                <div class="file-select-style">
+                    <label for="files" class="upl-video-btn">Select a file</label>
+                    <input id="files" style="visibility:hidden;" type="file" accept="video/*">
+                </div>
                 <div class="upl-video-drag">or drag it here</div>
             </div>
             <div class="info-of-video">
@@ -13,7 +16,7 @@
                         placeholder="Title of the video"
                         maxlength="100"
                         >
-                    <span class="material-icons-outlined">create</span>
+                    <span class="material-icons-outlined select-off">create</span>
                 </div>
                 <div class="description-video">
                     <textarea
@@ -24,19 +27,26 @@
                         size="100px"
                         >
                     </textarea>
-                    <span class="material-icons-outlined">create</span>
+                    <span class="material-icons-outlined select-off">create</span>
                 </div>
             </div>
             <div class="video-editing">
-                <div class="tools">qw</div>
-                <div class="track">qweqwe</div>
+                <div class="tools"></div>
+                <div class="track"></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+    name: 'add-video',
+    methods: {
+        dropFunction() {
+            console.log('YAP')
+        }
+    }
+}
 </script>
 
 <style>
@@ -54,7 +64,7 @@ export default {}
     display: flex;
     flex-wrap: wrap;
 }
-.uploading-video {
+#uploading-video {
     background-color: #EDEDED;
     width: 730px;
     height: 415px;
@@ -64,10 +74,6 @@ export default {}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -khtml-user-select: none;
 }
 .upl-video-btn {
     width: 170px;
@@ -81,6 +87,10 @@ export default {}
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+.file-select-style {
+    width: 170px;
+    height: 40px;
 }
 .upl-video-drag {
     font-size: 18px;
@@ -97,14 +107,7 @@ export default {}
     display: flex;
     align-items: center;
 }
-.material-icons-outlined {
-    color: #505050;
-    font-size: 35px;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    padding: 5px;
-}
+
 .description-video {
     width: 100%;
     height: 345px;
@@ -146,5 +149,22 @@ export default {}
     width: 100%;
     height: 100%;
     margin-left: 60px;
+}
+.select-off {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+}
+</style>
+
+<style scoped>
+.material-icons-outlined {
+    color: #505050;
+    font-size: 35px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    padding: 5px;
 }
 </style>
