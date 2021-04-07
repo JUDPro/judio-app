@@ -14,7 +14,7 @@
                         class="info-inp"
                         type="text"
                         placeholder="Title of the video"
-                        maxlength="100"
+                        maxlength="50"
                         >
                     <span class="material-icons-outlined select-off">create</span>
                 </div>
@@ -31,7 +31,17 @@
                 </div>
             </div>
             <div class="video-editing">
-                <div class="tools"></div>
+                <div class="tools select-off">
+                    <div class="tool">
+                        <span class="material-icons-outlined">content_cut</span>
+                    </div>
+                    <div class="tool">
+                        <span class="material-icons-outlined">undo</span>
+                    </div>
+                    <div class="tool">
+                        <span class="material-icons-outlined">redo</span>
+                    </div>
+                </div>
                 <div class="track"></div>
             </div>
         </div>
@@ -143,6 +153,19 @@ export default {
     width: 60px;
     height: 200px;
     border-right: solid 1px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.tool {
+    width: 40px;
+    height: 40px;
+    background-color: #EDEDED;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .track {
     position: absolute;
@@ -166,5 +189,10 @@ export default {
     height: 35px;
     cursor: pointer;
     padding: 5px;
+}
+.tool > .material-icons-outlined {
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
 }
 </style>

@@ -48,5 +48,31 @@ export default {
   transform: translate3d(10px);
   opacity: 0;
 }
+::-webkit-scrollbar-button {
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:5px;
+  height:0px
+}
+::-webkit-scrollbar-track {
+  background-color:#ecedee
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color:#009FC2;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color:#009FC2;
+}
+::-webkit-resizer{
+  background-image:url('');
+  background-repeat:no-repeat;
+  width:4px;
+  height:0px
+}
+::-webkit-scrollbar{
+  width: 4px;
+}
 </style>
   

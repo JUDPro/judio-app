@@ -91,7 +91,7 @@ export default {
                             icon: 'account_circle',
                             text: 'Your profile',
                             method: () => {
-                                this.$router.push('Profile');
+                                this.$router.push('Profile').catch(() => {});
                             }
                         },
                         {
@@ -99,7 +99,7 @@ export default {
                             icon: 'home',
                             text: 'Home',
                             method: () => {
-                                this.$router.push('Home');
+                                this.$router.push('Home').catch(() => {});
                             }
                         },
                         {
@@ -107,28 +107,28 @@ export default {
                             icon: 'chat',
                             text: 'Messenger',
                             method: () => {
-                                this.$router.push('Messenger');
+                                this.$router.push('Messenger').catch(() => {});
                             }
                         },                        {
                             class: 'settings-btn',
                             icon: 'settings',
                             text: 'Settings',
                             method: () => {
-                                this.$router.push('Settings');
+                                this.$router.push('Settings').catch(() => {});
                             }
                         },                        {
                             class: 'statistics-btn',
                             icon: 'assessment',
                             text: 'Statistics',
                             method: () => {
-                                this.$router.push('Statistics');
+                                this.$router.push('Statistics').catch(() => {});
                             }
                         },                        {
                             class: 'new-video-btn',
                             icon: 'add_circle',
                             text: 'Add video',
                             method: () => {
-                                this.$router.push('AddVideo');
+                                this.$router.push('AddVideo').catch(() => {});
                             }
                         },
                     ]
@@ -148,7 +148,7 @@ export default {
                             icon: 'home',
                             text: 'Home',
                             method: () => {
-                                this.$router.push('Home');
+                                this.$router.push('Home').catch(() => {});
                             }
                         },
                         {
