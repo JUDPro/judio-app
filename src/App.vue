@@ -49,7 +49,6 @@ export default {
   opacity: 0;
 }
 ::-webkit-scrollbar-button {
-  background-image:url('');
   background-repeat:no-repeat;
   width:5px;
   height:0px
@@ -66,7 +65,6 @@ export default {
   background-color:#009FC2;
 }
 ::-webkit-resizer{
-  background-image:url('');
   background-repeat:no-repeat;
   width:4px;
   height:0px

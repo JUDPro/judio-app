@@ -91,7 +91,14 @@ export default {
                             icon: 'account_circle',
                             text: 'Your profile',
                             method: () => {
-                                this.$router.push('Profile').catch(() => {});
+                                this.$router.push('Profile').catch(err => {
+                                    if (
+                                        err.name !== 'NavigationDuplicated' &&
+                                        !err.message.includes('Avoided redundant navigation to current location')) 
+                                    {
+                                        logError(err);
+                                    }
+                                });
                             }
                         },
                         {
@@ -107,7 +114,8 @@ export default {
                             icon: 'chat',
                             text: 'Messenger',
                             method: () => {
-                                this.$router.push('Messenger').catch(() => {});
+                                if(this.$router.path != '/Messenger')
+                                    this.$router.push('Messenger').catch(() => {});
                             }
                         },                        {
                             class: 'settings-btn',
