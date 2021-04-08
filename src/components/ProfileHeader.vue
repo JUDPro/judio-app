@@ -10,10 +10,18 @@
             </div>
         </div>
         <div class="user-action">
-            <div class="user-settings">
+            <div
+                class="user-settings"
+                @click="$router.push('Settings').catch(() => {})"
+            >
                 <span class="material-icons-outlined">settings</span>
             </div>
-            <div class="user-btn">Add video</div>
+            <div
+                class="user-btn"
+                @click="$router.push('AddVideo').catch(() => {})"
+            >
+                Add video
+            </div>
         </div>
     </header>
 </template>

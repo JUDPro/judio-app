@@ -1,9 +1,9 @@
 <template>
-    <div class="add-video">
+    <div class="add-video flex-settings">
         <div class="container">
-            <div id="uploading-video" class="select-off" @mouseover="dropFunction">
+            <div id="uploading-video" class="select-off flex-settings" @mouseover="dropFunction">
                 <div class="file-select-style">
-                    <label for="files" class="upl-video-btn">Select a file</label>
+                    <label for="files" class="upl-video-btn flex-settings">Select a file</label>
                     <input id="files" style="visibility:hidden;" type="file" accept="video/*">
                 </div>
                 <div class="upl-video-drag">or drag it here</div>
@@ -32,13 +32,13 @@
             </div>
             <div class="video-editing">
                 <div class="tools select-off">
-                    <div class="tool">
+                    <div class="tool flex-settings">
                         <span class="material-icons-outlined">content_cut</span>
                     </div>
-                    <div class="tool">
+                    <div class="tool flex-settings">
                         <span class="material-icons-outlined">undo</span>
                     </div>
-                    <div class="tool">
+                    <div class="tool flex-settings">
                         <span class="material-icons-outlined">redo</span>
                     </div>
                 </div>
@@ -64,9 +64,6 @@ export default {
     width: 95%;
     height: 100%;
     margin-left: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .container {
     width: auto;
@@ -80,10 +77,7 @@ export default {
     height: 415px;
     border: solid 1px #000;
     margin-right: 30px;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .upl-video-btn {
     width: 170px;
@@ -93,9 +87,6 @@ export default {
     background-color: #009FC2;
     border: solid 1px #000;
     color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
 }
 .file-select-style {
@@ -163,9 +154,6 @@ export default {
     height: 40px;
     background-color: #EDEDED;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .track {
     position: absolute;
@@ -178,6 +166,11 @@ export default {
     -moz-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
+}
+.flex-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
 
