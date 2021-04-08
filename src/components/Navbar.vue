@@ -7,14 +7,6 @@
             >
         </div>
         <nav class="navbar" :class="{activeNavbar: $store.state.navbarIsActive}">
-            <ButtonComponent
-                class="menu-btn"
-                @click.native="$store.dispatch('setNavbarIsActive', !$store.state.navbarIsActive)"
-                >
-                    <span slot="icon" class="material-icons-outlined">menu</span>
-                    <span slot="text">Menu</span>
-            </ButtonComponent>
-
             <div class="nav-buttons" :class="{activeIcons: $store.state.navbarIsActive}">
                 <ButtonComponent
                     v-for="info in dataOfButton"
@@ -31,23 +23,6 @@
                     </div>
                 </div>
             </div>
-
-            <ButtonComponent
-                class="sign-in-btn"
-                v-if="$store.state.Logged == false"
-                @click.native="$store.dispatch('setOpenDialogWindow', 'login')"
-            >
-                <span slot="icon" class="material-icons-outlined">login</span>
-                <span slot="text">Sign&#8209;in</span>
-            </ButtonComponent>
-            <ButtonComponent
-                class="exit-btn"
-                v-if="$store.state.Logged == true"
-                @click.native="outAccount"
-            >
-                <span slot="icon" class="material-icons-outlined">logout</span>
-                <span slot="text">Exit</span>
-            </ButtonComponent>
         </nav>
     </div>
 </template>
@@ -87,18 +62,27 @@ export default {
                 if(this.$store.state.Logged){
                     return [
                         {
+                            class: 'menu-btn',
+                            icon: 'menu',
+                            text: 'Menu',
+                            method: () => {
+                                this.$store.dispatch('setNavbarIsActive', !this.$store.state.navbarIsActive);
+                            }
+                        },
+                        {
                             class: 'avatar-btn',
                             icon: 'account_circle',
                             text: 'Your profile',
                             method: () => {
-                                this.$router.push('Profile').catch(err => {
-                                    if (
-                                        err.name !== 'NavigationDuplicated' &&
-                                        !err.message.includes('Avoided redundant navigation to current location')) 
-                                    {
-                                        logError(err);
-                                    }
-                                });
+                                this.$router.push('Profile').catch(() => {});
+                                //this.$router.push('Profile').catch(err => {
+                                //    if (
+                                //        err.name !== 'NavigationDuplicated' &&
+                                //        !err.message.includes('Avoided redundant navigation to current location')) 
+                                //    {
+                                //        logError(err);
+                                //    }
+                                //});
                             }
                         },
                         {
@@ -114,8 +98,7 @@ export default {
                             icon: 'chat',
                             text: 'Messenger',
                             method: () => {
-                                if(this.$router.path != '/Messenger')
-                                    this.$router.push('Messenger').catch(() => {});
+                                this.$router.push('Messenger').catch(() => {});
                             }
                         },                        {
                             class: 'settings-btn',
@@ -139,10 +122,24 @@ export default {
                                 this.$router.push('AddVideo').catch(() => {});
                             }
                         },
+                        {
+                            class: 'exit-btn',
+                            icon: 'logout',
+                            text: 'Exit',
+                            method: this.outAccount
+                        },
                     ]
                 }
                 if(!this.$store.state.Logged) {
                     return [
+                        {
+                            class: 'menu-btn',
+                            icon: 'menu',
+                            text: 'Menu',
+                            method: () => {
+                                this.$store.dispatch('setNavbarIsActive', !this.$store.state.navbarIsActive);
+                            }
+                        },
                         {
                             class: 'avatar-btn',
                             icon: 'account_circle',
@@ -165,6 +162,14 @@ export default {
                             text: 'Registration',
                             method: () => {
                                 this.$store.dispatch('setOpenDialogWindow', 'regist');
+                            }
+                        },
+                        {
+                            class: 'sign-in-btn',
+                            icon: 'login',
+                            text: 'Login',
+                            method: () => {
+                                this.$store.dispatch('setOpenDialogWindow', 'login');
                             }
                         },
                     ]
@@ -203,6 +208,7 @@ export default {
     transition: all .15s ease-in-out;
 }
 .nav-buttons {
+    position: relative;
     width: 95%;
     flex-grow: 1;
     display: flex;
@@ -214,17 +220,16 @@ export default {
     font-size: 40px;
 }
 .menu-btn {
-	width: 95%;
     border-bottom: 1px solid #505050;
     display: flex;
     align-items: center;
 	font-weight: 600;
 }
 .sign-in-btn, .exit-btn {
-	width: 95%;
+    position: absolute;
     border-top: 1px solid #505050;
     display: flex;
-    align-items: center;
+    bottom: 0;
 	font-weight: 600;
 }
 .info-for-anon {
