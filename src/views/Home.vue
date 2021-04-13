@@ -19,7 +19,7 @@ export default {
     name: 'Home',
 
     data: () => ({
-        idVideo: 'https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/15788215775460.webm?alt=media&token=18105b20-2dc8-493b-8cb0-b6e2730778f7',
+        idVideo: 'https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/15927921091411.mp4?alt=media&token=3163dd90-51b1-4a20-aea9-a865e2be2371',
         userData: { 
             id: 0,
             uid: '',

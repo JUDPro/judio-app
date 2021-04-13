@@ -1,10 +1,16 @@
 <template>
     <div class="add-video flex-settings">
         <div class="container">
-            <div id="uploading-video" class="select-off flex-settings" @mouseover="dropFunction">
+            <div id="uploading-video" class="select-off flex-settings">
                 <div class="file-select-style">
                     <label for="files" class="upl-video-btn flex-settings">Select a file</label>
-                    <input id="files" style="visibility:hidden;" type="file" accept="video/*">
+                    <input
+                        id="files"
+                        style="visibility:hidden;"
+                        type="file"
+                        accept="video/*"
+                        @change="fileFunc"
+                    >
                 </div>
                 <div class="upl-video-drag">or drag it here</div>
             </div>
@@ -15,7 +21,7 @@
                         type="text"
                         placeholder="Title of the video"
                         maxlength="50"
-                        >
+                    >
                     <span class="material-icons-outlined select-off">create</span>
                 </div>
                 <div class="description-video">
@@ -25,7 +31,7 @@
                         placeholder="Description"
                         maxlength="1000"
                         size="100px"
-                        >
+                    >
                     </textarea>
                     <span class="material-icons-outlined select-off">create</span>
                 </div>
@@ -44,16 +50,31 @@
                 </div>
                 <div class="track"></div>
             </div>
+            <div
+                class="push-video flex-settings"
+                type="button"
+            >
+                Add video
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import { firebase } from '../plugins/firebase'
+
 export default {
     name: 'add-video',
+    data: () => ({}),
     methods: {
-        dropFunction() {
-            console.log('YAP')
+        fileFunc(e) {
+            let fileMy = e.target.files[0]
+            console.log(fileMy.name)
+            var storageRef = firebase.storage().ref();
+            var mountainsRef = storageRef.child(fileMy.name);
+            mountainsRef.put(fileMy).then((snapshot) => {
+                console.log('Uploaded a blob or file!');
+            });
         }
     }
 }
@@ -66,6 +87,7 @@ export default {
     margin-left: 90px;
 }
 .container {
+    position: relative;
     width: auto;
     height: 830px;
     display: flex;
@@ -108,7 +130,6 @@ export default {
     display: flex;
     align-items: center;
 }
-
 .description-video {
     width: 100%;
     height: 345px;
@@ -140,7 +161,7 @@ export default {
     display: flex;
 }
 .tools {
-    position: fixed;
+    position: absolute;
     width: 60px;
     height: 200px;
     border-right: solid 1px #000;
@@ -166,6 +187,19 @@ export default {
     -moz-user-select: none;
     -ms-user-select: none;
     -khtml-user-select: none;
+}
+.push-video {
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    background-color: #DA2222;
+    border: solid 1px #000;
+    border-radius: 7px;
+    right: 0;
+    bottom: 0;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
 }
 .flex-settings {
     display: flex;

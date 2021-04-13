@@ -51,7 +51,7 @@ export default {
             } 
             
             else {
-                console.log('error! пароли не совпадают, бака T//_//T')
+                console.log('error! пароли не совпадают')
             }
         }
     },
