@@ -12,7 +12,15 @@
                         @change="fileFunc"
                     >
                 </div>
-                <div class="upl-video-drag">or drag it here</div>
+                {{textDrag}}
+                <div
+                    for="files"
+                    class="upl-video-drag"
+                    @dragover="testClass"
+                    @dragleave="testClassTwo"
+                    :class="{'active-input': isActive}"
+                >
+                </div>
             </div>
             <div class="info-of-video">
                 <div class="name-video">
@@ -65,7 +73,10 @@ import { firebase } from '../plugins/firebase'
 
 export default {
     name: 'add-video',
-    data: () => ({}),
+    data: () => ({
+        isActive: false,
+        textDrag: 'or drag it here'
+    }),
     methods: {
         fileFunc(e) {
             let fileMy = e.target.files[0]
@@ -75,6 +86,15 @@ export default {
             mountainsRef.put(fileMy).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
             });
+        },
+        testClass(e) {
+            this.isActive = true
+            this.textDrag = 'release to start the upload'
+            
+        },
+        testClassTwo() {
+            this.isActive = false
+            this.textDrag = 'or drag it here'
         }
     }
 }
@@ -94,10 +114,10 @@ export default {
     flex-wrap: wrap;
 }
 #uploading-video {
+    position: relative;
     background-color: #EDEDED;
     width: 730px;
     height: 415px;
-    border: solid 1px #000;
     margin-right: 30px;
     flex-direction: column;
 }
@@ -114,10 +134,16 @@ export default {
 .file-select-style {
     width: 170px;
     height: 40px;
+    margin-bottom: 5px;
 }
 .upl-video-drag {
-    font-size: 18px;
-    margin-top: 8px;
+    position: absolute;
+    border: 1px solid #000;
+    width: 100%;
+    height: 100%;
+}
+.active-input {
+    border: 3px dotted #009FC2;
 }
 .info-of-video {
     width: 860px;
