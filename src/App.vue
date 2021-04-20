@@ -13,6 +13,7 @@
 import Navbar from './components/Navbar'
 import AuthForm from './components/AuthForm'
 import Regist from './components/RegistForm'
+import { firebase } from './plugins/firebase'
 
 export default {
   name: 'app',
@@ -20,6 +21,23 @@ export default {
     Navbar,
     AuthForm,
     Regist,
+  },
+  methods: {
+    getCurrentUser() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user !== null) {
+          this.$store.dispatch('setUser', {
+            email: user.email,
+            uid: user.uid
+          })
+          console.log(this.$store.state.user.email)
+          this.$store.dispatch('setLogged', true)
+        }
+      })
+    }
+  },
+  mounted() {
+    this.getCurrentUser();
   }
 }
 </script>

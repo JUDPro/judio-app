@@ -36,10 +36,9 @@ export default {
     components: {
         ButtonComponent,
     },
-    data: () => ({}),
     methods: {
-        outAccount() {
-            firebase.auth().signOut()
+        async outAccount() {
+            await firebase.auth().signOut()
             .then(() => {
                 let userInfo = {
                     email: 'Anon',
