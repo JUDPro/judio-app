@@ -1,7 +1,7 @@
 <template>
     <div class="add-video flex-settings">
         <div class="container">
-            <div id="uploading-video" class="select-off flex-settings">
+            <form id="uploading-video" class="select-off flex-settings">
                 <div class="file-select-style">
                     <label for="files" class="upl-video-btn flex-settings">Select a file</label>
                     <input
@@ -9,19 +9,20 @@
                         style="visibility:hidden;"
                         type="file"
                         accept="video/*"
-                        @change="fileFunc"
+                        @change="fileFromInput"
                     >
                 </div>
                 or throw it here
                 <div
                     class="droppable"
+                    :class="{'active-input': isActive}"
                     @dragenter="isActive = true"
                     @dragleave="isActive = false"
-                    @drop.prevent="someM"
-                    :class="{'active-input': isActive}"
+                    @dragover.prevent=""
+                    @drop.prevent="fileFromBox"
                 >
                 </div>
-            </div>
+            </form>
             <div class="info-of-video">
                 <div class="name-video">
                     <input
@@ -75,24 +76,24 @@ export default {
     name: 'add-video',
     data: () => ({
         isActive: false,
+        userFile: null
     }),
     methods: {
         //функция для добавления новых файлов в storage
-        fileFunc(e) {
-            let fileMy = e.target.files[0]
-            console.log(fileMy.name)
+        fileFromInput(e) {
+            this.uploadFile(e.target.files[0])
+        },  
+        fileFromBox(e) {
+            this.isActive = false
+            this.uploadFile(e.dataTransfer.files[0])
+        },
+        uploadFile(uplFile) {
             var storageRef = firebase.storage().ref();
-            var mountainsRef = storageRef.child(fileMy.name);
-            mountainsRef.put(fileMy).then((snapshot) => {
+            var mountainsRef = storageRef.child(uplFile.name);
+            mountainsRef.put(uplFile).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
             });
-        },
-        someM() {
-            console.log('drop!');
         }
-    },
-    mounted() {
-        this.$el.addEventListener('drop', this.someM)
     },
 }
 </script>
