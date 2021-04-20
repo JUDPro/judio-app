@@ -12,12 +12,12 @@
                         @change="fileFunc"
                     >
                 </div>
-                {{textDrag}}
+                or throw it here
                 <div
-                    for="files"
-                    class="upl-video-drag"
-                    @dragover="testClass"
-                    @dragleave="testClassTwo"
+                    class="droppable"
+                    @dragenter="isActive = true"
+                    @dragleave="isActive = false"
+                    @drop.prevent="someM"
                     :class="{'active-input': isActive}"
                 >
                 </div>
@@ -75,9 +75,9 @@ export default {
     name: 'add-video',
     data: () => ({
         isActive: false,
-        textDrag: 'or drag it here'
     }),
     methods: {
+        //функция для добавления новых файлов в storage
         fileFunc(e) {
             let fileMy = e.target.files[0]
             console.log(fileMy.name)
@@ -87,16 +87,13 @@ export default {
                 console.log('Uploaded a blob or file!');
             });
         },
-        testClass(e) {
-            this.isActive = true
-            this.textDrag = 'release to start the upload'
-            
-        },
-        testClassTwo() {
-            this.isActive = false
-            this.textDrag = 'or drag it here'
+        someM() {
+            console.log('drop!');
         }
-    }
+    },
+    mounted() {
+        this.$el.addEventListener('drop', this.someM)
+    },
 }
 </script>
 
@@ -135,12 +132,14 @@ export default {
     width: 170px;
     height: 40px;
     margin-bottom: 5px;
+    z-index: 20;
 }
-.upl-video-drag {
+.droppable {
     position: absolute;
     border: 1px solid #000;
     width: 100%;
     height: 100%;
+    z-index: 10;
 }
 .active-input {
     border: 3px dotted #009FC2;
