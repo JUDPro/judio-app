@@ -70,30 +70,20 @@
 </template>
 
 <script>
-import { firebase } from '../plugins/firebase'
-
 export default {
     name: 'add-video',
     data: () => ({
-        isActive: false,
-        userFile: null
+        isActive: false
     }),
     methods: {
-        //функция для добавления новых файлов в storage
+        //функция для добавления новых файлов в storage (выполнено через store)
         fileFromInput(e) {
-            this.uploadFile(e.target.files[0])
+            this.$store.dispatch('uploadFile', e.target.files[0])
         },  
         fileFromBox(e) {
             this.isActive = false
-            this.uploadFile(e.dataTransfer.files[0])
+            this.$store.dispatch('uploadFile', e.dataTransfer.files[0])
         },
-        uploadFile(uplFile) {
-            var storageRef = firebase.storage().ref();
-            var mountainsRef = storageRef.child(uplFile.name);
-            mountainsRef.put(uplFile).then((snapshot) => {
-                console.log('Uploaded a blob or file!');
-            });
-        }
     },
 }
 </script>

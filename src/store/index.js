@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { firebase } from '../plugins/firebase';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     },
     Logged: false,
     navbarIsActive: false,
+    uplFileVideo: ''
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -30,6 +32,9 @@ export default new Vuex.Store({
     setNavbarIsActive(state, i) {
       state.navbarIsActive = i
     },
+    setUplFile(state, i) {
+      state.uplFileVideo = i
+    }
   },
   actions: {
     setOpenDialogWindow(isOpenDialogWindow, i) {
@@ -43,6 +48,14 @@ export default new Vuex.Store({
     },
     setNavbarIsActive(setNavbarIsActive, i) {
       setNavbarIsActive.commit('setNavbarIsActive', i)
+    },
+    uploadFile(uplFile, i) {
+      var storageRef = firebase.storage().ref();
+      var mountainsRef = storageRef.child(i.name);
+      mountainsRef.put(i).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+      });
+      uplFile.commit('setUplFile', i)
     }
   },
   modules: {}
