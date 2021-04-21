@@ -2,7 +2,7 @@
     <div class="add-video flex-settings">
         <div class="container">
             <form id="uploading-video" class="select-off flex-settings">
-                <div class="file-select-style">
+                <div class="file-select-style" v-show="isActive == false">
                     <label for="files" class="upl-video-btn flex-settings">Select a file</label>
                     <input
                         id="files"
@@ -12,9 +12,9 @@
                         @change="fileFromInput"
                     >
                 </div>
-                or throw it here
+                <span v-show="isActive == false">or throw it here</span>
                 <div
-                    class="droppable"
+                    class="droppable flex-settings"
                     :class="{'active-input': isActive}"
                     @dragenter="isActive = true"
                     @dragleave="isActive = false"
@@ -22,6 +22,7 @@
                     @drop.prevent="fileFromBox"
                 >
                 </div>
+                <span class="material-icons-outlined" v-show="isActive">upload_file</span>
             </form>
             <div class="info-of-video">
                 <div class="name-video">
@@ -133,7 +134,8 @@ export default {
     z-index: 10;
 }
 .active-input {
-    border: 3px dotted #009FC2;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 30;
 }
 .info-of-video {
     width: 860px;
@@ -237,5 +239,13 @@ export default {
     width: 24px;
     height: 24px;
     font-size: 24px;
+}
+#uploading-video > .material-icons-outlined {
+    position: absolute;
+    z-index: 30;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    color: #fff;
 }
 </style>

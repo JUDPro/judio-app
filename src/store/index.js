@@ -51,11 +51,29 @@ export default new Vuex.Store({
     },
     uploadFile(uplFile, i) {
       var storageRef = firebase.storage().ref();
-      var mountainsRef = storageRef.child(i.name);
-      mountainsRef.put(i).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-      });
-      uplFile.commit('setUplFile', i)
+      var mountainsRef = storageRef.child(i.name).put(i);
+      mountainsRef.on('state_changed', (snapshot) => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log('Upload is ' +  progress + '% done')
+        switch(snapshot.state) {
+          case firebase.storage.TaskState.PAUSED:
+            console.log('paused')
+            break
+          case firebase.storage.TaskState.RUNNING:
+            console.log('run')
+            break
+        }
+      },
+      (error) => {
+        console.log('error')
+      },
+      () => {
+        mountainsRef.then((snapshot) => {
+          console.log('Uploaded a blob or file!');
+        });
+        uplFile.commit('setUplFile', i)
+      }
+      )
     }
   },
   modules: {}
