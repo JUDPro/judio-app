@@ -55,6 +55,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 .openDialogAnimation-enter-active {
   transition: all .3s ease-in-out;

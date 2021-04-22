@@ -74,14 +74,6 @@ export default {
                             text: 'Your profile',
                             method: () => {
                                 this.$router.push('Profile').catch(() => {});
-                                //this.$router.push('Profile').catch(err => {
-                                //    if (
-                                //        err.name !== 'NavigationDuplicated' &&
-                                //        !err.message.includes('Avoided redundant navigation to current location')) 
-                                //    {
-                                //        logError(err);
-                                //    }
-                                //});
                             }
                         },
                         {

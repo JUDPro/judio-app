@@ -1,31 +1,38 @@
 <template>
     <div class="add-video flex-settings">
         <div class="container">
-            <form id="uploading-video" class="select-off flex-settings">
-                <div class="file-select-style" v-show="isActive == false">
-                    <label for="files" class="upl-video-btn flex-settings">Select a file</label>
-                    <input
-                        id="files"
-                        style="visibility:hidden;"
-                        type="file"
-                        accept="video/*"
-                        @change="fileFromInput"
+            <Judio :url_video="urlVideo"></Judio>
+            <div class="video">
+                <form class="uploading-video select-off flex-settings black-border">
+                    <span
+                        class="material-icons-outlined"
+                        :class="{active: isActive, 'non-active': isActive == false}"
                     >
-                </div>
-                <span v-show="isActive == false">or throw it here</span>
-                <div
-                    class="droppable flex-settings"
-                    :class="{'active-input': isActive}"
-                    @dragenter="isActive = true"
-                    @dragleave="isActive = false"
-                    @dragover.prevent=""
-                    @drop.prevent="fileFromBox"
-                >
-                </div>
-                <span class="material-icons-outlined" v-show="isActive">upload_file</span>
-            </form>
+                        upload_file
+                    </span>
+                    <div
+                        class="droppable black-border"
+                        :class="{active: isActive}"
+                        @dragenter="isActive = true"
+                        @dragleave="isActive = false"
+                        @dragover.prevent=""
+                        @drop.prevent="fileFromBox"
+                    ></div>
+                    <div class="select-file flex-settings" :class="{'non-active': isActive}">
+                        <label for="files" class="upl-video-btn flex-settings black-border">Select a file</label>
+                        <input
+                            id="files"
+                            style="visibility:hidden;"
+                            type="file"
+                            accept="video/*"
+                            @change="fileFromInput"
+                        >
+                        <span>or throw it here</span>
+                    </div>
+                </form>
+            </div>
             <div class="info-of-video">
-                <div class="name-video">
+                <div class="name-video black-border">
                     <input
                         class="info-inp"
                         type="text"
@@ -34,7 +41,7 @@
                     >
                     <span class="material-icons-outlined select-off">create</span>
                 </div>
-                <div class="description-video">
+                <div class="description-video black-border">
                     <textarea
                         class="info-inp"
                         type="text"
@@ -46,35 +53,35 @@
                     <span class="material-icons-outlined select-off">create</span>
                 </div>
             </div>
-            <div class="video-editing">
-                <div class="tools select-off">
-                    <div class="tool flex-settings">
-                        <span class="material-icons-outlined">content_cut</span>
-                    </div>
-                    <div class="tool flex-settings">
-                        <span class="material-icons-outlined">undo</span>
-                    </div>
-                    <div class="tool flex-settings">
-                        <span class="material-icons-outlined">redo</span>
-                    </div>
+            <div class="undo-add">
+                <div
+                    class="undo flex-settings black-border"
+                    type="button"
+                >
+                    Undo
                 </div>
-                <div class="track"></div>
-            </div>
-            <div
-                class="push-video flex-settings"
-                type="button"
-            >
-                Add video
+                <div
+                    class="push-video flex-settings black-border"
+                    type="button"
+                >
+                    Add video
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Judio from '../components/Judio'
+
 export default {
     name: 'add-video',
+    components: {
+        Judio
+    },
     data: () => ({
-        isActive: false
+        isActive: false,
+        urlVideo: 'https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/16188476771353.webm?alt=media&token=5be01c14-aa8c-4f09-b15c-0a32d630c63d',
     }),
     methods: {
         //функция для добавления новых файлов в storage (выполнено через store)
@@ -102,12 +109,16 @@ export default {
     display: flex;
     flex-wrap: wrap;
 }
-#uploading-video {
+.video {
     position: relative;
-    background-color: #EDEDED;
     width: 730px;
     height: 415px;
-    margin-right: 30px;
+}
+.uploading-video {
+    position: absolute;
+    background-color: #EDEDED;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
 }
 .upl-video-btn {
@@ -116,26 +127,27 @@ export default {
     border-radius: 7px;
     font-size: 24px;
     background-color: #009FC2;
-    border: solid 1px #000;
     color: #fff;
     cursor: pointer;
 }
-.file-select-style {
+.select-file {
+    position: absolute;
+    flex-direction: column;
     width: 170px;
-    height: 40px;
-    margin-bottom: 5px;
-    z-index: 20;
+    height: 50px;
+    z-index: 10;
+    opacity: 1;
 }
 .droppable {
     position: absolute;
-    border: 1px solid #000;
     width: 100%;
     height: 100%;
-    z-index: 10;
+    z-index: 0;
+    opacity: 0;
 }
-.active-input {
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 30;
+.user-video {
+    widows: 100%;
+    height: 100%;
 }
 .info-of-video {
     width: 860px;
@@ -144,14 +156,12 @@ export default {
 .name-video {
     width: 100%;
     height: 50px;
-    border: solid 1px #000;
     display: flex;
     align-items: center;
 }
 .description-video {
     width: 100%;
     height: 345px;
-    border: solid 1px #000;
     margin-top: 20px;
     display: flex;
 }
@@ -170,59 +180,27 @@ export default {
     height: 90%;
     resize: none;
 }
-.video-editing {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    border: solid 1px #000;
-    align-self: flex-start;
+.undo-add {
     display: flex;
-}
-.tools {
+    justify-content: space-between;
     position: absolute;
-    width: 60px;
-    height: 200px;
-    border-right: solid 1px #000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-.tool {
-    width: 40px;
-    height: 40px;
-    background-color: #EDEDED;
-    border-radius: 50%;
-}
-.track {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin-left: 60px;
-}
-.select-off {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -khtml-user-select: none;
-}
-.push-video {
-    position: absolute;
-    width: 200px;
-    height: 40px;
-    background-color: #DA2222;
-    border: solid 1px #000;
-    border-radius: 7px;
+    width: 430px;
     right: 0;
     bottom: 0;
+}
+.undo-add > div {
+    width: 200px;
+    height: 40px;
+    border-radius: 7px;
     font-size: 24px;
-    color: #fff;
     cursor: pointer;
 }
-.flex-settings {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.push-video {
+    background-color: #DA2222;
+    color: #fff;
+}
+.undo {
+    background-color: #EDEDED;
 }
 </style>
 
@@ -235,17 +213,33 @@ export default {
     cursor: pointer;
     padding: 5px;
 }
-.tool > .material-icons-outlined {
-    width: 24px;
-    height: 24px;
-    font-size: 24px;
-}
-#uploading-video > .material-icons-outlined {
+.uploading-video > .material-icons-outlined {
     position: absolute;
-    z-index: 30;
     width: 100px;
     height: 100px;
     font-size: 100px;
-    color: #fff;
+    color: #009FC2;
+}
+.select-off {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+}
+.flex-settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active {
+    opacity: 1;
+    z-index: 10;
+}
+.non-active {
+    opacity: 0;
+    z-index: 0;
+}
+.black-border {
+    border: solid 1px #000;
 }
 </style>

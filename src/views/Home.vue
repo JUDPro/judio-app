@@ -6,6 +6,9 @@
             controls="controls"
             loop="loop"
             poster=""
+            @dragover.prevent=""
+            @drop.prevent="test"
+            autoplay
             >{{video.id}}
         </video>
         </div>
@@ -19,7 +22,7 @@ export default {
     name: 'Home',
 
     data: () => ({
-        idVideo: 'https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/15927921091411.mp4?alt=media&token=3163dd90-51b1-4a20-aea9-a865e2be2371',
+        idVideo: '',
         userData: { 
             id: 0,
             uid: '',
@@ -34,6 +37,11 @@ export default {
     methods: {
         writeData() {
             return firebase.database().ref('users/testUser/userVideo/').get()
+        },
+        test(e) {
+            let i = e.dataTransfer.files[0]
+            let m = URL.createObjectURL(i)
+            this.idVideo = m
         }
     },
     
