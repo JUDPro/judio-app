@@ -1,6 +1,6 @@
 <template>
     <div class="container" :style="{ width: width, height: height }">
-        <video class="video" :src="url_video" controls></video>
+        <video class="video" :src="url_video" controls loop></video>
     </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
 .container {
     position: relative;
     border: solid 1px #000;
+    margin: 20px;
 }
 .video {
     position: absolute;
