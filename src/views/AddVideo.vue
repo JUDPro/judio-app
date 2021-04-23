@@ -1,5 +1,5 @@
 <template>
-    <div class="add-video">
+    <div class="add-video flex-settings">
         <div class="container">
 
 
@@ -36,8 +36,10 @@
                     </form>
                 </div>
                 <div class="preview-for-video">
-                    <div class="preview"></div>
-                    <div class="preview"></div>
+                    <div class="preview flex-settings">Preview</div>
+                    <div class="preview flex-settings">
+                        <span class="material-icons-outlined">add_circle_outline</span>
+                    </div>
                 </div>
             </div>
 
@@ -76,6 +78,7 @@
                     <div
                         class="push-video flex-settings black-border"
                         type="button"
+                        @click="addNewVideo"
                     >
                         Add video
                     </div>
@@ -92,6 +95,7 @@
 </template>
 
 <script>
+import { firebase } from '../plugins/firebase'
 import Judio from '../components/Judio'
 
 export default {
@@ -103,11 +107,19 @@ export default {
         isActive: false,
         userVideoActive: false,
         urlVideo: '',
+        newVideo: {
+            uid: '',
+            title: '',
+            description: '',
+            preview: ''
+        }
     }),
     methods: {
         //функция для добавления новых файлов в storage (выполнено через store)
         fileFromInput(e) {
-            this.$store.dispatch('uploadFile', e.target.files[0])
+            let i = e.target.files[0]
+            
+            this.$store.dispatch('uploadFile', i)
         },  
         fileFromBox(e) {
             this.urlVideo = URL.createObjectURL(e.dataTransfer.files[0])
@@ -115,17 +127,32 @@ export default {
             this.userVideoActive = true
             //this.$store.dispatch('uploadFile', e.dataTransfer.files[0])
         },
+        addNewVideo() {
+            let video = this.newVideo
+            firebase.firestore().collection("videos").add({
+                userId: video.uid,
+                title: video.title,
+                description: video.description,
+                preview: video.preview
+            })
+            .then((docRef) => {
+                console.log("Doc id: ", docRef.id)
+            })
+            .catch((error) => {
+                console.log("error", error)
+            })
+        }
     },
 }
 </script>
 
 <style>
 .add-video {
-    width: 100%;
     height: 100%;
     margin-left: 90px;
 }
 .container {
+    position: relative;
     width: auto;
     height: 830px;
     display: flex;
@@ -196,7 +223,7 @@ export default {
 }
 .description-video {
     width: 100%;
-    height: 345px;
+    height: 200px;
     margin-top: 20px;
     display: flex;
 }
@@ -205,14 +232,14 @@ export default {
     font-family: 'Roboto Regular';
     padding: 0 20px 0 20px;
     margin: 0;
-    width: 95%;
+    width: 100%;
     height: 100%;
     border-width: 0;
     outline: none;
 }
 .description-video > textarea {
     padding: 15px 20px 15px 20px;
-    height: 90%;
+    height: auto;
     resize: none;
 }
 .tags {

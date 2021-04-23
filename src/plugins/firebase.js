@@ -2,8 +2,9 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
 import 'firebase/storage'
+import 'firebase/firestore'
 
-let firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyD4DU70XauUU1vjjiuDWPmwv5nk3bqgKDo",
     authDomain: "judio-10aa1.firebaseapp.com",
     databaseURL: 'https://judio-10aa1-default-rtdb.firebaseio.com',
@@ -14,6 +15,7 @@ let firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
+export const db = firebase.firestore();
 export const storage = firebase.storage();
 
 export { firebase };
