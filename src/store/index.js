@@ -11,13 +11,16 @@ export default new Vuex.Store({
       uid: '',
       email: 'Anon',
       userAvatar: '',
-      userVideo: {
-        videoUrl: ''
-      },
+    },
+    video: {
+      url: '',
+      title: '',
+      description: '',
+      preview: ''
     },
     Logged: false,
     navbarIsActive: false,
-    uplFileVideo: ''
+    uplFileVideo: '',
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -32,7 +35,7 @@ export default new Vuex.Store({
     setNavbarIsActive(state, i) {
       state.navbarIsActive = i
     },
-    setUplFile(state, i) {
+    UplFile(state, i) {
       state.uplFileVideo = i
     }
   },
@@ -71,10 +74,25 @@ export default new Vuex.Store({
         mountainsRef.then((snapshot) => {
           console.log('Uploaded a blob or file!');
         });
-        uplFile.commit('setUplFile', i)
+        uplFile.commit('UplFile', i)
       }
       )
-    }
+    },
+    addObjVideo(state, i) {
+      firebase.firestore().collection("videos").add({
+        uid: this.state.user.uid,
+        url: 'test',
+        title: i.title,
+        description: i.description,
+        preview: 'test'
+      })
+      .then((docRef) => {
+        console.log("Doc id: ", docRef.id)
+      })
+      .catch((error) => {
+        console.log("error", error)
+      })
+    },
   },
   modules: {}
 });

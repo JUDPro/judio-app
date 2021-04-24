@@ -49,6 +49,7 @@
                 <div class="info-of-video">
                     <div class="name-video black-border">
                         <input
+                            v-model="title"
                             class="info-inp"
                             type="text"
                             placeholder="Title of the video"
@@ -58,6 +59,7 @@
                     </div>
                     <div class="description-video black-border">
                         <textarea
+                            v-model="description"
                             class="info-inp"
                             type="text"
                             placeholder="Description"
@@ -95,7 +97,6 @@
 </template>
 
 <script>
-import { firebase } from '../plugins/firebase'
 import Judio from '../components/Judio'
 
 export default {
@@ -106,21 +107,16 @@ export default {
     data: () => ({
         isActive: false,
         userVideoActive: false,
-        urlVideo: '',
-        newVideo: {
-            uid: '',
-            title: '',
-            description: '',
-            preview: ''
-        }
+        title: '',
+        description: '',
+        preview: ''
     }),
     methods: {
         //функция для добавления новых файлов в storage (выполнено через store)
         fileFromInput(e) {
             let i = e.target.files[0]
-            
-            this.$store.dispatch('uploadFile', i)
-        },  
+            //this.$store.dispatch('uploadFile', i)
+        },
         fileFromBox(e) {
             this.urlVideo = URL.createObjectURL(e.dataTransfer.files[0])
             this.isActive = false
@@ -128,19 +124,11 @@ export default {
             //this.$store.dispatch('uploadFile', e.dataTransfer.files[0])
         },
         addNewVideo() {
-            let video = this.newVideo
-            firebase.firestore().collection("videos").add({
-                userId: video.uid,
-                title: video.title,
-                description: video.description,
-                preview: video.preview
-            })
-            .then((docRef) => {
-                console.log("Doc id: ", docRef.id)
-            })
-            .catch((error) => {
-                console.log("error", error)
-            })
+            let video = {
+                title: this.title,
+                description: this.description
+            }
+            this.$store.dispatch('addObjVideo', video)
         }
     },
 }
