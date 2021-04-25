@@ -1,6 +1,6 @@
 import Vue from "vue";
-import Vuex from "vuex";
-import { firebase } from '../plugins/firebase';
+import Vuex, { Store } from "vuex";
+import { firebase } from "../plugins/firebase";
 
 Vue.use(Vuex);
 
@@ -8,91 +8,85 @@ export default new Vuex.Store({
   state: {
     isOpenDialogWindow: false,
     user: {
-      uid: '',
-      email: 'Anon',
-      userAvatar: '',
+      uid: "",
+      email: "Anon",
+      userAvatar: "",
     },
     video: {
-      url: '',
-      title: '',
-      description: '',
-      preview: ''
+      url: "",
+      title: "",
+      description: "",
+      preview: "",
     },
     Logged: false,
     navbarIsActive: false,
-    uplFileVideo: '',
   },
   mutations: {
     setOpenDialogWindow(state, i) {
-      state.isOpenDialogWindow = i
+      state.isOpenDialogWindow = i;
     },
     setUser(state, i) {
-      state.user = i
+      state.user = i;
     },
     setLogged(state, i) {
-      state.Logged = i
+      state.Logged = i;
     },
     setNavbarIsActive(state, i) {
-      state.navbarIsActive = i
+      state.navbarIsActive = i;
     },
-    UplFile(state, i) {
-      state.uplFileVideo = i
-    }
+    uplVideo(state, i) {
+      state.video.url = i;
+    },
   },
   actions: {
     setOpenDialogWindow(isOpenDialogWindow, i) {
-      isOpenDialogWindow.commit('setOpenDialogWindow', i)
+      isOpenDialogWindow.commit("setOpenDialogWindow", i);
     },
     setUser(user, i) {
-      user.commit('setUser', i)
+      user.commit("setUser", i);
     },
     setLogged(Logged, i) {
-      Logged.commit('setLogged', i)
+      Logged.commit("setLogged", i);
     },
     setNavbarIsActive(setNavbarIsActive, i) {
-      setNavbarIsActive.commit('setNavbarIsActive', i)
+      setNavbarIsActive.commit("setNavbarIsActive", i);
     },
-    uploadFile(uplFile, i) {
-      var storageRef = firebase.storage().ref();
-      var mountainsRef = storageRef.child(i.name).put(i);
-      mountainsRef.on('state_changed', (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log('Upload is ' +  progress + '% done')
-        switch(snapshot.state) {
-          case firebase.storage.TaskState.PAUSED:
-            console.log('paused')
-            break
-          case firebase.storage.TaskState.RUNNING:
-            console.log('run')
-            break
-        }
-      },
-      (error) => {
-        console.log('error')
-      },
-      () => {
-        mountainsRef.then((snapshot) => {
-          console.log('Uploaded a blob or file!');
+    async uploadVideo(uplVideo, i) {
+      var storageRef = firebase.storage();
+      try {
+        const j = await storageRef.ref().child("videos/" + i.name);
+        j.put(i).on("state_changed", (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
         });
-        uplFile.commit('UplFile', i)
+        uplVideo.commit("uplVideo", storageRef.ref().child("videos/" + i.name).getDownloadURL())
+      } catch (error) {
+        console.log(error);
       }
-      )
     },
-    addObjVideo(state, i) {
-      firebase.firestore().collection("videos").add({
-        uid: this.state.user.uid,
-        url: 'test',
-        title: i.title,
-        description: i.description,
-        preview: 'test'
-      })
-      .then((docRef) => {
-        console.log("Doc id: ", docRef.id)
-      })
-      .catch((error) => {
-        console.log("error", error)
-      })
+    async addObj(state, i) {
+      try {
+        await firebase
+          .firestore()
+          .collection("videos")
+          .add({
+            uid: this.state.user.uid,
+            url: this.state.video.url,
+            title: i.title,
+            description: i.description,
+            preview: "test",
+          })
+          .then(() => {
+            console.log(this.state.video.url);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
+    // addNewVideo(state, obj, video) {
+    //   this.dispatch("uploadVideo", video);
+    //   this.dispatch("addObj", obj)
+    // }
   },
-  modules: {}
+  modules: {},
 });
