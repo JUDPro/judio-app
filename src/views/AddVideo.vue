@@ -124,9 +124,9 @@ export default {
       //this.$store.dispatch('uploadVideo', e.dataTransfer.files[0])
     },
     addNewVideo() {
-      this.$store.state.video.title = this.title,
-      this.$store.state.video.description = this.description
-      this.$store.dispatch("addObj", this.video)
+      (this.$store.state.video.title = this.title),
+        (this.$store.state.video.description = this.description);
+      this.$store.dispatch("addObj", this.video);
     },
   },
 };

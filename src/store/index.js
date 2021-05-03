@@ -54,14 +54,12 @@ export default new Vuex.Store({
     async uploadVideo(uplVideo, i) {
       var storageRef = firebase.storage();
       try {
-        var j = await storageRef.ref();
-        j.child("videos/" + i.name)
-          .put(i)
-          .on("state_changed", (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-          });
+        await storageRef.ref().child("videos/" + i.name).put(i)
+          // await j.on("state_changed", (snapshot) => { //не знаю как сделать прогрессбар, ибо он возвращает промис, из-за чего ломается загрузка  
+          //   const progress =
+          //     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          //   console.log("Upload is " + progress + "% done");
+          // });
         let urlI = await storageRef
           .ref()
           .child("videos/" + i.name)
