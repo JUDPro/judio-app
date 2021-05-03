@@ -121,17 +121,12 @@ export default {
       this.userVideoActive = true;
       this.urlVideo = URL.createObjectURL(e.dataTransfer.files[0]);
       this.video = e.dataTransfer.files[0];
-      this.$store.dispatch('uploadVideo', e.dataTransfer.files[0])
+      //this.$store.dispatch('uploadVideo', e.dataTransfer.files[0])
     },
     addNewVideo() {
-        let obj = {
-           title: this.title,
-           description: this.description,
-        };
-        //this.$store.dispatch("uploadVideo", this.video)//.then(() => {
-        this.$store.dispatch("addObj", obj);
-       //});
-      //this.$store.dispatch("addNewVideo", obj, this.video);
+      this.$store.state.video.title = this.title,
+      this.$store.state.video.description = this.description
+      this.$store.dispatch("addObj", this.video)
     },
   },
 };

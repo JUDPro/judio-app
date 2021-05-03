@@ -54,34 +54,36 @@ export default new Vuex.Store({
     async uploadVideo(uplVideo, i) {
       var storageRef = firebase.storage();
       try {
-        const j = await storageRef.ref().child("videos/" + i.name);
-        j.put(i).on("state_changed", (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        });
-        uplVideo.commit("uplVideo", storageRef.ref().child("videos/" + i.name).getDownloadURL())
+        var j = await storageRef.ref();
+        j.child("videos/" + i.name)
+          .put(i)
+          .on("state_changed", (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+          });
+        let urlI = await storageRef
+          .ref()
+          .child("videos/" + i.name)
+          .getDownloadURL();
+        uplVideo.commit("uplVideo", urlI);
       } catch (error) {
         console.log(error);
+        console.log(i);
       }
     },
     async addObj(state, i) {
-      try {
-        await firebase
-          .firestore()
-          .collection("videos")
-          .add({
-            uid: this.state.user.uid,
-            url: this.state.video.url,
-            title: i.title,
-            description: i.description,
-            preview: "test",
-          })
-          .then(() => {
-            console.log(this.state.video.url);
-          });
-      } catch (error) {
-        console.log(error);
-      }
+      await this.dispatch("uploadVideo", i);
+      firebase
+        .firestore()
+        .collection("videos")
+        .add({
+          uid: this.state.user.uid,
+          url: this.state.video.url,
+          title: this.state.video.title,
+          description: this.state.video.description,
+          preview: "test",
+        });
     },
     // addNewVideo(state, obj, video) {
     //   this.dispatch("uploadVideo", video);
