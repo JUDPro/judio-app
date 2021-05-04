@@ -1,18 +1,13 @@
 <template>
   <div class="container" :style="{ width: width, height: height }">
-    <video
-      class="video"
-      :src="url_video"
-      controls
-      loop
-    ></video>
+    <img class="preview" src="url_preview" alt="" />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    url_video: {
+    url_preview: {
       type: String,
       default: "",
     },
@@ -25,9 +20,6 @@ export default {
       default: "415px",
     },
   },
-  data: () => ({
-    isActive: true,
-  }),
 };
 </script>
 
@@ -37,9 +29,9 @@ export default {
   border: solid 1px #000;
   margin: 20px;
 }
-.video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+.preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 </style>
