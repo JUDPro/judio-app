@@ -77,7 +77,7 @@ export default {
 }
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 0px;
-  border-radius: 0px;
+  border-radius: 25px;
   background-color:#009FC2;
 }
 ::-webkit-scrollbar-thumb:hover{
@@ -85,11 +85,11 @@ export default {
 }
 ::-webkit-resizer{
   background-repeat:no-repeat;
-  width:4px;
+  width:6px;
   height:0px
 }
 ::-webkit-scrollbar{
-  width: 4px;
+  width: 6px;
 }
 </style>
   

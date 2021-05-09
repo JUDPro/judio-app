@@ -1,6 +1,7 @@
 <template>
   <div class="container" :style="{ width: width, height: height }">
     <video
+      ref="video"
       class="video"
       :src="url_video"
       controls

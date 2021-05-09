@@ -2,8 +2,8 @@
   <div class="add-video flex-settings">
     <div class="container">
       <div class="for-files flex-settings">
-        <Judio :url_video="urlVideo" v-if="userVideoActive"></Judio>
-        <div class="video" v-else>
+        <Judio ref="kek" :url_video="urlVideo" v-show="userVideoActive"></Judio>
+        <div class="video" v-show="!userVideoActive">
           <form class="uploading-video select-off flex-settings black-border">
             <span
               class="material-icons-outlined"
@@ -40,7 +40,10 @@
           </form>
         </div>
         <div class="preview-for-video">
-          <div class="preview flex-settings">Preview</div>
+          <!--div class="preview flex-settings" v-if="!userVideoActive">
+            Preview
+          </div-->
+          <canvas ref="pos"></canvas>
           <div class="preview flex-settings">
             <span class="material-icons-outlined">add_circle_outline</span>
           </div>
@@ -108,26 +111,37 @@ export default {
     preview: "",
     urlVideo: "",
     video: "",
+    initialVideo: "",
   }),
   methods: {
     //функция для добавления новых файлов в storage (выполнено через store)
     fileFromInput(e) {
       let i = e.target.files[0];
       return i;
-      //this.$store.dispatch('uploadFile', i)
     },
     fileFromBox(e) {
+      const localFile = e.dataTransfer.files[0];
       this.isActive = false;
       this.userVideoActive = true;
       this.urlVideo = URL.createObjectURL(e.dataTransfer.files[0]);
-      this.video = e.dataTransfer.files[0];
-      //this.$store.dispatch('uploadVideo', e.dataTransfer.files[0])
+      this.video = localFile;
+      let v = this.initialVideo;
+      let p = this.$refs.pos.getContext("2d");
+      console.log(v + " " + p);
+      p.drawImage(v, 0, 0);
     },
     addNewVideo() {
-      (this.$store.state.video.title = this.title),
-        (this.$store.state.video.description = this.description);
+      this.$store.state.video.title = this.title;
+      this.$store.state.video.description = this.description;
       this.$store.dispatch("addObj", this.video);
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initialVideo = this.$refs.kek.$refs.video;
+      console.log(this.$refs.kek.$refs.video);
+    });
+    
   },
 };
 </script>

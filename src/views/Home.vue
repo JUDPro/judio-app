@@ -5,6 +5,8 @@
         {{ video.id }}
       </Judio>
     </div>
+    <img class="qwe" src="" alt="">
+    <canvas class="test" :width="width" :height="height"></canvas>
   </div>
 </template>
 
@@ -37,6 +39,11 @@ export default {
   },
   mounted() {
     this.getData();
+    let j = document.querySelector('.test')
+    let c = j.getContext('2d')
+    c.drawImage(this.listVideo[0], 0, 0, "400px", "250px")
+    const dataUrl = c.toDataUrl()
+    querySelector('.qwe').src = dataUrl
   },
 };
 </script>
@@ -47,5 +54,8 @@ export default {
   grid-template-columns: auto auto auto;
   justify-items: center;
   margin-left: 90px;
+}
+.test {
+  margin: 20px;
 }
 </style>
