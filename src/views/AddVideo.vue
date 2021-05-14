@@ -40,10 +40,10 @@
           </form>
         </div>
         <div class="preview-for-video">
-          <!--div class="preview flex-settings" v-if="!userVideoActive">
-            Preview
-          </div-->
-          <canvas ref="pos"></canvas>
+          <div class="preview flex-settings">
+            <img :src="$store.state.video.preview" alt="default">
+            default preview
+          </div>
           <div class="preview flex-settings">
             <span class="material-icons-outlined">add_circle_outline</span>
           </div>
@@ -89,7 +89,7 @@
         </div>
         <!--div class="tags">
                     <span class="select-off info-inp">Tags:</span>
-                </div-->
+        </div-->
       </div>
     </div>
   </div>
@@ -109,9 +109,10 @@ export default {
     title: "",
     description: "",
     preview: "",
-    urlVideo: "",
     video: "",
+    urlVideo: "",
     initialVideo: "",
+    userPreview: ""
   }),
   methods: {
     //функция для добавления новых файлов в storage (выполнено через store)
@@ -123,12 +124,8 @@ export default {
       const localFile = e.dataTransfer.files[0];
       this.isActive = false;
       this.userVideoActive = true;
-      this.urlVideo = URL.createObjectURL(e.dataTransfer.files[0]);
+      this.urlVideo = URL.createObjectURL(localFile);
       this.video = localFile;
-      let v = this.initialVideo;
-      let p = this.$refs.pos.getContext("2d");
-      console.log(v + " " + p);
-      p.drawImage(v, 0, 0);
     },
     addNewVideo() {
       this.$store.state.video.title = this.title;
@@ -137,11 +134,7 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      this.initialVideo = this.$refs.kek.$refs.video;
-      console.log(this.$refs.kek.$refs.video);
-    });
-    
+    this.initialVideo = this.$refs.kek.$refs.video;
   },
 };
 </script>
@@ -200,9 +193,14 @@ export default {
   align-items: center;
 }
 .preview {
+  position: relative;
   height: 200px;
   width: 100%;
   border: solid 1px #000;
+}
+.preview > img {
+  position: absolute;
+  width: 100%;
 }
 
 .for-info {

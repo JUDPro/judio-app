@@ -1,12 +1,8 @@
 <template>
   <div class="content-home">
     <div class="video" v-for="video in listVideo" :key="video.id">
-      <Judio :width="width" :height="height" :url_video="video">
-        {{ video.id }}
-      </Judio>
+      <img :src="video.preview" alt="">
     </div>
-    <img class="qwe" src="" alt="">
-    <canvas class="test" :width="width" :height="height"></canvas>
   </div>
 </template>
 
@@ -32,18 +28,13 @@ export default {
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            this.listVideo.push(doc.data().url);
+            this.listVideo.push(doc.data());
           });
         });
     },
   },
   mounted() {
     this.getData();
-    let j = document.querySelector('.test')
-    let c = j.getContext('2d')
-    c.drawImage(this.listVideo[0], 0, 0, "400px", "250px")
-    const dataUrl = c.toDataUrl()
-    querySelector('.qwe').src = dataUrl
   },
 };
 </script>
@@ -55,7 +46,14 @@ export default {
   justify-items: center;
   margin-left: 90px;
 }
-.test {
-  margin: 20px;
+.video {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.video > img {
+  width: 100%;
 }
 </style>

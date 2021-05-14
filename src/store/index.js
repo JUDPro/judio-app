@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuex, { Store } from "vuex";
+import Vuex from "vuex";
 import { firebase } from "../plugins/firebase";
 
 Vue.use(Vuex);
@@ -16,7 +16,7 @@ export default new Vuex.Store({
       url: "",
       title: "",
       description: "",
-      preview: "",
+      preview: "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
     },
     Logged: false,
     navbarIsActive: false,
@@ -80,7 +80,7 @@ export default new Vuex.Store({
           url: this.state.video.url,
           title: this.state.video.title,
           description: this.state.video.description,
-          preview: "test",
+          preview: this.state.video.preview,
         });
     },
     // addNewVideo(state, obj, video) {
