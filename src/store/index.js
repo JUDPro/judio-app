@@ -10,7 +10,7 @@ export default new Vuex.Store({
     user: {
       uid: "",
       email: "Anon",
-      userAvatar: "",
+      photoURL: "",
     },
     video: {
       url: "",
@@ -20,6 +20,7 @@ export default new Vuex.Store({
     },
     Logged: false,
     navbarIsActive: false,
+    listVideos: [],
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     uplVideo(state, i) {
       state.video.url = i;
     },
+    setListVideos(state, i) {
+      state.listVideos = i
+    }
   },
   actions: {
     setOpenDialogWindow(isOpenDialogWindow, i) {
@@ -83,10 +87,19 @@ export default new Vuex.Store({
           preview: this.state.video.preview,
         });
     },
-    // addNewVideo(state, obj, video) {
-    //   this.dispatch("uploadVideo", video);
-    //   this.dispatch("addObj", obj)
-    // }
+    async getDataOfVideos(list) {
+      const videos = [];
+      await firebase
+        .firestore()
+        .collection("videos")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            videos.push(doc.data());
+            list.commit("setListVideos", videos)
+          });
+        });
+    }
   },
   modules: {},
 });
