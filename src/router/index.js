@@ -6,6 +6,7 @@ import Messenger from '../views/Messenger.vue';
 import Settings from '../views/Settings.vue';
 import Statistics from '../views/Statistics.vue';
 import AddVideo from '../views/AddVideo.vue';
+import Watch from '../views/Watch.vue';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,12 @@ const routes = [
     path: "/AddVideo",
     name: "Add Video",
     component: AddVideo
+  },
+  {
+    path: "/Watch/:id",
+    name: "Watch Video",
+    component: Watch,
+    props: true
   }
 ];
 

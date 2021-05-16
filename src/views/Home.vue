@@ -1,7 +1,7 @@
 <template>
   <div class="content-home">
     <div class="video" v-for="video in $store.state.listVideos" :key="video.id">
-      <img :src="video.preview" alt="" />
+      <img :src="video.preview" alt="" @click="goToVideo(video)" />
       <div class="info-text">
         <span class="title">{{ video.title }}</span>
         <span class="name-user">{{ video.uid }}</span>
@@ -17,6 +17,12 @@ export default {
     width: "400px",
     height: "250px",
   }),
+  methods: {
+    goToVideo(i) {
+      console.log(i)
+      this.$router.push({ path: '/Watch/' + i.id, params: { id: i.id }}).catch(() => {});
+    },
+  },
   mounted() {
     this.$store.dispatch("getDataOfVideos");
   },

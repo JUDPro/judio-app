@@ -10,9 +10,10 @@ export default new Vuex.Store({
     user: {
       uid: "",
       email: "Anon",
-      photoURL: "",
+      photoURL: "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
     },
     video: {
+      id: "",
       url: "",
       title: "",
       description: "",
@@ -89,13 +90,22 @@ export default new Vuex.Store({
     },
     async getDataOfVideos(list) {
       const videos = [];
+
       await firebase
         .firestore()
         .collection("videos")
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {
-            videos.push(doc.data());
+            const items = {
+              id: doc.id,
+              uid: doc.data().uid,
+              title: doc.data().title,
+              description: doc.data().description,
+              url: doc.data().url,
+              preview: doc.data().preview,
+            }
+            videos.push(items);
             list.commit("setListVideos", videos)
           });
         });

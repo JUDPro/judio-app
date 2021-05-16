@@ -42,7 +42,6 @@ export default {
     user: {
       email: "",
       password: "",
-      //userAvatar:"https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
     },
     email_pattern:
       "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$",
@@ -53,8 +52,8 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then((res) => {
-          let userInfo = {
+        .then(async (res) => {
+          let userInfo = await {
             email: res.user.email,
             userId: res.user.uid,
             photoURL: res.user.photoURL,
