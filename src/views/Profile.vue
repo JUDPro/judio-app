@@ -38,9 +38,9 @@ export default {
       }
     },
   },
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch("getDataOfVideos");
     this.getUserVideo();
-    this.$store.dispatch("getDataOfVideos");
   },
 };
 </script>
