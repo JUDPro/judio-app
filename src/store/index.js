@@ -9,6 +9,7 @@ export default new Vuex.Store({
     isOpenDialogWindow: false,
     user: {
       uid: "",
+      name: "",
       email: "Anon",
       photoURL: "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
     },
@@ -90,7 +91,6 @@ export default new Vuex.Store({
     },
     async getDataOfVideos(list) {
       const videos = [];
-
       await firebase
         .firestore()
         .collection("videos")

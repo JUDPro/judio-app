@@ -55,12 +55,14 @@ export default {
         .then(async (res) => {
           let userInfo = await {
             email: res.user.email,
-            userId: res.user.uid,
+            name: res.user.displayName,
+            uid: res.user.uid,
             photoURL: res.user.photoURL,
           };
           this.$store.dispatch("setUser", userInfo);
           this.$store.dispatch("setOpenDialogWindow", false);
           this.$store.dispatch("setLogged", true);
+          this.$router.push({ path: "/Profile/" + userInfo.uid }).catch(() => {});
         })
         .catch((error) => {
           console.log("error");

@@ -5,6 +5,7 @@
       class="video"
       :src="url_video"
       controls
+      autoplay
       loop
     ></video>
   </div>
@@ -34,11 +35,13 @@ export default {
 
 <style scoped>
 .container {
+  background-color: rgb(39, 39, 39);
   position: relative;
   border: solid 1px #000;
   margin: 20px;
 }
 .video {
+  /* object-fit: cover; убирает чертов отступ у видео */
   position: absolute;
   width: 100%;
   height: 100%;

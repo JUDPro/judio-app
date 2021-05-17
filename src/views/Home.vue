@@ -19,8 +19,9 @@ export default {
   }),
   methods: {
     goToVideo(i) {
-      console.log(i)
-      this.$router.push({ path: '/Watch/' + i.id, params: { id: i.id }}).catch(() => {});
+      this.$router
+        .push({ path: "/Watch/" + i.id, params: { id: i.id } })
+        .catch(() => {});
     },
   },
   mounted() {

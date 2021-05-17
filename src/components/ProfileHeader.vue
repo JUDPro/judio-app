@@ -4,7 +4,7 @@
       <img :src="$store.state.user.photoURL" alt="" />
     </div>
     <div class="user-info">
-      <span class="user-nickname">{{ $store.state.user.email }}</span>
+      <span class="user-nickname">{{ $store.state.user.name }}</span>
       <div class="user-subscribers">
         <span><font color="#DA2222">232301</font> subscribers</span>
       </div>
@@ -12,11 +12,11 @@
     <div class="user-action">
       <div
         class="user-settings"
-        @click="$router.push('Settings').catch(() => {})"
+        @click="$router.push({ path: '/Settings' }).catch(() => {})"
       >
         <span class="material-icons-outlined">settings</span>
       </div>
-      <div class="user-btn" @click="$router.push('AddVideo').catch(() => {})">
+      <div class="user-btn" @click="$router.push({ path: '/AddVideo' }).catch(() => {})">
         Add video
       </div>
     </div>

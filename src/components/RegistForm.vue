@@ -10,12 +10,13 @@
         Registration
       </div>
       <div class="userInput">
-        <input type="email" v-model="user.email" placeholder="email" v-focus />
-        <input type="password" v-model="user.password" placeholder="password" />
+        <input v-model="user.name" placeholder="Your name" />
+        <input type="email" v-model="user.email" placeholder="Email" v-focus />
+        <input type="password" v-model="user.password" placeholder="Password" />
         <input
           type="password"
           v-model="user.repeatPassword"
-          placeholder="repeat password"
+          placeholder="Repeat password"
         />
       </div>
       <div class="btnUser">
@@ -40,6 +41,7 @@ export default {
   data: () => ({
     user: {
       email: "",
+      name: "",
       password: "",
       repeatPassword: "",
     },
@@ -55,18 +57,25 @@ export default {
             await authFB.currentUser.updateProfile({
               photoURL:
                 "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
+              displayName: this.user.name,
             });
             let userInfo = {
               email: res.user.email,
-              userId: res.user.uid,
+              name: res.user.displayName,
+              uid: res.user.uid,
               photoURL: res.user.photoURL,
             };
+            firebase
+              .firestore()
+              .collection("users")
+              .add({ userInfo });
             this.$store.dispatch("setUser", userInfo);
             this.$store.dispatch("setOpenDialogWindow", false);
             this.$store.dispatch("setLogged", true);
+            this.$router.push({ path: "/Profile/" + userInfo.uid }).catch(() => {});
           })
           .catch((error) => {
-            console.log("error");
+            console.log(error);
           });
       } else {
         console.log("error! пароли не совпадают");

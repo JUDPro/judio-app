@@ -1,6 +1,18 @@
 <template>
   <div class="content">
-    <Judio :width="width" :height="height" :url_video="url"></Judio>
+    <div class="user-actions">
+      <div class="custom-functions">
+        <Judio :width="width" :height="height" :url_video="video.url"></Judio>
+        <div class="info-block">
+          <span class="title">{{ video.title }}</span>
+        </div>
+      </div>
+      <div class="comments"></div>
+    </div>
+
+    <div class="recommendations">
+      <div class="v"></div>
+    </div>
   </div>
 </template>
 
@@ -14,9 +26,9 @@ export default {
     Judio,
   },
   data: () => ({
-      width: "950px",
-      height: "520px",
-      url: ''
+    width: "1050px",
+    height: "600px",
+    video: "",
   }),
   methods: {
     async takeVideo() {
@@ -26,7 +38,7 @@ export default {
         .doc(this.id)
         .get()
         .then((doc) => {
-          this.url = doc.data().url;
+          this.video = doc.data();
         })
         .catch((err) => {
           console.log(err);
@@ -41,6 +53,39 @@ export default {
 
 <style scoped>
 .content {
-  margin-left: 90px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user-actions {
+  display: flex;
+}
+.custom-functions {
+  display: flex;
+  flex-direction: column;
+}
+.info-block {
+  width: 1050px;
+  height: 180px;
+  margin: 20px;
+}
+.title {
+  font-size: 24px;
+}
+.comments {
+  margin: 20px;
+  width: 480px;
+  height: 600px;
+  border: solid 1px black;
+}
+.recommendations {
+  height: auto;
+  border: solid 1px black;
+}
+.v {
+  width: 100px;
+  height: 100px;
 }
 </style>

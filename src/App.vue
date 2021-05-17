@@ -28,10 +28,11 @@ export default {
         if(user !== null) {
           this.$store.dispatch('setUser', {
             email: user.email,
+            name: user.displayName,
             uid: user.uid,
             photoURL: user.photoURL
           })
-          console.log(this.$store.state.user.email)
+          console.log(this.$store.state.user.uid)
           this.$store.dispatch('setLogged', true)
         }
       })
