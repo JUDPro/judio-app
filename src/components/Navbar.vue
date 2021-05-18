@@ -58,7 +58,7 @@ export default {
           };
           this.$store.dispatch("setUser", userInfo);
           this.$store.dispatch("setLogged", false);
-          this.$router.push({ path: '/Home' })
+          this.$router.push({ path: "/Home" });
         })
         .catch((error) => {
           console.log("error");
@@ -89,10 +89,9 @@ export default {
               icon: "account_circle",
               text: "Your profile",
               method: () => {
-                const uid = this.$store.state.user.uid
-                this.$router
-                  .push({ path: "/Profile/" + uid })
-                  .catch(() => {});
+                const uid = this.$store.state.user.uid;
+                this.$router.push({ path: "/Profile/" + uid }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -101,6 +100,7 @@ export default {
               text: "Home",
               method: () => {
                 this.$router.push({ path: "/Home" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -109,6 +109,7 @@ export default {
               text: "Messenger",
               method: () => {
                 this.$router.push({ path: "/Messenger" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -117,6 +118,7 @@ export default {
               text: "Settings",
               method: () => {
                 this.$router.push({ path: "/Settings" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -125,6 +127,7 @@ export default {
               text: "Statistics",
               method: () => {
                 this.$router.push({ path: "/Statistics" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -133,6 +136,7 @@ export default {
               text: "Add video",
               method: () => {
                 this.$router.push({ path: "/AddVideo" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
@@ -170,6 +174,7 @@ export default {
               text: "Home",
               method: () => {
                 this.$router.push({ path: "/Home" }).catch(() => {});
+                this.$store.dispatch("setNavbarIsActive", false);
               },
             },
             {
