@@ -1,8 +1,8 @@
 <template>
-  <div class="add-video flex-settings">
+  <div class="add-video">
     <div class="container">
       <div class="for-files flex-settings">
-        <Judio ref="kek" :url_video="urlVideo" v-show="userVideoActive"></Judio>
+        <Judio :url_video="urlVideo" v-show="userVideoActive"></Judio>
         <div class="video" v-show="!userVideoActive">
           <form class="uploading-video select-off flex-settings black-border">
             <span
@@ -39,14 +39,15 @@
             </div>
           </form>
         </div>
-        <div class="preview-for-video">
-          <div class="preview flex-settings">
-            <img :src="$store.state.video.preview" alt="default">
-            default preview
-          </div>
-          <div class="preview flex-settings">
-            <span class="material-icons-outlined">add_circle_outline</span>
-          </div>
+      </div>
+
+      <div class="preview-for-video">
+        <div class="preview flex-settings">
+          <img :src="$store.state.video.preview" alt="default" />
+          default preview
+        </div>
+        <div class="preview flex-settings">
+          <span class="material-icons-outlined">add_circle_outline</span>
         </div>
       </div>
 
@@ -75,21 +76,21 @@
             <span class="material-icons-outlined select-off">create</span>
           </div>
         </div>
-        <div class="undo-add">
-          <div class="undo flex-settings black-border" type="button">
-            Undo
-          </div>
-          <div
-            class="push-video flex-settings black-border"
-            type="button"
-            @click="addNewVideo"
-          >
-            Add video
-          </div>
+
+        <div class="tags"></div>
+      </div>
+
+      <div class="undo-add">
+        <div class="undo flex-settings black-border" type="button">
+          Undo
         </div>
-        <!--div class="tags">
-                    <span class="select-off info-inp">Tags:</span>
-        </div-->
+        <div
+          class="push-video flex-settings black-border"
+          type="button"
+          @click="addNewVideo"
+        >
+          Add video
+        </div>
       </div>
     </div>
   </div>
@@ -112,13 +113,15 @@ export default {
     video: "",
     urlVideo: "",
     initialVideo: "",
-    userPreview: ""
+    userPreview: "",
   }),
   methods: {
     //функция для добавления новых файлов в storage (выполнено через store)
     fileFromInput(e) {
-      let i = e.target.files[0];
-      return i;
+      const localFile = e.target.files[0];
+      this.userVideoActive = true;
+      this.urlVideo = URL.createObjectURL(localFile);
+      this.video = localFile;
     },
     fileFromBox(e) {
       const localFile = e.dataTransfer.files[0];
@@ -133,9 +136,6 @@ export default {
       this.$store.dispatch("addObj", this.video);
     },
   },
-  mounted() {
-    this.initialVideo = this.$refs.kek.$refs.video;
-  },
 };
 </script>
 
@@ -149,7 +149,8 @@ export default {
   width: auto;
   height: 830px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .uploading-video {
   background-color: #ededed;
@@ -187,6 +188,7 @@ export default {
 .preview-for-video {
   height: 415px;
   width: 300px;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -209,8 +211,11 @@ export default {
   justify-content: space-between;
 }
 .info-of-video {
-  width: 860px;
-  height: 415px;
+  width: 730px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .name-video {
   width: 100%;
@@ -240,13 +245,14 @@ export default {
   resize: none;
 }
 .tags {
-  width: 150px;
-  height: 100%;
+  border: solid 1px #000;
+  width: 200px;
+  height: 272px;
 }
 .undo-add {
+  position: absolute;
   display: flex;
   justify-content: space-between;
-  position: absolute;
   width: 430px;
   right: 0;
   bottom: 0;

@@ -26,8 +26,8 @@ export default {
   methods: {
     goToVideo(i) {
       this.$router
-        .push({ path: "/Watch/" + i.id, params: { id: i.id } })
-        .catch(() => {});
+        .push({ path: "/Watch/" + i.id, params: { id: i.id } }) //это не хорошо, нужно потом переписать,
+        .catch(() => {});                                       //ибо я получаю все видео, а потом только показываю те, которые получил
     },
     getUserVideo() {
       let userVideo = this.$store.state.listVideos;
