@@ -39,15 +39,14 @@
             </div>
           </form>
         </div>
-      </div>
-
-      <div class="preview-for-video">
-        <div class="preview flex-settings">
-          <img :src="$store.state.video.preview" alt="default" />
-          default preview
-        </div>
-        <div class="preview flex-settings">
-          <span class="material-icons-outlined">add_circle_outline</span>
+        <div class="preview-for-video">
+          <div class="preview flex-settings">
+            <img :src="$store.state.video.preview" alt="default" />
+            default preview
+          </div>
+          <div class="preview flex-settings">
+            <span class="material-icons-outlined">add_circle_outline</span>
+          </div>
         </div>
       </div>
 
@@ -76,21 +75,22 @@
             <span class="material-icons-outlined select-off">create</span>
           </div>
         </div>
-
-        <div class="tags"></div>
+        <div class="tags">
+          Tags:
+          <span class="material-icons-outlined">add_circle_outline</span>
+        </div>
       </div>
-
-      <div class="undo-add">
-        <div class="undo flex-settings black-border" type="button">
-          Undo
-        </div>
-        <div
-          class="push-video flex-settings black-border"
-          type="button"
-          @click="addNewVideo"
-        >
-          Add video
-        </div>
+    </div>
+    <div class="undo-add">
+      <div class="undo flex-settings black-border" type="button">
+        Undo
+      </div>
+      <div
+        class="push-video flex-settings black-border"
+        type="button"
+        @click="addNewVideo"
+      >
+        Add video
       </div>
     </div>
   </div>
@@ -141,13 +141,18 @@ export default {
 
 <style>
 .add-video {
+  position: relative;
   height: 100%;
   margin-left: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .container {
   position: relative;
   width: auto;
-  height: 830px;
+  height: auto;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -204,7 +209,6 @@ export default {
   position: absolute;
   width: 100%;
 }
-
 .for-info {
   display: flex;
   align-items: center;
@@ -216,6 +220,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 20px;
 }
 .name-video {
   width: 100%;
@@ -245,17 +250,21 @@ export default {
   resize: none;
 }
 .tags {
-  border: solid 1px #000;
-  width: 200px;
-  height: 272px;
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  width: 300px;
+  height: auto;
+  margin: 30px 20px 20px 20px;
+  font-size: 24px;
 }
 .undo-add {
-  position: absolute;
+  height: auto;
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   width: 430px;
-  right: 0;
-  bottom: 0;
+  margin: 20px;
 }
 .undo-add > div {
   width: 200px;
