@@ -1,10 +1,14 @@
 <template>
-    <div>Settings</div>
+    <div class="ttt">
+    </div>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style>
+<style scoped>
+.ttt {
+    padding-left: 90px;
+}
 </style>

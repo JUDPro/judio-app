@@ -65,7 +65,7 @@ export default {
           this.$router.push({ path: "/Profile/" + userInfo.uid }).catch(() => {});
         })
         .catch((error) => {
-          console.log("error");
+          console.log(error);
         });
     },
   },

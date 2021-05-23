@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { firebase } from "../plugins/firebase";
 
+import getDataOfVideo from './modules/getDataOfVideo';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -22,7 +24,9 @@ export default new Vuex.Store({
     },
     Logged: false,
     navbarIsActive: false,
-    listVideos: [],
+    urlVideo: "",
+    fileVideo: "",
+    videoIsActive: false,
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -40,16 +44,21 @@ export default new Vuex.Store({
     uplVideo(state, i) {
       state.video.url = i;
     },
-    setListVideos(state, i) {
-      state.listVideos = i
+    setVideo(state, i) {
+      state.urlVideo = i.url
+      state.fileVideo = i.file
+      state.videoIsActive = i.active
     }
   },
   actions: {
+    setVideo(video, i) {
+      video.commit("setVideo", i)
+    },
     setOpenDialogWindow(isOpenDialogWindow, i) {
       isOpenDialogWindow.commit("setOpenDialogWindow", i);
     },
-    setUser(user, i) {
-      user.commit("setUser", i);
+    async setUser(user, i) {
+      await user.commit("setUser", i);
     },
     setLogged(Logged, i) {
       Logged.commit("setLogged", i);
@@ -89,27 +98,8 @@ export default new Vuex.Store({
           preview: this.state.video.preview,
         });
     },
-    async getDataOfVideos(list) {
-      const videos = [];
-      await firebase
-        .firestore()
-        .collection("videos")
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            const items = {
-              id: doc.id,
-              uid: doc.data().uid,
-              title: doc.data().title,
-              description: doc.data().description,
-              url: doc.data().url,
-              preview: doc.data().preview,
-            }
-            videos.push(items);
-            list.commit("setListVideos", videos)
-          });
-        });
-    }
   },
-  modules: {},
+  modules: {
+    dataOfVideo: getDataOfVideo
+  },
 });

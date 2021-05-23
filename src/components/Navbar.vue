@@ -57,6 +57,7 @@ export default {
             userId: "",
           };
           this.$store.dispatch("setUser", userInfo);
+          this.$store.dispatch("setListVideo", [])
           this.$store.dispatch("setLogged", false);
           this.$router.push({ path: "/Home" });
         })

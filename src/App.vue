@@ -2,21 +2,21 @@
   <div id="app">
     <Navbar></Navbar>
     <transition name="openDialogAnimation">
-      <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'"/>
+      <AuthForm v-if="$store.state.isOpenDialogWindow == 'login'" />
       <Regist v-if="$store.state.isOpenDialogWindow == 'regist'"></Regist>
     </transition>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar'
-import AuthForm from './components/AuthForm'
-import Regist from './components/RegistForm'
-import { firebase } from './plugins/firebase'
+import Navbar from "./components/Navbar";
+import AuthForm from "./components/AuthForm";
+import Regist from "./components/RegistForm";
+import { firebase } from "./plugins/firebase";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
     Navbar,
     AuthForm,
@@ -24,74 +24,75 @@ export default {
   },
   methods: {
     getCurrentUser() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if(user !== null) {
-          this.$store.dispatch('setUser', {
+      firebase.auth().onAuthStateChanged(async (user) => {
+        if (user !== null) {
+          await this.$store.dispatch("setUser", {
             email: user.email,
             name: user.displayName,
             uid: user.uid,
-            photoURL: user.photoURL
-          })
-          console.log(this.$store.state.user.uid)
-          this.$store.dispatch('setLogged', true)
+            photoURL: user.photoURL,
+          });
+          this.$store.dispatch("setLogged", true);
+          if(this.$router.history.current.name == "Profile")
+          this.$store.dispatch("getUserVideo");
         }
-      })
-    }
+      });
+    },
   },
-  mounted() {
-    this.getCurrentUser();
-  }
-}
+  async mounted() {
+    await this.getCurrentUser();
+  },
+};
 </script>
 
 <style>
 @font-face {
-	font-family: 'Roboto Regular';
-	font-style: normal;
+  font-family: "Roboto Regular";
+  font-style: normal;
   font-weight: regular;
-	src: url('../public/font/Roboto/Roboto-Regular.ttf');
+  src: url("../public/font/Roboto/Roboto-Regular.ttf");
 }
 
 #app {
-  font-family: 'Roboto Regular';
+  font-family: "Roboto Regular";
   position: relative;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
 }
 .openDialogAnimation-enter-active {
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 .openDialogAnimation-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.openDialogAnimation-enter, .openDialogAnimation-leave-to {
+.openDialogAnimation-enter,
+.openDialogAnimation-leave-to {
   transform: translate3d(10px);
   opacity: 0;
 }
 ::-webkit-scrollbar-button {
-  background-repeat:no-repeat;
-  width:5px;
-  height:0px
+  background-repeat: no-repeat;
+  width: 5px;
+  height: 0px;
 }
 ::-webkit-scrollbar-track {
-  background-color:#ecedee
+  background-color: #ecedee;
 }
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 0px;
   border-radius: 25px;
-  background-color:#009FC2;
+  background-color: #009fc2;
 }
-::-webkit-scrollbar-thumb:hover{
-  background-color:#009FC2;
+::-webkit-scrollbar-thumb:hover {
+  background-color: #009fc2;
 }
-::-webkit-resizer{
-  background-repeat:no-repeat;
-  width:6px;
-  height:0px
+::-webkit-resizer {
+  background-repeat: no-repeat;
+  width: 6px;
+  height: 0px;
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 6px;
 }
 </style>
-  

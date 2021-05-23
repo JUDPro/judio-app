@@ -1,6 +1,10 @@
 <template>
   <div class="content-home">
-    <div class="video" v-for="video in $store.state.listVideos" :key="video.id">
+    <div
+      class="video"
+      v-for="video in $store.state.dataOfVideo.listVideos"
+      :key="video.id"
+    >
       <img :src="video.preview" alt="" @click="goToVideo(video)" />
       <div class="info-text">
         <span class="title">{{ video.title }}</span>

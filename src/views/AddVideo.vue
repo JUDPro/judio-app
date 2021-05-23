@@ -1,56 +1,39 @@
 <template>
   <div class="add-video">
     <div class="container">
-      <div class="for-files flex-settings">
-        <Judio :url_video="urlVideo" v-show="userVideoActive"></Judio>
-        <div class="video" v-show="!userVideoActive">
-          <form class="uploading-video select-off flex-settings black-border">
-            <span
-              class="material-icons-outlined"
-              :class="{ active: isActive, 'non-active': isActive == false }"
-            >
-              upload_file
-            </span>
-            <div
-              class="droppable black-border"
-              :class="{ active: isActive }"
-              @dragenter="isActive = true"
-              @dragleave="isActive = false"
-              @dragover.prevent=""
-              @drop.prevent="fileFromBox"
-            ></div>
-            <div
-              class="select-file flex-settings"
-              :class="{ 'non-active': isActive }"
-            >
-              <label
-                for="files"
-                class="upl-video-btn flex-settings black-border"
-                >Select a file</label
-              >
-              <input
-                id="files"
-                style="visibility:hidden;"
-                type="file"
-                accept="video/*"
-                @change="fileFromInput"
-              />
-              <span>or throw it here</span>
-            </div>
-          </form>
-        </div>
+      <div class="for-files fs-c">
+        <!---------------------- Загрузка видео ---------------------->
+        <Judio
+          :url_video="$store.state.urlVideo"
+          v-show="$store.state.videoIsActive"
+        ></Judio>
+        <DropZone v-show="$store.state.videoIsActive == false"></DropZone>
+        <!---------------------- Загрузка видео ---------------------->
+        <!---------------------- Загрузка превью ---------------------->
         <div class="preview-for-video">
-          <div class="preview flex-settings">
+          <div class="preview fs-c">
             <img :src="$store.state.video.preview" alt="default" />
             default preview
           </div>
-          <div class="preview flex-settings">
-            <span class="material-icons-outlined">add_circle_outline</span>
+          <div class="preview fs-c">
+            <img src="" alt="" />
+            <div
+              class="droppable"
+              :class="{ active: isDropImgActive }"
+              @dragenter="isDropImgActive = true"
+              @dragleave="isDropImgActive = false"
+              @dragover.prevent=""
+              @drop.prevent="fileFromBox"
+            ></div>
+            <span class="material-icons-outlined fs-c"
+              >add_circle_outline</span
+            >
           </div>
         </div>
+        <!---------------------- Загрузка превью ---------------------->
       </div>
-
-      <div class="for-info flex-settings">
+      <!---------------------- Информация о видео ---------------------->
+      <div class="for-info fs-c">
         <div class="info-of-video">
           <div class="name-video black-border">
             <input
@@ -80,13 +63,14 @@
           <span class="material-icons-outlined">add_circle_outline</span>
         </div>
       </div>
+      <!---------------------- Информация о видео ---------------------->
     </div>
     <div class="undo-add">
-      <div class="undo flex-settings black-border" type="button">
+      <div class="undo fs-c black-border" type="button">
         Undo
       </div>
       <div
-        class="push-video flex-settings black-border"
+        class="push-video fs-c black-border"
         type="button"
         @click="addNewVideo"
       >
@@ -98,14 +82,16 @@
 
 <script>
 import Judio from "../components/Judio";
+import DropZone from "../components/DropZone";
 
 export default {
   name: "add-video",
   components: {
     Judio,
+    DropZone,
   },
   data: () => ({
-    isActive: false,
+    isDropImgActive: false,
     userVideoActive: false,
     title: "",
     description: "",
@@ -116,24 +102,10 @@ export default {
     userPreview: "",
   }),
   methods: {
-    //функция для добавления новых файлов в storage (выполнено через store)
-    fileFromInput(e) {
-      const localFile = e.target.files[0];
-      this.userVideoActive = true;
-      this.urlVideo = URL.createObjectURL(localFile);
-      this.video = localFile;
-    },
-    fileFromBox(e) {
-      const localFile = e.dataTransfer.files[0];
-      this.isActive = false;
-      this.userVideoActive = true;
-      this.urlVideo = URL.createObjectURL(localFile);
-      this.video = localFile;
-    },
     addNewVideo() {
       this.$store.state.video.title = this.title;
       this.$store.state.video.description = this.description;
-      this.$store.dispatch("addObj", this.video);
+      this.$store.dispatch("addObj", this.$store.state.fileVideo);
     },
   },
 };
@@ -148,47 +120,6 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.container {
-  position: relative;
-  width: auto;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.uploading-video {
-  background-color: #ededed;
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-}
-.upl-video-btn {
-  width: 170px;
-  height: 40px;
-  border-radius: 7px;
-  font-size: 24px;
-  background-color: #009fc2;
-  color: #fff;
-  cursor: pointer;
-}
-.select-file {
-  position: absolute;
-  flex-direction: column;
-  width: 170px;
-  height: 50px;
-  z-index: 10;
-  opacity: 1;
-}
-.droppable {
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0;
-}
-.user-video {
-  widows: 100%;
-  height: 100%;
 }
 .preview-for-video {
   height: 415px;
@@ -208,6 +139,9 @@ export default {
 .preview > img {
   position: absolute;
   width: 100%;
+}
+.preview > span {
+  position: absolute;
 }
 .for-info {
   display: flex;
@@ -283,10 +217,13 @@ export default {
 </style>
 
 <style scoped>
-.video {
-  width: 730px;
-  height: 415px;
-  margin: 20px;
+.container {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .material-icons-outlined {
   color: #505050;
@@ -296,20 +233,13 @@ export default {
   cursor: pointer;
   padding: 5px;
 }
-.uploading-video > .material-icons-outlined {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  font-size: 100px;
-  color: #009fc2;
-}
 .select-off {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -khtml-user-select: none;
 }
-.flex-settings {
+.fs-c {
   display: flex;
   justify-content: center;
   align-items: center;

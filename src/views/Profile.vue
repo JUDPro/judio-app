@@ -2,7 +2,7 @@
   <div class="content-profile">
     <ProfileHeader></ProfileHeader>
     <div class="user-video">
-      <div class="video" v-for="video in listVideos" :key="video.id">
+      <div class="video" v-for="video in $store.state.dataOfVideo.listUserVideos" :key="video.id">
         <img :src="video.preview" @click="goToVideo(video)" />
         <div class="info-text">
           <span class="title">{{ video.title }}</span>
@@ -20,27 +20,15 @@ export default {
   components: {
     ProfileHeader,
   },
-  data: () => ({
-    listVideos: [],
-  }),
   methods: {
     goToVideo(i) {
       this.$router
-        .push({ path: "/Watch/" + i.id, params: { id: i.id } }) //это не хорошо, нужно потом переписать,
-        .catch(() => {});                                       //ибо я получаю все видео, а потом только показываю те, которые получил
-    },
-    getUserVideo() {
-      let userVideo = this.$store.state.listVideos;
-      for (let i = 0; i < userVideo.length; i++) {
-        if (userVideo[i].uid == this.$store.state.user.uid) {
-          this.listVideos.push(userVideo[i]);
-        }
-      }
+        .push({ path: "/Watch/" + i.id, params: { id: i.id } })
+        .catch(() => {});
     },
   },
-  async mounted() {
-    await this.$store.dispatch("getDataOfVideos");
-    this.getUserVideo();
+  mounted() {
+    this.$store.dispatch("getUserVideo");
   },
 };
 </script>
