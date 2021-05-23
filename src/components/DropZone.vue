@@ -1,9 +1,43 @@
 <template>
+<!----------------------------------------------------------------------->
+<!---------------------- Здесь код нужно сократить ---------------------->
+<!----------------------------------------------------------------------->
   <div class="container fs-c">
     <!---------------------- Дроп через дроп хД ---------------------->
-    <div class="dropzone" :style="{ width: width, height: height }">
+    <!-- Дроп для видео -->
+    <div
+      class="dropzone"
+      :style="{ width: width, height: height }"
+      v-if="typeFile == 'video/*'"
+    >
       <span
-        class="material-icons-outlined"
+        class="material-icons-outlined s-off"
+        :class="{
+          active: isActive,
+          'non-active': isActive == false,
+        }"
+      >
+        upload_file
+      </span>
+      <div
+        class="droppable"
+        :class="{ active: isActive }"
+        @dragenter="isActive = true"
+        @dragleave="isActive = false"
+        @dragover.prevent=""
+        @drop.prevent="dropFile"
+      ></div>
+    </div>
+    <!--------------------------------------------------->
+    <!-- Дроп для изображений -->
+    <div
+      class="dropzone"
+      :style="{ width: width, height: height }"
+      v-if="typeFile == 'image/*'"
+    >
+      <span
+        class="material-icons-outlined fs-c s-off"
+        :style="{ 'font-size': '60px' }"
         :class="{
           active: isActive,
           'non-active': isActive == false,
@@ -22,16 +56,37 @@
     </div>
     <!---------------------- Дроп через дроп хД ---------------------->
     <!---------------------- Дроп через инпут ---------------------->
-    <div class="select-file fs-c" :class="{ 'non-active': isActive }">
-      <label for="files" class="upload-video fs-c">Select a file</label>
+    <div
+      class="select-file fs-c s-off"
+      :class="{ 'non-active': isActive }"
+      v-if="typeFile == 'video/*'"
+    >
+      <!-- Инпут для видео -->
+      <label for="video" class="upload-video fs-c s-off">Select a video</label>
       <input
-        id="files"
+        id="video"
         style="visibility:hidden;"
         type="file"
-        accept="video/*"
+        :accept="typeFile"
         @change="inputFile"
       />
       <span>or throw it here</span>
+    </div>
+    <!--------------------------------------------------->
+    <div
+      class="select-file fs-c s-off"
+      :class="{ 'non-active': isActive }"
+      v-if="typeFile == 'image/*'"
+    >
+      <!-- Инпут для изображений -->
+      <label for="image" class="upload-image fs-c s-off">Select a image</label>
+      <input
+        id="image"
+        style="visibility:hidden;"
+        type="file"
+        :accept="typeFile"
+        @change="inputFile"
+      />
     </div>
     <!---------------------- Дроп через инпут ---------------------->
   </div>
@@ -51,35 +106,56 @@ export default {
       type: String,
       default: "415px",
     },
+    typeFile: {
+      type: String,
+      default: "video/*",
+    },
   },
   methods: {
     dropFile(e) {
-      let video;
       const localFile = e.dataTransfer.files[0];
+      if (this.typeFile == "image/*") {
+        let image = {
+          url: URL.createObjectURL(localFile),
+          file: localFile,
+          active: true,
+        };
+        this.$store.dispatch("setPreview", image);
+      } else {
+        let video = {
+          url: URL.createObjectURL(localFile),
+          file: localFile,
+          active: true,
+        };
+        this.$store.dispatch("setVideo", video);
+      }
       this.isActive = false;
-      video = {
-        url: URL.createObjectURL(localFile),
-        file: localFile,
-        active: true,
-      };
-      this.$store.dispatch("setVideo", video);
     },
     inputFile(e) {
-      let video;
       const localFile = e.target.files[0];
-      this.isActive = true;
-      video = {
-        url: URL.createObjectURL(localFile),
-        file: localFile,
-        active: true,
-      };
-      this.$store.dispatch("setVideo", video);
+      if (this.typeFile == "image/*") {
+        let image = {
+          url: URL.createObjectURL(localFile),
+          file: localFile,
+          active: true,
+        };
+        this.$store.dispatch("setPreview", image);
+      } else {
+        this.isActive = true;
+        let video = {
+          url: URL.createObjectURL(localFile),
+          file: localFile,
+          active: true,
+        };
+        this.$store.dispatch("setVideo", video);
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+/* ---------------------- Всё, что связанно с файлами ---------------------- */
 .dropzone {
   border: solid 1px #000;
   display: flex;
@@ -100,6 +176,19 @@ export default {
   z-index: 10;
   opacity: 1;
 }
+#image {
+  display: none;
+}
+.upload-image {
+  width: 140px;
+  height: 30px;
+  border-radius: 5px;
+  font-size: 18px;
+  background-color: #4eb16c;
+  color: #fff;
+  cursor: pointer;
+  border: solid 1px #000;
+}
 .upload-video {
   width: 170px;
   height: 40px;
@@ -110,6 +199,9 @@ export default {
   cursor: pointer;
   border: solid 1px #000;
 }
+/* ---------------------- Всё, что связанно с файлами ---------------------- */
+
+/* ---------------------- Стили иконок ---------------------- */
 .material-icons-outlined {
   position: absolute;
   width: 100px;
@@ -117,6 +209,9 @@ export default {
   font-size: 100px;
   color: #009fc2;
 }
+/* ---------------------- Стили иконок ---------------------- */
+
+/* ---------------------- Спец. классы ---------------------- */
 .active {
   opacity: 1;
   z-index: 10;
@@ -125,9 +220,16 @@ export default {
   opacity: 0;
   z-index: 0;
 }
+.s-off {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+}
 .fs-c {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+/* ---------------------- Спец. классы ---------------------- */
 </style>

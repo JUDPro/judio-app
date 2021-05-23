@@ -4,31 +4,20 @@
       <div class="for-files fs-c">
         <!---------------------- Загрузка видео ---------------------->
         <Judio
-          :url_video="$store.state.urlVideo"
-          v-show="$store.state.videoIsActive"
+          :url_video="$store.state.localVideo.urlVideo"
+          v-show="$store.state.localVideo.videoIsActive"
         ></Judio>
-        <DropZone v-show="$store.state.videoIsActive == false"></DropZone>
+        <DropZone
+          v-show="$store.state.localVideo.videoIsActive == false"
+        ></DropZone>
         <!---------------------- Загрузка видео ---------------------->
         <!---------------------- Загрузка превью ---------------------->
         <div class="preview-for-video">
           <div class="preview fs-c">
-            <img :src="$store.state.video.preview" alt="default" />
+            <img :src="$store.state.localPreview.urlImage" alt="default" />
             default preview
           </div>
-          <div class="preview fs-c">
-            <img src="" alt="" />
-            <div
-              class="droppable"
-              :class="{ active: isDropImgActive }"
-              @dragenter="isDropImgActive = true"
-              @dragleave="isDropImgActive = false"
-              @dragover.prevent=""
-              @drop.prevent="fileFromBox"
-            ></div>
-            <span class="material-icons-outlined fs-c"
-              >add_circle_outline</span
-            >
-          </div>
+          <DropZone width="300px" height="200px" typeFile="image/*"></DropZone>
         </div>
         <!---------------------- Загрузка превью ---------------------->
       </div>
@@ -91,21 +80,18 @@ export default {
     DropZone,
   },
   data: () => ({
-    isDropImgActive: false,
-    userVideoActive: false,
     title: "",
     description: "",
-    preview: "",
-    video: "",
-    urlVideo: "",
-    initialVideo: "",
-    userPreview: "",
   }),
   methods: {
     addNewVideo() {
       this.$store.state.video.title = this.title;
       this.$store.state.video.description = this.description;
-      this.$store.dispatch("addObj", this.$store.state.fileVideo);
+      const file = {
+        video: this.$store.state.localVideo.fileVideo,
+        image: this.$store.state.localPreview.fileImage,
+      };
+      this.$store.dispatch("addObj", file);
     },
   },
 };
@@ -139,6 +125,8 @@ export default {
 .preview > img {
   position: absolute;
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .preview > span {
   position: absolute;
