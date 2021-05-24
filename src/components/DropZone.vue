@@ -7,7 +7,7 @@
     <!-- Дроп для видео -->
     <div
       class="dropzone"
-      :style="{ width: width, height: height }"
+      :style="{ width: width, height: height, margin: margin }"
       v-if="typeFile == 'video/*'"
     >
       <span
@@ -32,7 +32,7 @@
     <!-- Дроп для изображений -->
     <div
       class="dropzone"
-      :style="{ width: width, height: height }"
+      :style="{ width: width, height: height, margin: margin }"
       v-if="typeFile == 'image/*'"
     >
       <span
@@ -110,6 +110,10 @@ export default {
       type: String,
       default: "video/*",
     },
+    margin: {
+      type: String,
+      default: "0px",
+    }
   },
   methods: {
     dropFile(e) {

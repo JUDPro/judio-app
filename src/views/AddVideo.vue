@@ -9,6 +9,7 @@
         ></Judio>
         <DropZone
           v-show="$store.state.localVideo.videoIsActive == false"
+          :margin="'20px'"
         ></DropZone>
         <!---------------------- Загрузка видео ---------------------->
         <!---------------------- Загрузка превью ---------------------->
@@ -126,13 +127,14 @@ export default {
         image: this.$store.state.localPreview.fileImage,
       };
       await this.$store.dispatch("addObj", file);
-      const id = this.$store.state.id
+      const id = this.$store.state.id;
       this.$router
         .push({
           path: "/Watch/" + id,
           params: { id: id },
         })
         .catch(() => {});
+      this.clear();
     },
     clear() {
       this.title = "";
@@ -208,6 +210,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 20px;
 }
 .name-video {
   width: 100%;

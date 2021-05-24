@@ -104,33 +104,33 @@ export default {
                 this.$store.dispatch("setNavbarIsActive", false);
               },
             },
-            {
-              class: "messenger-btn",
-              icon: "chat",
-              text: "Messenger",
-              method: () => {
-                this.$router.push({ path: "/Messenger" }).catch(() => {});
-                this.$store.dispatch("setNavbarIsActive", false);
-              },
-            },
-            {
-              class: "settings-btn",
-              icon: "settings",
-              text: "Settings",
-              method: () => {
-                this.$router.push({ path: "/Settings" }).catch(() => {});
-                this.$store.dispatch("setNavbarIsActive", false);
-              },
-            },
-            {
-              class: "statistics-btn",
-              icon: "assessment",
-              text: "Statistics",
-              method: () => {
-                this.$router.push({ path: "/Statistics" }).catch(() => {});
-                this.$store.dispatch("setNavbarIsActive", false);
-              },
-            },
+            // {
+            //   class: "messenger-btn",
+            //   icon: "chat",
+            //   text: "Messenger",
+            //   method: () => {
+            //     this.$router.push({ path: "/Messenger" }).catch(() => {});
+            //     this.$store.dispatch("setNavbarIsActive", false);
+            //   },
+            // },
+            // {
+            //   class: "settings-btn",
+            //   icon: "settings",
+            //   text: "Settings",
+            //   method: () => {
+            //     this.$router.push({ path: "/Settings" }).catch(() => {});
+            //     this.$store.dispatch("setNavbarIsActive", false);
+            //   },
+            // },
+            // {
+            //   class: "statistics-btn",
+            //   icon: "assessment",
+            //   text: "Statistics",
+            //   method: () => {
+            //     this.$router.push({ path: "/Statistics" }).catch(() => {});
+            //     this.$store.dispatch("setNavbarIsActive", false);
+            //   },
+            // },
             {
               class: "new-video-btn",
               icon: "add_circle",

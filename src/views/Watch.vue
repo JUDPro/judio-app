@@ -5,13 +5,11 @@
         <Judio :width="width" :height="height" :url_video="video.url"></Judio>
         <div class="info-block">
           <span class="title">{{ video.title }}</span>
+          
+          <span class="description">{{ video.description }}</span>
         </div>
       </div>
-      <div class="comments"></div>
-    </div>
-
-    <div class="recommendations">
-      <div class="v"></div>
+      <!-- <div class="comments"></div> -->
     </div>
   </div>
 </template>
@@ -29,6 +27,7 @@ export default {
     width: "1050px",
     height: "600px",
     video: "",
+    path: ""
   }),
   methods: {
     async takeVideo() {
@@ -47,6 +46,7 @@ export default {
   },
   mounted() {
     this.takeVideo();
+    this.path = this.$router.history.current.name
   },
 };
 </script>
@@ -70,22 +70,24 @@ export default {
   width: 1050px;
   height: 180px;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
 }
 .title {
+  font-size: 30px;
+  width: 40%;
+  padding: 10px;
+  border-bottom: solid 1px #000;
+}
+.description {
   font-size: 24px;
+  padding: 10px;
+  border-bottom: solid 1px #000;
 }
 .comments {
   margin: 20px;
   width: 480px;
   height: 600px;
   border: solid 1px black;
-}
-.recommendations {
-  height: auto;
-  border: solid 1px black;
-}
-.v {
-  width: 100px;
-  height: 100px;
 }
 </style>

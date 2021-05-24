@@ -6,7 +6,6 @@
         <img :src="video.preview" @click="goToVideo(video)" />
         <div class="info-text">
           <span class="title">{{ video.title }}</span>
-          <span class="name-user">{{ video.uid }}</span>
         </div>
       </div>
     </div>
@@ -61,5 +60,17 @@ export default {
   height: 200px;
   object-fit: cover;
   cursor: pointer;
+}
+.info-text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #505050;
 }
 </style>

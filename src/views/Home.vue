@@ -16,10 +16,6 @@
 <script>
 export default {
   name: "Home",
-  data: () => ({
-    width: "400px",
-    height: "250px",
-  }),
   methods: {
     goToVideo(i) {
       this.$router

@@ -14,7 +14,7 @@ const routes = [
   {
     path: "/Home",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "/Profile/:id",
@@ -45,7 +45,7 @@ const routes = [
     path: "/Watch/:id",
     name: "Watch Video",
     component: Watch,
-    props: true
+    props: true,
   }
 ];
 
