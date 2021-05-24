@@ -38,6 +38,7 @@ export default new Vuex.Store({
       fileImage: "",
       imageIsActive: false,
     },
+    id: "",
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -68,15 +69,21 @@ export default new Vuex.Store({
       state.localPreview.fileImage = i.file;
       state.localPreview.imageIsActive = i.active;
     },
-    setIngoVideo(state, i){
-      state.video.title = i.title,
-      state.video.description = i.description,
-      state.video.tags = i.tags
-    }
+    setIngoVideo(state, i) {
+      (state.video.title = i.title),
+        (state.video.description = i.description),
+        (state.video.tags = i.tags);
+    },
+    setIdVideo(state, i) {
+      state.id = i;
+    },
   },
   actions: {
+    async setIdVideo(id, i) {
+      await id.commit("setIdVideo", i);
+    },
     setInfoVideo(info, i) {
-      info.commit("setIngoVideo", i)
+      info.commit("setIngoVideo", i);
     },
     setVideo(video, i) {
       video.commit("setVideo", i);
@@ -128,7 +135,7 @@ export default new Vuex.Store({
     },
     async addObj(state, i) {
       await this.dispatch("uploadVideo", i);
-      firebase
+      await firebase
         .firestore()
         .collection("videos")
         .add({
@@ -138,6 +145,12 @@ export default new Vuex.Store({
           description: this.state.video.description,
           preview: this.state.video.preview,
           tags: this.state.video.tags,
+        })
+        .then((doc) => {
+          this.dispatch("setIdVideo", doc.id);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },

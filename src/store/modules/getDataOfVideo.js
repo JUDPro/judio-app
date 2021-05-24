@@ -11,15 +11,15 @@ export default {
       state.listVideos = i;
     },
     setListUserVideos(state, i) {
-      state.listUserVideos = i
+      state.listUserVideos = i;
     },
     clearListUserVideo(state, i) {
-      state.listUserVideos = i
-    }
+      state.listUserVideos = i;
+    },
   },
   actions: {
     setListVideo(list, i) {
-      list.commit("clearListUserVideo", i)
+      list.commit("clearListUserVideo", i);
     },
     async getDataOfVideos(list) {
       const videos = [];
@@ -44,7 +44,7 @@ export default {
     },
     async getUserVideo(list) {
       const videos = [];
-      let uid = store.state.user.uid
+      let uid = store.state.user.uid;
       await firebase
         .firestore()
         .collection("videos")

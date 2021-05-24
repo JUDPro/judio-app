@@ -8,7 +8,6 @@
       <img :src="video.preview" alt="" @click="goToVideo(video)" />
       <div class="info-text">
         <span class="title">{{ video.title }}</span>
-        <span class="name-user">{{ video.uid }}</span>
       </div>
     </div>
   </div>

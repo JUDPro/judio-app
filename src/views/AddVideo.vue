@@ -115,7 +115,7 @@ export default {
       this.tag = "";
       this.tagInput = !this.tagInput;
     },
-    addNewVideo() {
+    async addNewVideo() {
       this.$store.dispatch("setInfoVideo", {
         title: this.title,
         description: this.description,
@@ -125,7 +125,14 @@ export default {
         video: this.$store.state.localVideo.fileVideo,
         image: this.$store.state.localPreview.fileImage,
       };
-      this.$store.dispatch("addObj", file);
+      await this.$store.dispatch("addObj", file);
+      const id = this.$store.state.id
+      this.$router
+        .push({
+          path: "/Watch/" + id,
+          params: { id: id },
+        })
+        .catch(() => {});
     },
     clear() {
       this.title = "";
@@ -136,9 +143,9 @@ export default {
         file: "",
         active: false,
       };
-
       let image = {
-        url: "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
+        url:
+          "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
         file: "",
         active: false,
       };
