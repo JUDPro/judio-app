@@ -23,6 +23,7 @@ export default new Vuex.Store({
       description: "",
       preview:
         "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
+      tags: [],
     },
     Logged: false,
     navbarIsActive: false,
@@ -67,8 +68,16 @@ export default new Vuex.Store({
       state.localPreview.fileImage = i.file;
       state.localPreview.imageIsActive = i.active;
     },
+    setIngoVideo(state, i){
+      state.video.title = i.title,
+      state.video.description = i.description,
+      state.video.tags = i.tags
+    }
   },
   actions: {
+    setInfoVideo(info, i) {
+      info.commit("setIngoVideo", i)
+    },
     setVideo(video, i) {
       video.commit("setVideo", i);
     },
@@ -128,6 +137,7 @@ export default new Vuex.Store({
           title: this.state.video.title,
           description: this.state.video.description,
           preview: this.state.video.preview,
+          tags: this.state.video.tags,
         });
     },
   },

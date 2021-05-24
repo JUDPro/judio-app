@@ -47,15 +47,38 @@
             <span class="material-icons-outlined select-off">create</span>
           </div>
         </div>
+        <!---------------------- Теги ---------------------->
         <div class="tags">
-          Tags:
-          <span class="material-icons-outlined">add_circle_outline</span>
+          <span>
+            Tags:
+            <span
+              class="material-icons-outlined"
+              @click="tagInput = !tagInput"
+              v-show="!tagInput"
+              >add_circle_outline</span
+            >
+            <input
+              class="tagInput"
+              type="text"
+              maxlength="20"
+              v-focus
+              v-model="tag"
+              @keyup.enter="addTags"
+              v-if="tagInput"
+            />
+          </span>
+          <div class="tag-container">
+            <span class="tag" v-for="tag in tags" :key="tag.id">
+              <span>#{{ tag }}</span>
+            </span>
+          </div>
         </div>
+        <!---------------------- Теги ---------------------->
       </div>
       <!---------------------- Информация о видео ---------------------->
     </div>
     <div class="undo-add">
-      <div class="undo fs-c black-border" type="button">
+      <div class="undo fs-c black-border" type="button" @click="clear">
         Undo
       </div>
       <div
@@ -80,18 +103,54 @@ export default {
     DropZone,
   },
   data: () => ({
+    tagInput: false,
     title: "",
     description: "",
+    tag: "",
+    tags: [],
   }),
   methods: {
+    addTags() {
+      this.tags.push(this.tag);
+      this.tag = "";
+      this.tagInput = !this.tagInput;
+    },
     addNewVideo() {
-      this.$store.state.video.title = this.title;
-      this.$store.state.video.description = this.description;
+      this.$store.dispatch("setInfoVideo", {
+        title: this.title,
+        description: this.description,
+        tags: this.tags,
+      });
       const file = {
         video: this.$store.state.localVideo.fileVideo,
         image: this.$store.state.localPreview.fileImage,
       };
       this.$store.dispatch("addObj", file);
+    },
+    clear() {
+      this.title = "";
+      this.description = "";
+      this.tags = [];
+      let video = {
+        url: "",
+        file: "",
+        active: false,
+      };
+
+      let image = {
+        url: "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
+        file: "",
+        active: false,
+      };
+      this.$store.dispatch("setPreview", image);
+      this.$store.dispatch("setVideo", video);
+    },
+  },
+  directives: {
+    focus: {
+      inserted: function(el) {
+        el.focus();
+      },
     },
   },
 };
@@ -142,7 +201,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 20px;
 }
 .name-video {
   width: 100%;
@@ -172,13 +230,45 @@ export default {
   resize: none;
 }
 .tags {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
+  position: relative;
+  height: 280px;
   width: 300px;
-  height: auto;
   margin: 30px 20px 20px 20px;
   font-size: 24px;
+  overflow: auto;
+}
+.tags > span {
+  width: 300px;
+  height: 45px;
+  background-color: #fff;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px #000;
+}
+.tagInput {
+  font-size: 24px;
+  font-family: "Roboto Regular";
+  padding: 0 20px 0 20px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border-width: 0;
+  outline: none;
+}
+.tag-container {
+  width: 100%;
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.tag {
+  border: solid 1px #000;
+  border-radius: 30px;
+  padding: 10px;
+  margin: 5px;
+  max-width: 250px;
+  overflow: hidden;
 }
 .undo-add {
   height: auto;
