@@ -59,20 +59,26 @@ export default {
                 "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
               displayName: this.user.name,
             });
-            let userInfo = {
+            firebase
+              .firestore()
+              .collection("users")
+              .add({
+                email: res.user.email,
+                name: res.user.displayName,
+                uid: res.user.uid,
+                photoURL: res.user.photoURL,
+              });
+            this.$store.dispatch("setUser", {
               email: res.user.email,
               name: res.user.displayName,
               uid: res.user.uid,
               photoURL: res.user.photoURL,
-            };
-            firebase
-              .firestore()
-              .collection("users")
-              .add({ userInfo });
-            this.$store.dispatch("setUser", userInfo);
+            });
             this.$store.dispatch("setOpenDialogWindow", false);
             this.$store.dispatch("setLogged", true);
-            this.$router.push({ path: "/Profile/" + userInfo.uid }).catch(() => {});
+            this.$router
+              .push({ path: "/Profile/" + res.user.uid })
+              .catch(() => {});
           })
           .catch((error) => {
             console.log(error);

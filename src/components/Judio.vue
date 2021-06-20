@@ -1,7 +1,6 @@
 <template>
   <div ref="video" class="container" :style="{ width: width, height: height }">
-    <video ref="video" class="video" :src="url_video" autoplay loop controls></video>
-    <div class="block" @click="stop"></div>
+    <video ref="video" class="video" :src="url_video" loop controls></video>
   </div>
 </template>
 
@@ -26,7 +25,7 @@ export default {
   }),
   methods: {
     stop() {
-      const video = this.$refs.video
+      const video = this.$refs.video;
       video.pause();
       video.currentTime = 0;
     }
@@ -47,13 +46,5 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 0;
-}
-.block {
-  z-index: 1;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  background-color: blue;
-  cursor: pointer;
 }
 </style>
