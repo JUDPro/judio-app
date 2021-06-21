@@ -42,13 +42,12 @@ export default {
           });
         });
     },
-    async getUserVideo(list) {
+    async getUserVideo(list, i) {
       const videos = [];
-      let uid = store.state.user.uid;
       await firebase
         .firestore()
         .collection("videos")
-        .where("uid", "==", uid)
+        .where("uid", "==", i)
         .get()
         .then((snapshot) => {
           snapshot.forEach((doc) => {

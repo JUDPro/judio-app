@@ -1,10 +1,10 @@
 <template>
   <header class="profile-header">
     <div class="user-avatar">
-      <img :src="$store.state.user.photoURL" alt="" />
+      <img :src="$store.state.dataOfAuthor.avatar" alt="" />
     </div>
     <div class="user-info">
-      <span class="user-nickname">{{ $store.state.user.name }}</span>
+      <span class="user-nickname">{{ $store.state.dataOfAuthor.name }}</span>
       <div class="user-subscribers">
         <span><font color="#DA2222">232301</font> subscribers</span>
       </div>
@@ -16,7 +16,10 @@
       >
         <span class="material-icons-outlined">settings</span>
       </div>
-      <div class="user-btn" @click="$router.push({ path: '/AddVideo' }).catch(() => {})">
+      <div
+        class="user-btn"
+        @click="$router.push({ path: '/AddVideo' }).catch(() => {})"
+      >
         Add video
       </div>
     </div>
@@ -43,6 +46,20 @@ export default {
         .ref("users/testUser/userVideo/")
         .push(post);
     },
+  },
+  watch: {
+    "$route.params": async function() {
+      await this.$store.dispatch(
+        "getIdAuthor",
+        this.$router.history.current.params.id
+      );
+    },
+  },
+  async mounted() {
+    await this.$store.dispatch(
+      "getIdAuthor",
+      this.$router.history.current.params.id
+    );
   },
 };
 </script>

@@ -1,36 +1,59 @@
 <template>
   <div class="content">
-    <div class="user-actions">
-      <div class="custom-functions">
-        <judio :width="width" :height="height" :url_video="video.url"></judio>
-        <div class="info-block" :class="{ 'info-height': descrip }">
-          <span class="title">{{ video.title }}</span>
-          <div class="description-btn" @click="descrip = !descrip">
-            Description
+    <div class="box-user">
+      <div class="user-actions">
+        <div class="custom-functions">
+          <judio
+            :width="width"
+            :height="height"
+            :url_video="video.url"
+            ref="top"
+          ></judio>
+          <div class="info-block" :class="{ 'info-height': descrip }">
+            <span class="title">{{ video.title }}</span>
+            <div class="description-btn" @click="descrip = !descrip">
+              Description
+            </div>
+            <div class="description" v-show="descrip">
+              {{ video.description }}
+            </div>
           </div>
-          <div class="description" v-show="descrip">
-            {{ video.description }}
+        </div>
+        <div class="infoAuthor">
+          <div 
+            class="avatarAuthor"
+            @click="goToAuthor">
+            <img :src="$store.state.dataOfAuthor.avatar" alt="" />
+          </div>
+          <span
+            class="nameAuthor"
+            @click="goToAuthor"
+            >{{ $store.state.dataOfAuthor.name }}
+            <div class="subAuthor"><span>123284</span> subscribers</div>
+          </span>
+          <div class="sub-btn">Subscribe</div>
+          <div class="action-btn">
+            <span class="material-icons-outlined">thumb_up</span>
+            <span class="material-icons-outlined">thumb_down_alt</span>
+            <span class="material-icons-outlined">report</span>
           </div>
         </div>
       </div>
-      <div class="infoAuthor">
-        <div class="avatarAuthor">
-          <img :src="$store.state.dataOfAuthor.avatar" alt="" />
-        </div>
-        <span class="nameAuthor"
-          >{{ $store.state.dataOfAuthor.name }}
-          <div class="subAuthor"><span>123284</span> subscribers</div>
-        </span>
-        <div class="sub-btn">Subscribe</div>
-        <div class="action-btn">
-          <span class="material-icons-outlined">thumb_up</span>
-          <span class="material-icons-outlined">thumb_down_alt</span>
-          <span class="material-icons-outlined">report</span>
-        </div>
-      </div>
+      <!-- <div class="comments">
+        <span class="comm-text">Comments</span>
+      </div> -->
     </div>
-    <div class="comments">
-      <span class="comm-text">Comments</span>
+    <div class="recom">
+      <div
+        class="video"
+        v-for="video in $store.state.dataOfVideo.listVideos"
+        :key="video.id"
+      >
+        <img :src="video.preview" alt="" @click="goToVideo(video)" />
+        <div class="info-text">
+          <span class="title">{{ video.title }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,10 +88,27 @@ export default {
           console.log(err);
         });
     },
+    goToVideo(i) {
+      document.querySelector(".custom-functions").scrollIntoView(true);
+      this.$router
+        .push({ path: "/Watch/" + i.id, params: { id: i.id } })
+        .catch(() => {});
+    },
+    goToAuthor() {
+      let uid = this.video.uid;
+      this.$router.push({ path: "/Profile/" + uid, params: { id: uid } }).catch(() => {});
+    }
+  },
+  watch: {
+    "$route.params": async function() {
+      await this.takeVideo();
+      this.$store.dispatch("getIdAuthor", this.video.uid);
+    },
   },
   async mounted() {
     await this.takeVideo();
     this.$store.dispatch("getIdAuthor", this.video.uid);
+    this.$store.dispatch("getDataOfVideos");
     this.path = this.$router.history.current.name;
   },
 };
@@ -76,10 +116,21 @@ export default {
 
 <style scoped>
 .content {
+  top: 5%;
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.box-user {
+  position: relative;
+  display: flex;
+}
+.box-rec {
+  position: relative;
+  top: 15%;
 }
 .user-actions {
   height: 800px;
@@ -97,10 +148,10 @@ export default {
   justify-content: space-around;
   border-bottom: solid 2px #505050;
   overflow: auto;
-  transition: .2s;
+  transition: 0.2s;
 }
 .info-height {
-  transition: .2s;
+  transition: 0.2s;
   height: 200px;
   box-shadow: 0 -20px 15px -15px rgba(0, 0, 0, 0.3) inset;
 }
@@ -230,7 +281,27 @@ export default {
   -khtml-user-select: none;
 }
 .video {
-  width: 1050px;
-  height: 600px;
+  position: relative;
+  margin: 50px;
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video > img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.recom {
+  position: relative;
+  top: 15%;
+  width: 80%;
+  height: 100px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
 }
 </style>

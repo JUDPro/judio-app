@@ -20,6 +20,7 @@ const routes = [
     path: "/Profile/:id",
     name: "Profile",
     component: Profile,
+    props: true,
   },
   {
     path: "/Messenger",

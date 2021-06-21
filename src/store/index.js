@@ -111,10 +111,12 @@ export default new Vuex.Store({
           .ref()
           .child("videos/" + i.video.name)
           .put(i.video);
-        await storageRef
-          .ref()
-          .child("videos/previews/" + i.image.name)
-          .put(i.image);
+        if (this.state.video.preview != this.state.localPreview.urlImage) {
+          await storageRef
+            .ref()
+            .child("videos/previews/" + i.image.name)
+            .put(i.image);
+        }
         // await j.on("state_changed", (snapshot) => { //не знаю как сделать прогрессбар, ибо он возвращает промис, из-за чего ломается загрузка
         //   const progress =
         //     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;

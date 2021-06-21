@@ -57,7 +57,7 @@ export default {
             userId: "",
           };
           this.$store.dispatch("setUser", userInfo);
-          this.$store.dispatch("setListVideo", [])
+          this.$store.dispatch("setListVideo", []);
           this.$store.dispatch("setLogged", false);
           this.$router.push({ path: "/Home" });
         })
@@ -91,7 +91,7 @@ export default {
               text: "Your profile",
               method: () => {
                 const uid = this.$store.state.user.uid;
-                this.$router.push({ path: "/Profile/" + uid }).catch(() => {});
+                (this.$router.history.current.params.id) ? this.$router.push({ path: "/Profile/" + uid }).catch(() => {}) : ""
                 this.$store.dispatch("setNavbarIsActive", false);
               },
             },

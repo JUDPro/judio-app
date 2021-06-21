@@ -1,6 +1,6 @@
 <template>
   <div ref="video" class="container" :style="{ width: width, height: height }">
-    <video ref="video" class="video" :src="url_video" loop controls></video>
+    <video ref="video" class="video" :src="url_video" loop controls autoplay></video>
   </div>
 </template>
 

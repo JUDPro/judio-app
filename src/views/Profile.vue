@@ -2,7 +2,11 @@
   <div class="content-profile">
     <ProfileHeader></ProfileHeader>
     <div class="user-video">
-      <div class="video" v-for="video in $store.state.dataOfVideo.listUserVideos" :key="video.id">
+      <div
+        class="video"
+        v-for="video in $store.state.dataOfVideo.listUserVideos"
+        :key="video.id"
+      >
         <img :src="video.preview" @click="goToVideo(video)" />
         <div class="info-text">
           <span class="title">{{ video.title }}</span>
@@ -15,6 +19,7 @@
 <script>
 import ProfileHeader from "../components/ProfileHeader";
 export default {
+  props: ["id"],
   name: "Profile",
   components: {
     ProfileHeader,
@@ -26,8 +31,13 @@ export default {
         .catch(() => {});
     },
   },
-  mounted() {
-    this.$store.dispatch("getUserVideo");
+  watch: {
+    "$route.params": async function() {
+      await this.$store.dispatch("getUserVideo", this.id);
+    },
+  },
+  async mounted() {
+    await this.$store.dispatch("getUserVideo", this.id);
   },
 };
 </script>
