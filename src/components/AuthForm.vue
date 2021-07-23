@@ -43,8 +43,8 @@ export default {
       email: "",
       password: ""
     },
-    email_pattern:
-      "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
+    // email_pattern:
+    //   "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
   }),
 
   methods: {

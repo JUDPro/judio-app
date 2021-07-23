@@ -62,7 +62,7 @@ export default {
           this.$router.push({ path: "/Home" });
         })
         .catch(error => {
-          console.log("error");
+          console.log(error);
         });
     },
     actionNavbar() {
