@@ -20,14 +20,10 @@
           </div>
         </div>
         <div class="infoAuthor">
-          <div 
-            class="avatarAuthor"
-            @click="goToAuthor">
+          <div class="avatarAuthor" @click="goToAuthor">
             <img :src="$store.state.dataOfAuthor.avatar" alt="" />
           </div>
-          <span
-            class="nameAuthor"
-            @click="goToAuthor"
+          <span class="nameAuthor" @click="goToAuthor"
             >{{ $store.state.dataOfAuthor.name }}
             <div class="subAuthor"><span>123284</span> subscribers</div>
           </span>
@@ -65,14 +61,14 @@ import { firebase } from "../plugins/firebase";
 export default {
   props: ["id"],
   components: {
-    judio,
+    judio
   },
   data: () => ({
     width: "1050px",
     height: "600px",
     video: "",
     path: "",
-    descrip: false,
+    descrip: false
   }),
   methods: {
     async takeVideo() {
@@ -81,10 +77,10 @@ export default {
         .collection("videos")
         .doc(this.id)
         .get()
-        .then((doc) => {
+        .then(doc => {
           this.video = doc.data();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -96,21 +92,23 @@ export default {
     },
     goToAuthor() {
       let uid = this.video.uid;
-      this.$router.push({ path: "/Profile/" + uid, params: { id: uid } }).catch(() => {});
+      this.$router
+        .push({ path: "/Profile/" + uid, params: { id: uid } })
+        .catch(() => {});
     }
   },
   watch: {
     "$route.params": async function() {
       await this.takeVideo();
       this.$store.dispatch("getIdAuthor", this.video.uid);
-    },
+    }
   },
   async mounted() {
     await this.takeVideo();
     this.$store.dispatch("getIdAuthor", this.video.uid);
     this.$store.dispatch("getDataOfVideos");
     this.path = this.$router.history.current.name;
-  },
+  }
 };
 </script>
 

@@ -15,7 +15,7 @@ export default new Vuex.Store({
       name: "",
       email: "Anon",
       photoURL:
-        "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
+        "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3"
     },
     video: {
       id: "",
@@ -24,22 +24,22 @@ export default new Vuex.Store({
       description: "",
       preview:
         "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
-      tags: [],
+      tags: []
     },
     Logged: false,
     navbarIsActive: false,
     localVideo: {
       urlVideo: "",
       fileVideo: "",
-      videoIsActive: false,
+      videoIsActive: false
     },
     localPreview: {
       urlImage:
         "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
       fileImage: "",
-      imageIsActive: false,
+      imageIsActive: false
     },
-    id: "",
+    id: ""
   },
   mutations: {
     setOpenDialogWindow(state, i) {
@@ -77,7 +77,7 @@ export default new Vuex.Store({
     },
     setIdVideo(state, i) {
       state.id = i;
-    },
+    }
   },
   actions: {
     async setIdVideo(id, i) {
@@ -147,18 +147,18 @@ export default new Vuex.Store({
           title: this.state.video.title,
           description: this.state.video.description,
           preview: this.state.video.preview,
-          tags: this.state.video.tags,
+          tags: this.state.video.tags
         })
-        .then((doc) => {
+        .then(doc => {
           this.dispatch("setIdVideo", doc.id);
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   modules: {
     dataOfVideo: getDataOfVideo,
-    dataOfAuthor: getDataOfAuthor,
-  },
+    dataOfAuthor: getDataOfAuthor
+  }
 });

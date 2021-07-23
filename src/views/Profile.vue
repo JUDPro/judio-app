@@ -22,23 +22,23 @@ export default {
   props: ["id"],
   name: "Profile",
   components: {
-    ProfileHeader,
+    ProfileHeader
   },
   methods: {
     goToVideo(i) {
       this.$router
         .push({ path: "/Watch/" + i.id, params: { id: i.id } })
         .catch(() => {});
-    },
+    }
   },
   watch: {
     "$route.params": async function() {
       await this.$store.dispatch("getUserVideo", this.id);
-    },
+    }
   },
   async mounted() {
     await this.$store.dispatch("getUserVideo", this.id);
-  },
+  }
 };
 </script>
 

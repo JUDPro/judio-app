@@ -43,8 +43,8 @@ export default {
       email: "",
       name: "",
       password: "",
-      repeatPassword: "",
-    },
+      repeatPassword: ""
+    }
   }),
 
   methods: {
@@ -53,11 +53,11 @@ export default {
         const authFB = firebase.auth();
         authFB
           .createUserWithEmailAndPassword(this.user.email, this.user.password)
-          .then(async (res) => {
+          .then(async res => {
             await authFB.currentUser.updateProfile({
               photoURL:
                 "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/users%2Favatars%2Fdefault-avatar.jpg?alt=media&token=bb03c08d-8e99-492a-b0c9-2fab89fef8f3",
-              displayName: this.user.name,
+              displayName: this.user.name
             });
             firebase
               .firestore()
@@ -66,13 +66,13 @@ export default {
                 email: res.user.email,
                 name: res.user.displayName,
                 uid: res.user.uid,
-                photoURL: res.user.photoURL,
+                photoURL: res.user.photoURL
               });
             this.$store.dispatch("setUser", {
               email: res.user.email,
               name: res.user.displayName,
               uid: res.user.uid,
-              photoURL: res.user.photoURL,
+              photoURL: res.user.photoURL
             });
             this.$store.dispatch("setOpenDialogWindow", false);
             this.$store.dispatch("setLogged", true);
@@ -80,22 +80,22 @@ export default {
               .push({ path: "/Profile/" + res.user.uid })
               .catch(() => {});
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error);
           });
       } else {
         console.log("error! пароли не совпадают");
       }
-    },
+    }
   },
 
   directives: {
     focus: {
       inserted: function(el) {
         el.focus();
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

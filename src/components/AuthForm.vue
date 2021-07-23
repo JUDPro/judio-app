@@ -41,10 +41,10 @@ export default {
   data: () => ({
     user: {
       email: "",
-      password: "",
+      password: ""
     },
     email_pattern:
-      "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$",
+      "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"
   }),
 
   methods: {
@@ -52,30 +52,32 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.user.email, this.user.password)
-        .then(async (res) => {
+        .then(async res => {
           let userInfo = await {
             email: res.user.email,
             name: res.user.displayName,
             uid: res.user.uid,
-            photoURL: res.user.photoURL,
+            photoURL: res.user.photoURL
           };
           this.$store.dispatch("setUser", userInfo);
           this.$store.dispatch("setOpenDialogWindow", false);
           this.$store.dispatch("setLogged", true);
-          this.$router.push({ path: "/Profile/" + userInfo.uid }).catch(() => {});
+          this.$router
+            .push({ path: "/Profile/" + userInfo.uid })
+            .catch(() => {});
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
-    },
+    }
   },
   directives: {
     focus: {
       inserted: function(el) {
         el.focus();
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

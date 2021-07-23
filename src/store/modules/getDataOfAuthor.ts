@@ -5,7 +5,7 @@ export default {
     uid: "",
     name: "",
     avatar: "",
-    sub: "",
+    sub: ""
   },
   mutations: {
     setAuthorId(state, i) {
@@ -15,7 +15,7 @@ export default {
       state.name = i.name;
       state.avatar = i.avatar;
       state.sub = i.sub;
-    },
+    }
   },
   actions: {
     async getDataOfAuthor(state) {
@@ -25,12 +25,12 @@ export default {
         .collection("users")
         .where("uid", "==", uid)
         .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
+        .then(snapshot => {
+          snapshot.forEach(doc => {
             const items = {
               name: doc.data().name,
               avatar: doc.data().photoURL,
-              sub: "nope", //добавить подписчиков
+              sub: "nope" //добавить подписчиков
             };
             state.commit("setAuthorInfo", items);
           });
@@ -39,6 +39,6 @@ export default {
     getIdAuthor(state, userId) {
       state.commit("setAuthorId", userId);
       this.dispatch("getDataOfAuthor");
-    },
-  },
+    }
+  }
 };

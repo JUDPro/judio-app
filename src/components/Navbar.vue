@@ -44,7 +44,7 @@ import { firebase } from "../plugins/firebase";
 export default {
   name: "Navbar",
   components: {
-    ButtonComponent,
+    ButtonComponent
   },
   methods: {
     async outAccount() {
@@ -54,20 +54,20 @@ export default {
         .then(() => {
           let userInfo = {
             email: "Anon",
-            userId: "",
+            userId: ""
           };
           this.$store.dispatch("setUser", userInfo);
           this.$store.dispatch("setListVideo", []);
           this.$store.dispatch("setLogged", false);
           this.$router.push({ path: "/Home" });
         })
-        .catch((error) => {
+        .catch(error => {
           console.log("error");
         });
     },
     actionNavbar() {
       return "width: 370";
-    },
+    }
   },
   computed: {
     dataOfButton: {
@@ -83,7 +83,7 @@ export default {
                   "setNavbarIsActive",
                   !this.$store.state.navbarIsActive
                 );
-              },
+              }
             },
             {
               class: "avatar-btn",
@@ -91,9 +91,11 @@ export default {
               text: "Your profile",
               method: () => {
                 const uid = this.$store.state.user.uid;
-                (this.$router.history.current.params.id) ? this.$router.push({ path: "/Profile/" + uid }).catch(() => {}) : ""
+                //(this.$router.history.current.params.id) ?
+                this.$router.push({ path: "/Profile/" + uid }).catch(() => {});
+                // : ""
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "home-btn",
@@ -102,7 +104,7 @@ export default {
               method: () => {
                 this.$router.push({ path: "/Home" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "messenger-btn",
@@ -111,7 +113,7 @@ export default {
               method: () => {
                 this.$router.push({ path: "/Messenger" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "settings-btn",
@@ -120,7 +122,7 @@ export default {
               method: () => {
                 this.$router.push({ path: "/Settings" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "statistics-btn",
@@ -129,7 +131,7 @@ export default {
               method: () => {
                 this.$router.push({ path: "/Statistics" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "new-video-btn",
@@ -138,14 +140,14 @@ export default {
               method: () => {
                 this.$router.push({ path: "/AddVideo" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "exit-btn",
               icon: "logout",
               text: "Exit",
-              method: this.outAccount,
-            },
+              method: this.outAccount
+            }
           ];
         }
         if (!this.$store.state.Logged) {
@@ -159,7 +161,7 @@ export default {
                   "setNavbarIsActive",
                   !this.$store.state.navbarIsActive
                 );
-              },
+              }
             },
             {
               class: "avatar-btn",
@@ -167,7 +169,7 @@ export default {
               text: this.$store.state.user.email,
               method: () => {
                 this.$store.dispatch("setOpenDialogWindow", "login");
-              },
+              }
             },
             {
               class: "home-btn",
@@ -176,7 +178,7 @@ export default {
               method: () => {
                 this.$router.push({ path: "/Home" }).catch(() => {});
                 this.$store.dispatch("setNavbarIsActive", false);
-              },
+              }
             },
             {
               class: "user-add-btn",
@@ -184,7 +186,7 @@ export default {
               text: "Registration",
               method: () => {
                 this.$store.dispatch("setOpenDialogWindow", "regist");
-              },
+              }
             },
             {
               class: "sign-in-btn",
@@ -192,13 +194,13 @@ export default {
               text: "Login",
               method: () => {
                 this.$store.dispatch("setOpenDialogWindow", "login");
-              },
-            },
+              }
+            }
           ];
         }
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

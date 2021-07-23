@@ -9,17 +9,17 @@ export default {
   props: {
     url_preview: {
       type: String,
-      default: "",
+      default: ""
     },
     width: {
       type: String,
-      default: "730px",
+      default: "730px"
     },
     height: {
       type: String,
-      default: "415px",
-    },
-  },
+      default: "415px"
+    }
+  }
 };
 </script>
 
@@ -30,8 +30,8 @@ export default {
   margin: 20px;
 }
 .preview {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 </style>

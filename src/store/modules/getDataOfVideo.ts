@@ -4,7 +4,7 @@ import store from "../index";
 export default {
   state: {
     listVideos: [],
-    listUserVideos: [],
+    listUserVideos: []
   },
   mutations: {
     setListVideos(state, i) {
@@ -15,7 +15,7 @@ export default {
     },
     clearListUserVideo(state, i) {
       state.listUserVideos = i;
-    },
+    }
   },
   actions: {
     setListVideo(list, i) {
@@ -27,15 +27,15 @@ export default {
         .firestore()
         .collection("videos")
         .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
+        .then(snapshot => {
+          snapshot.forEach(doc => {
             const items = {
               id: doc.id,
               uid: doc.data().uid,
               title: doc.data().title,
               description: doc.data().description,
               url: doc.data().url,
-              preview: doc.data().preview,
+              preview: doc.data().preview
             };
             videos.push(items);
             list.commit("setListVideos", videos);
@@ -49,20 +49,20 @@ export default {
         .collection("videos")
         .where("uid", "==", i)
         .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
+        .then(snapshot => {
+          snapshot.forEach(doc => {
             const items = {
               id: doc.id,
               uid: doc.data().uid,
               title: doc.data().title,
               description: doc.data().description,
               url: doc.data().url,
-              preview: doc.data().preview,
+              preview: doc.data().preview
             };
             videos.push(items);
             list.commit("setListUserVideos", videos);
           });
         });
-    },
-  },
+    }
+  }
 };

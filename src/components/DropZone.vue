@@ -14,7 +14,7 @@
         class="material-icons-outlined s-off"
         :class="{
           active: isActive,
-          'non-active': isActive == false,
+          'non-active': isActive == false
         }"
       >
         upload_file
@@ -40,7 +40,7 @@
         :style="{ 'font-size': '60px' }"
         :class="{
           active: isActive,
-          'non-active': isActive == false,
+          'non-active': isActive == false
         }"
       >
         upload_file
@@ -95,24 +95,24 @@
 <script>
 export default {
   data: () => ({
-    isActive: false,
+    isActive: false
   }),
   props: {
     width: {
       type: String,
-      default: "730px",
+      default: "730px"
     },
     height: {
       type: String,
-      default: "415px",
+      default: "415px"
     },
     typeFile: {
       type: String,
-      default: "video/*",
+      default: "video/*"
     },
     margin: {
       type: String,
-      default: "0px",
+      default: "0px"
     }
   },
   methods: {
@@ -122,14 +122,14 @@ export default {
         let image = {
           url: URL.createObjectURL(localFile),
           file: localFile,
-          active: true,
+          active: true
         };
         this.$store.dispatch("setPreview", image);
       } else {
         let video = {
           url: URL.createObjectURL(localFile),
           file: localFile,
-          active: true,
+          active: true
         };
         this.$store.dispatch("setVideo", video);
       }
@@ -141,7 +141,7 @@ export default {
         let image = {
           url: URL.createObjectURL(localFile),
           file: localFile,
-          active: true,
+          active: true
         };
         this.$store.dispatch("setPreview", image);
       } else {
@@ -149,13 +149,13 @@ export default {
         let video = {
           url: URL.createObjectURL(localFile),
           file: localFile,
-          active: true,
+          active: true
         };
         this.$store.dispatch("setVideo", video);
       }
       this.isActive = false;
-    },
-  },
+    }
+  }
 };
 </script>
 

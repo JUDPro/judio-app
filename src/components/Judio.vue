@@ -1,6 +1,13 @@
 <template>
   <div ref="video" class="container" :style="{ width: width, height: height }">
-    <video ref="video" class="video" :src="url_video" loop controls autoplay></video>
+    <video
+      ref="video"
+      class="video"
+      :src="url_video"
+      loop
+      controls
+      autoplay
+    ></video>
   </div>
 </template>
 
@@ -9,19 +16,19 @@ export default {
   props: {
     url_video: {
       type: String,
-      default: "",
+      default: ""
     },
     width: {
       type: String,
-      default: "730px",
+      default: "730px"
     },
     height: {
       type: String,
-      default: "415px",
-    },
+      default: "415px"
+    }
   },
   data: () => ({
-    isActive: true,
+    isActive: true
   }),
   methods: {
     stop() {

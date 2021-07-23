@@ -20,28 +20,28 @@ export default {
   components: {
     Navbar,
     AuthForm,
-    Regist,
+    Regist
   },
   methods: {
     getCurrentUser() {
-      firebase.auth().onAuthStateChanged(async (user) => {
+      firebase.auth().onAuthStateChanged(async user => {
         if (user !== null) {
           await this.$store.dispatch("setUser", {
             email: user.email,
             name: user.displayName,
             uid: user.uid,
-            photoURL: user.photoURL,
+            photoURL: user.photoURL
           });
           this.$store.dispatch("setLogged", true);
-          if(this.$router.history.current.name == "Profile")
-          this.$store.dispatch("getUserVideo");
+          if (this.$router.history.current.name == "Profile")
+            this.$store.dispatch("getUserVideo");
         }
       });
-    },
+    }
   },
   async mounted() {
     await this.getCurrentUser();
-  },
+  }
 };
 </script>
 

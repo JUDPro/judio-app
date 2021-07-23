@@ -1,14 +1,13 @@
 <template>
-    <div class="ttt">
-    </div>
+  <div class="ttt"></div>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style scoped>
 .ttt {
-    padding-left: 90px;
+  padding-left: 90px;
 }
 </style>

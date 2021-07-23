@@ -101,14 +101,14 @@ export default {
   name: "add-video",
   components: {
     Judio,
-    DropZone,
+    DropZone
   },
   data: () => ({
     tagInput: false,
     title: "",
     description: "",
     tag: "",
-    tags: [],
+    tags: []
   }),
   methods: {
     addTags() {
@@ -120,18 +120,18 @@ export default {
       this.$store.dispatch("setInfoVideo", {
         title: this.title,
         description: this.description,
-        tags: this.tags,
+        tags: this.tags
       });
       const file = {
         video: this.$store.state.localVideo.fileVideo,
-        image: this.$store.state.localPreview.fileImage,
+        image: this.$store.state.localPreview.fileImage
       };
       await this.$store.dispatch("addObj", file);
       const id = this.$store.state.id;
       this.$router
         .push({
           path: "/Watch/" + id,
-          params: { id: id },
+          params: { id: id }
         })
         .catch(() => {});
       this.clear();
@@ -143,25 +143,25 @@ export default {
       let video = {
         url: "",
         file: "",
-        active: false,
+        active: false
       };
       let image = {
         url:
           "https://firebasestorage.googleapis.com/v0/b/judio-10aa1.appspot.com/o/videos%2Fpreviews%2Fdefault-preview.jpg?alt=media&token=c2b3b050-e1c9-4c6c-84cc-27f1bf8bd209",
         file: "",
-        active: false,
+        active: false
       };
       this.$store.dispatch("setPreview", image);
       this.$store.dispatch("setVideo", video);
-    },
+    }
   },
   directives: {
     focus: {
       inserted: function(el) {
         el.focus();
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 

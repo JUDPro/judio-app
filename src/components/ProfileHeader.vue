@@ -33,19 +33,19 @@ export default {
   name: "AppHeader",
 
   data: () => ({
-    urlVideo: "",
+    urlVideo: ""
   }),
 
   methods: {
     addVideo() {
       let post = {
-        urlVideo: this.urlVideo,
+        urlVideo: this.urlVideo
       };
       firebase
         .database()
         .ref("users/testUser/userVideo/")
         .push(post);
-    },
+    }
   },
   watch: {
     "$route.params": async function() {
@@ -53,14 +53,14 @@ export default {
         "getIdAuthor",
         this.$router.history.current.params.id
       );
-    },
+    }
   },
   async mounted() {
     await this.$store.dispatch(
       "getIdAuthor",
       this.$router.history.current.params.id
     );
-  },
+  }
 };
 </script>
 
